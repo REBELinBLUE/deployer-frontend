@@ -2,6 +2,7 @@ import $ from 'jquery';
 import _ from 'underscore';
 import Backbone from 'backbone';
 
+// FIXME: Change to a factory?
 export default class ModelView extends Backbone.View {
   constructor(options, element) {
     super({

@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import Backbone from 'backbone';
 
 import endpoints from '../../endpoints';
@@ -29,6 +30,22 @@ export default class Server extends Backbone.Model {
 
   isTesting() {
     return parseInt(this.get('status'), 10) === TESTING;
+  }
+
+  testConnection() {
+    this.set({
+      status: TESTING,
+    });
+
+    const that = this;
+    $.ajax({
+      type: 'POST',
+      url: `${this.urlRoot}/${this.get('id')}/test`,
+    }).fail(() => {
+      that.set({
+        status: FAILED,
+      });
+    });
   }
 }
 

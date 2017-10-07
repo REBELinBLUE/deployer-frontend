@@ -1,6 +1,7 @@
 import ServerCollection from './collection';
 import CollectionViewFactory from '../../factories/CollectionView';
 import ModelView from '../../factories/ModelView';
+import { logFormatter } from '../../utils';
 
 class ServerView extends ModelView {
   constructor(options) {
@@ -14,11 +15,18 @@ class ServerView extends ModelView {
   }
 
   showLog() {
-    console.log('show log', this.model.id);
+    const modal = $('div.modal#result');
+
+    modal.find('pre').html(logFormatter(this.model.get('connect_log')));
+    modal.find('.modal-title span').text('View Log');
   }
 
   testConnection() {
-    console.log('test connection', this.model.id);
+    if (this.model.isTesting()) {
+      return;
+    }
+
+    this.model.testConnection();
   }
 
   viewData() {
