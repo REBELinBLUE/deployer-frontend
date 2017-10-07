@@ -26,8 +26,8 @@ if (window.__backboneAgent) {
 }
 
 window.app = {
+  project_id: null,
   views,
   collections,
-  project_id: null,
   listener,
 };
