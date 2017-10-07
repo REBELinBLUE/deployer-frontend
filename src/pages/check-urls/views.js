@@ -15,7 +15,17 @@ class CheckUrlView extends ModelView {
   }
 
   showLog() {
-    console.log('show log', this.model.id);
+    const modal = $('div.modal#result');
+
+    modal.find('pre').text(this.model.get('last_log'));
+    modal.find('.modal-title span').text('Log');
+  }
+
+  editModel() {
+    $('#url_id').val(this.model.id);
+    $('#url_name').val(this.model.get('name'));
+    $('#url_url').val(this.model.get('url'));
+    $(`#period_${this.model.get('period')}`).prop('checked', true);
   }
 
   viewData() {

@@ -14,9 +14,11 @@ export default class ModelView extends Backbone.View {
     });
 
     this.template = _.template($(element).html());
+
+    this.listeners();
   }
 
-  initialize() {
+  listeners() {
     this.listenTo(this.model, 'change', this.render);
     this.listenTo(this.model, 'destroy', this.remove);
   }
@@ -32,6 +34,6 @@ export default class ModelView extends Backbone.View {
   }
 
   editModel() {
-    console.log('edit model', this.model.id);
+    console.error('The editModel() method should be overridden', this.model.id);
   }
 }

@@ -15,6 +15,14 @@ class ConfigFileView extends ModelView {
   showFile() {
     console.log('show file', this.model.id);
   }
+
+  editModel() {
+    // FIXME: Standardise names
+    $('#config_file_id').val(this.model.id);
+    $('#config-file-name').val(this.model.get('name'));
+    $('#config-file-path').val(this.model.get('path'));
+    $('#config-file-content').text(this.model.get('content'));
+  }
 }
 
 export default CollectionViewFactory('configfile', ConfigFileCollection, ConfigFileView);

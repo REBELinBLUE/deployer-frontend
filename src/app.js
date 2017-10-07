@@ -4,6 +4,7 @@ import Backbone from 'backbone';
 
 import views from './pages/views';
 import collections from './pages/collections';
+import listener from './listener';
 
 toastr.options.closeButton = true;
 toastr.options.progressBar = true;
@@ -24,4 +25,9 @@ if (window.__backboneAgent) {
   window.__backboneAgent.handleBackbone(Backbone);
 }
 
-window.app = { views, collections };
+window.app = {
+  views,
+  collections,
+  project_id: null,
+  listener,
+};

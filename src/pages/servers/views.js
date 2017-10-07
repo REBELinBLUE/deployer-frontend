@@ -52,6 +52,17 @@ class ServerView extends ModelView {
       has_log: hasLog,
     };
   }
+
+  editModel() {
+    $('#server_id').val(this.model.id);
+    $('#server_name').val(this.model.get('name'));
+    $('#server_address').val(this.model.get('ip_address'));
+    $('#server_port').val(this.model.get('port'));
+    $('#server_user').val(this.model.get('user'));
+    $('#server_path').val(this.model.get('path'));
+
+    $('#server_deploy_code').prop('checked', (this.model.get('deploy_code') === true));
+  }
 }
 
 export default CollectionViewFactory('server', ServerCollection, ServerView);

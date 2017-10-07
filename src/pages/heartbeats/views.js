@@ -39,6 +39,12 @@ class HeartbeatView extends ModelView {
       formatted_date: hasRun ? moment(data.last_activity).format('Do MMMM YYYY h:mm:ss A') : null,
     };
   }
+
+  editModel() {
+    $('#heartbeat_id').val(this.model.id);
+    $('#heartbeat_name').val(this.model.get('name'));
+    $(`#heartbeat_interval_${this.model.get('interval')}`).prop('checked', true);
+  }
 }
 
 export default CollectionViewFactory('heartbeat', HeartbeatCollection, HeartbeatView);

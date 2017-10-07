@@ -7,10 +7,9 @@ class TemplateView extends ModelView {
     super(options, '#template-template');
   }
 
-  viewData() {
-    console.log('boo!');
-
-    return super.viewData();
+  editModel() {
+    $('#template_id').val(this.model.id);
+    $('#template_name').val(this.model.get('name'));
   }
 }
 

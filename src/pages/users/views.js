@@ -17,6 +17,12 @@ class UserView extends ModelView {
       created: moment(data.created_at).format('Do MMMM YYYY h:mm:ss A'),
     };
   }
+
+  editModel() {
+    $('#user_id').val(this.model.id);
+    $('#user_name').val(this.model.get('name'));
+    $('#user_email').val(this.model.get('email'));
+  }
 }
 
 export default CollectionViewFactory('user', UserCollection, UserView);
