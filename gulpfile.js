@@ -1,6 +1,6 @@
 const Elixir = require('laravel-elixir');
-const gulp = require('gulp');
-const shell = require('gulp-shell');
+// const gulp = require('gulp');
+// const shell = require('gulp-shell');
 
 require('laravel-elixir-remove');
 
