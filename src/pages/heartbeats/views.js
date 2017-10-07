@@ -1,8 +1,8 @@
-import moment from 'moment';
-
 import HeartbeatCollection from './collection';
 import CollectionViewFactory from '../../factories/CollectionView';
 import ModelView from '../../factories/ModelView';
+
+import { dateTimeFormatter } from '../../utils';
 
 class HeartbeatView extends ModelView {
   constructor(options) {
@@ -36,7 +36,7 @@ class HeartbeatView extends ModelView {
       status,
       has_run: hasRun,
       interval_label: `${data.interval} mins`,
-      formatted_date: hasRun ? moment(data.last_activity).format('Do MMMM YYYY h:mm:ss A') : null,
+      formatted_date: hasRun ? dateTimeFormatter(data.last_activity) : null,
     };
   }
 

@@ -1,8 +1,8 @@
-import moment from 'moment';
-
 import UserCollection from './collection';
 import CollectionViewFactory from '../../factories/CollectionView';
 import ModelView from '../../factories/ModelView';
+
+import { dateTimeFormatter } from '../../utils';
 
 class UserView extends ModelView {
   constructor(options) {
@@ -14,7 +14,7 @@ class UserView extends ModelView {
 
     return {
       ...data,
-      created: moment(data.created_at).format('Do MMMM YYYY h:mm:ss A'),
+      created: dateTimeFormatter(data.created_at),
     };
   }
 

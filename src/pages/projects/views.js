@@ -1,8 +1,7 @@
-import moment from 'moment';
-
 import ProjectCollection from './collection';
 import CollectionViewFactory from '../../factories/CollectionView';
 import ModelView from '../../factories/ModelView';
+import { dateTimeFormatter } from '../../utils';
 
 class ProjectView extends ModelView {
   constructor(options) {
@@ -14,7 +13,7 @@ class ProjectView extends ModelView {
 
     return {
       ...data,
-      deploy: data.last_run ? moment(data.last_run).format('Do MMMM YYYY h:mm:ss A') : false,
+      deploy: data.last_run ? dateTimeFormatter(data.last_run) : null,
     };
   }
 

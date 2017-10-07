@@ -1,8 +1,7 @@
-import moment from 'moment';
-
 import CheckUrlCollection from './collection';
 import CollectionViewFactory from '../../factories/CollectionView';
 import ModelView from '../../factories/ModelView';
+import { dateTimeFormatter } from '../../utils';
 
 class CheckUrlView extends ModelView {
   constructor(options) {
@@ -57,7 +56,7 @@ class CheckUrlView extends ModelView {
       has_run: hasRun,
       has_log: hasLog,
       interval_label: `${data.period} mins`,
-      formatted_date: hasRun ? moment(data.last_seen).format('Do MMMM YYYY h:mm:ss A') : null,
+      formatted_date: hasRun ? dateTimeFormatter(data.last_seen) : null,
     };
   }
 }
