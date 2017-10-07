@@ -1,3 +1,4 @@
+// TODO: Replace with webpack and babel
 const Elixir = require('laravel-elixir');
 // const gulp = require('gulp');
 // const shell = require('gulp-shell');

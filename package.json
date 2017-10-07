@@ -1,6 +1,10 @@
 {
   "private": true,
   "name": "deployer",
+  "description": "The frontend source for Deployer",
+  "author": "Stephen Ball",
+  "license": "MIT",
+  "homepage": "https://github.com/REBELinBLUE/deployer-frontend",
   "dependencies": {
     "ace-min-noconflict": "^1.1.9",
     "admin-lte": "^2.4.0",
