@@ -2,7 +2,6 @@ import $ from 'jquery';
 import _ from 'underscore';
 import Backbone from 'backbone';
 
-// FIXME: Change to use the spread operator
 export default (element, fields, events) => {
   return class ModelView extends Backbone.View {
     constructor(options) {
@@ -44,8 +43,6 @@ export default (element, fields, events) => {
     }
 
     editModel() {
-      console.error('The editModel() method should be overridden', this.model.id);
-
       this.populateDialog(element, fields);
     }
   };

@@ -40,7 +40,7 @@ class HeartbeatView extends ModelView {
   }
 
   editModel() {
-    this.editModel();
+    super.editModel();
 
     $(`#${element}_interval_${this.model.get('interval')}`).prop('checked', true);
   }

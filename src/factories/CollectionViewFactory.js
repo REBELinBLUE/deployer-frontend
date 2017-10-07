@@ -1,10 +1,19 @@
 import Backbone from 'backbone';
 
 import listener from '../listener';
+import showDialog from '../handlers/showDialog';
+import deleteModel from '../handlers/deleteModel';
+import saveModel from '../handlers/saveModel';
 import { MODEL_CHANGED, MODEL_TRASHED, MODEL_CREATED } from '../events';
 
-// FIXME: Change to use the spread operator
 export default (element, Collection, ModelView) => {
+  // FIXME: Why does this fail if importing jquery?]
+  const modal = `div#${element}.modal`;
+
+  $(modal).on('show.bs.modal', showDialog);
+  $(`${modal} button.btn-delete`).on('click', deleteModel(Collection, element));
+  $(`${modal} button.btn-save`).on('click', saveModel(Collection, element));
+
   return class CollectionView extends Backbone.View {
     constructor(options) {
       super({
@@ -79,3 +88,26 @@ export default (element, Collection, ModelView) => {
     }
   };
 };
+
+//
+// $('#variable').on('show.bs.modal', function (event) {
+//   var button = $(event.relatedTarget);
+//   var modal = $(this);
+//   var title = Lang.get('variables.create');
+//
+//   $('.btn-danger', modal).hide();
+//   $('.callout-danger', modal).hide();
+//   $('.has-error', modal).removeClass('has-error');
+//   $('.label-danger', modal).remove();
+//
+//   if (button.hasClass('btn-edit')) {
+//     title = Lang.get('variables.edit');
+//     $('.btn-danger', modal).show();
+//   } else {
+//     $('#variable_id').val('');
+//     $('#variable_name').val('');
+//     $('#variable_value').val('');
+//   }
+//
+//   modal.find('.modal-title span').text(title);
+// });

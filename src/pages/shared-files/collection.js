@@ -1,4 +1,6 @@
-import Collection from '../../factories/Collection';
+import CollectionFactory from '../../factories/CollectionFactory';
 import SharedFile from './model';
 
-export default new Collection(SharedFile);
+const SharedFileCollection = CollectionFactory(SharedFile);
+
+export default new SharedFileCollection();

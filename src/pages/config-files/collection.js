@@ -1,4 +1,6 @@
-import Collection from '../../factories/Collection';
+import CollectionFactory from '../../factories/CollectionFactory';
 import ConfigFile from './model';
 
-export default new Collection(ConfigFile);
+const ConfigFileCollection = CollectionFactory(ConfigFile);
+
+export default new ConfigFileCollection();

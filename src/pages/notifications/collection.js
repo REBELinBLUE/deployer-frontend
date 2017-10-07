@@ -1,4 +1,6 @@
-import Collection from '../../factories/Collection';
+import CollectionFactory from '../../factories/CollectionFactory';
 import Notification from './model';
 
-export default new Collection(Notification);
+const NotificationCollection = CollectionFactory(Notification);
+
+export default new NotificationCollection();

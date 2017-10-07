@@ -1,4 +1,6 @@
-import Collection from '../../factories/Collection';
+import CollectionFactory from '../../factories/CollectionFactory';
 import User from './model';
 
-export default new Collection(User);
+const UserCollection = CollectionFactory(User);
+
+export default new UserCollection();

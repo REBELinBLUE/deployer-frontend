@@ -5,7 +5,7 @@ import ModelViewFactory from '../../factories/ModelViewFactory';
 const element = 'notification';
 
 // FIXME: Still need to do the editModel() method
-const ModelView = ModelViewFactory(element, []);
+const ModelView = ModelViewFactory(element, ['name', 'type']);
 
 class NotificationView extends ModelView {
   viewData() {

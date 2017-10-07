@@ -1,4 +1,6 @@
-import Collection from '../../factories/Collection';
+import CollectionFactory from '../../factories/CollectionFactory';
 import CheckUrl from './model';
 
-export default new Collection(CheckUrl);
+const CheckUrlCollection = CollectionFactory(CheckUrl);
+
+export default new CheckUrlCollection();

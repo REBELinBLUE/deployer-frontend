@@ -1,4 +1,6 @@
-import Collection from '../../factories/Collection';
+import CollectionFactory from '../../factories/CollectionFactory';
 import Template from './model';
 
-export default new Collection(Template);
+const TemplateCollection = CollectionFactory(Template);
+
+export default new TemplateCollection();

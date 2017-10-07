@@ -1,4 +1,6 @@
-import Collection from '../../factories/Collection';
+import CollectionFactory from '../../factories/CollectionFactory';
 import Variable from './model';
 
-export default new Collection(Variable);
+const VariableCollection = CollectionFactory(Variable);
+
+export default new VariableCollection();
