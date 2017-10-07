@@ -1,0 +1,34 @@
+diff --git a/node_modules/laravel-elixir-rollup-official/dist/RollupTask.js b/node_modules/laravel-elixir-rollup-official/dist/RollupTask.js
+index 63ca29c..0b55e63 100644
+--- a/node_modules/laravel-elixir-rollup-official/dist/RollupTask.js
++++ b/node_modules/laravel-elixir-rollup-official/dist/RollupTask.js
+@@ -123,16 +123,19 @@ var RollupTask = function (_Elixir$Task) {
+                 include: ['node_modules/**', this.src.baseDir + '/**']
+             }), replace({
+                 'process.env.NODE_ENV': JSON.stringify(_laravelElixir2.default.inProduction)
+-            }), vue(), buble(), multiEntry()].concat(this.options.plugins || []);
++            }), vue(), buble({
++              objectAssign: 'Object.assign',
++              exclude: ['node_modules/**'],
++            }), multiEntry()].concat(this.options.plugins || []);
+ 
+             delete this.options.plugins;
+ 
+             return _rollup((0, _underscore.extend)({
+                 entry: this.src.path,
+                 cache: cache,
+-                sourceMap: true,
++                sourcemap: true,
+                 format: 'iife',
+-                moduleName: 'LaravelElixirBundle',
++                name: 'LaravelElixirBundle',
+                 plugins: plugins
+             }, this.rollupConfig, this.options)).on('bundle', function (bundle) {
+                 cache = bundle;
+@@ -143,4 +146,4 @@ var RollupTask = function (_Elixir$Task) {
+     return RollupTask;
+ }(_laravelElixir2.default.Task);
+ 
+-exports.default = RollupTask;
+\ No newline at end of file
++exports.default = RollupTask;

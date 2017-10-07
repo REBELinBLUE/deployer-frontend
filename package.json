@@ -1,0 +1,43 @@
+{
+  "private": true,
+  "name": "deployer",
+  "dependencies": {
+    "ace-min-noconflict": "^1.1.9",
+    "admin-lte": "^2.4.0",
+    "backbone": "^1.3.3",
+    "bootstrap": "^3.3.7",
+    "cropper": "^3.0.0",
+    "devbridge-autocomplete": "^1.4.3",
+    "dirty-chai": "^2.0.1",
+    "fontawesome": "^4.7.2",
+    "html5shiv": "^3.7.3",
+    "ionicons": "^3.0.0",
+    "jquery": "^3.2.1",
+    "jquery-sortable": "^0.9.13",
+    "moment": "^2.18.1",
+    "respond.js": "^1.4.2",
+    "select2": "^4.0.4",
+    "socket.io-client": "^2.0.3",
+    "toastr": "^2.1.2",
+    "underscore": "^1.8.3"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "eslint": "^4.8.0",
+    "eslint-config-airbnb": "^15.1.0",
+    "eslint-plugin-import": "^2.7.0",
+    "gulp": "^3.9.1",
+    "gulp-shell": "^0.5.2",
+    "laravel-elixir": "^6.0.0-1",
+    "laravel-elixir-remove": "^0.2.0",
+    "laravel-elixir-rollup-official": "^1.1.0",
+    "mocha": "^4.0.1",
+    "patch-package": "^3.5.0"
+  },
+  "scripts": {
+    "build": "gulp",
+    "test": "NODE_ENV=test mocha --recursive --reporter spec",
+    "lint": "eslint -c .eslintrc --quiet src/",
+    "prepare": "patch-package"
+  }
+}
