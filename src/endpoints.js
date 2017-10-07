@@ -4,4 +4,5 @@ export default {
   templates: '/admin/templates',
   projects: '/admin/projects',
   servers: '/servers',
+  variables: '/variables',
 };

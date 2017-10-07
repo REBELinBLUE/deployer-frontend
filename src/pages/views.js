@@ -3,6 +3,7 @@ import UsersView from './users/views';
 import TemplatesView from './templates/views';
 import ProjectsView from './projects/views';
 import ServersView from './servers/views';
+import VariablesView from './variables/views';
 
 export default {
   Groups: GroupsView,
@@ -10,4 +11,5 @@ export default {
   Templates: TemplatesView,
   Projects: ProjectsView,
   Servers: ServersView,
+  Variables: VariablesView,
 };
