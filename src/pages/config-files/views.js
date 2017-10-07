@@ -4,7 +4,16 @@ import ModelView from '../../factories/ModelView';
 
 class ConfigFileView extends ModelView {
   constructor(options) {
-    super(options, '#configfile-template');
+    super({
+      ...options,
+      events: {
+        'click .btn-view': 'showFile',
+      },
+    }, '#configfile-template');
+  }
+
+  showFile() {
+    console.log('show file', this.model.id);
   }
 }
 

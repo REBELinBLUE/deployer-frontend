@@ -6,7 +6,16 @@ import ModelView from '../../factories/ModelView';
 
 class CheckUrlView extends ModelView {
   constructor(options) {
-    super(options, '#checkurl-template');
+    super({
+      ...options,
+      events: {
+        'click .btn-view': 'showLog',
+      },
+    }, '#checkurl-template');
+  }
+
+  showLog() {
+    console.log('show log', this.model.id);
   }
 
   viewData() {

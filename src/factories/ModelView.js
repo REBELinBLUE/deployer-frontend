@@ -7,6 +7,7 @@ export default class ModelView extends Backbone.View {
     super({
       ...options,
       events: {
+        ...options.events,
         'click .btn-edit': 'editModel',
       },
       tagName: 'tr',

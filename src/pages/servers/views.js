@@ -4,7 +4,21 @@ import ModelView from '../../factories/ModelView';
 
 class ServerView extends ModelView {
   constructor(options) {
-    super(options, '#server-template');
+    super({
+      ...options,
+      events: {
+        'click .btn-test': 'testConnection',
+        'click .btn-view': 'showLog',
+      },
+    }, '#server-template');
+  }
+
+  showLog() {
+    console.log('show log', this.model.id);
+  }
+
+  testConnection() {
+    console.log('test connection', this.model.id);
   }
 
   viewData() {

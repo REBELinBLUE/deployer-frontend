@@ -4,7 +4,8 @@
     "ecmaVersion": 2017
   },
   "rules": {
-    "max-len": ["error", 120]
+    "max-len": ["error", 120],
+    "no-underscore-dangle": [2, { "allow": ["__backboneAgent"] }]
   },
   "env": {
     "browser": true,
