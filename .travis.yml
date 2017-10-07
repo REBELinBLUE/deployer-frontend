@@ -1,0 +1,22 @@
+sudo: false
+
+language: node_js
+
+cache:
+  directories:
+    - $TRAVIS_BUILD_DIR/node_modules
+
+before_install:
+  - npm install -g npm-check
+
+install:
+  - travis_retry npm install
+
+script:
+  - npm run lint
+  - npm run test
+- npm-check
+
+
+notifications:
+  email: false

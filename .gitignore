@@ -1,9 +1,2 @@
 node_modules/
-
-# Ignore the non-versioned copies of the files
-build/css/app.css
-build/css/vendor.css
-build/js/app.js
-build/js/ie.js
-build/js/vendor.js
-build/**/*.map
+build/

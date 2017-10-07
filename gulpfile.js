@@ -4,15 +4,15 @@ const shell = require('gulp-shell');
 
 require('laravel-elixir-remove');
 
-Elixir.extend('lang', () => {
-  new Elixir.Task('lang', () => {
-    const command = shell('php artisan js-localization:export --quiet', {
-      cwd: '../../../',
-    });
-
-    return gulp.src('').pipe(command);
-  });
-});
+// Elixir.extend('lang', () => {
+//   new Elixir.Task('lang', () => {
+//     const command = shell('php artisan js-localization:export --quiet', {
+//       cwd: '../../../',
+//     });
+//
+//     return gulp.src('').pipe(command);
+//   });
+// });
 
 const packages = 'node_modules';
 const build = 'build';
@@ -37,12 +37,12 @@ const paths = {
   cropper: `${packages}/cropper`,
   toastr: `${packages}/toastr`,
   select2: `${packages}/select2`,
-  localization: '../../../vendor/andywer/js-localization',
+  // localization: '../../../vendor/andywer/js-localization',
 };
 
 Elixir((mix) => {
   mix
-    .lang()
+    // .lang()
     .styles([
       `${paths.bootstrap}/dist/css/bootstrap.css`,
       `${paths.select2}/dist/css/select2.css`,
@@ -54,8 +54,8 @@ Elixir((mix) => {
       `${paths.cropper}/dist/cropper.css`,
     ], `${build}/css/vendor.css`, './')
     .styles([
-      '../css/app.css',
-      '../css/console.css',
+      'src/css/app.css',
+      'src/css/console.css',
     ], `${build}/css/app.css`, './')
     .scripts([
       `${paths.html5shiv}/dist/html5shiv.js`,
