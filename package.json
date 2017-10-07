@@ -9,6 +9,7 @@
     "cropper": "^3.0.0",
     "devbridge-autocomplete": "^1.4.3",
     "dirty-chai": "^2.0.1",
+    "eslint-config-airbnb-base": "^12.0.2",
     "fontawesome": "^4.7.2",
     "html5shiv": "^3.7.3",
     "ionicons": "^3.0.0",

@@ -1,5 +1,6 @@
 import $ from 'jquery';
 import toastr from 'toastr';
+import Backbone from 'backbone';
 
 import views from './pages/views';
 import collections from './pages/collections';
@@ -17,5 +18,10 @@ toastr.options.extendedTimeOut = 7000;
 $.ajaxPrefilter((options, originalOptions, jqXHR) => {
   jqXHR.setRequestHeader('X-CSRF-Token', $('meta[name="token"]').attr('content'));
 });
+
+// Needed for Backbone debugger
+if (window.__backboneAgent) {
+  window.__backboneAgent.handleBackbone(Backbone);
+}
 
 window.app = { views, collections };

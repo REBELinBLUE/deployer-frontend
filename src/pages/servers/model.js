@@ -16,19 +16,19 @@ export default class Server extends Backbone.Model {
   }
 
   isSuccessful() {
-    return this.get('status') === SUCCESSFUL;
+    return parseInt(this.get('status'), 10) === SUCCESSFUL;
   }
 
   isUntested() {
-    return this.get('status') === UNTESTED;
+    return parseInt(this.get('status'), 10) === UNTESTED;
   }
 
   isFailed() {
-    return this.get('status') === FAILED;
+    return parseInt(this.get('status'), 10) === FAILED;
   }
 
   isTesting() {
-    return this.get('status') === TESTING;
+    return parseInt(this.get('status'), 10) === TESTING;
   }
 }
 
