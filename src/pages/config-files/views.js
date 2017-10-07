@@ -17,11 +17,9 @@ class ConfigFileView extends ModelView {
   }
 
   editModel() {
-    // FIXME: Standardise names
-    $('#config_file_id').val(this.model.id);
-    $('#config-file-name').val(this.model.get('name'));
-    $('#config-file-path').val(this.model.get('path'));
-    $('#config-file-content').text(this.model.get('content'));
+    this.populateDialog('config_file', ['name', 'path']);
+
+    $('#config_file_content').text(this.model.get('content'));
   }
 }
 

@@ -33,6 +33,14 @@ export default class ModelView extends Backbone.View {
     return this;
   }
 
+  populateDialog(prefix, fields) {
+    $(`#${prefix}_id`).val(this.model.get('id'));
+
+    fields.forEach((field) => {
+      $(`#${prefix}_${field}`).val(this.model.get(field));
+    });
+  }
+
   editModel() {
     console.error('The editModel() method should be overridden', this.model.id);
   }

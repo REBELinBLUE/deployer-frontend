@@ -8,9 +8,7 @@ class SharedFileView extends ModelView {
   }
 
   editModel() {
-    $('#file_id').val(this.model.id);
-    $('#name').val(this.model.get('name'));
-    $('#file').val(this.model.get('file'));
+    this.populateDialog('shared_file', ['name', 'file']);
   }
 }
 

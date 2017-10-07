@@ -8,9 +8,7 @@ class VariableView extends ModelView {
   }
 
   editModel() {
-    $('#variable_id').val(this.model.id);
-    $('#variable_name').val(this.model.get('name'));
-    $('#variable_value').val(this.model.get('value'));
+    this.populateDialog('variable', ['name', 'value']);
   }
 }
 

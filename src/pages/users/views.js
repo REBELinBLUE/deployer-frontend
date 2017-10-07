@@ -10,7 +10,7 @@ class UserView extends ModelView {
   }
 
   viewData() {
-    const data = super.viewData();
+    const data = this.model.toJSON();
 
     return {
       ...data,
@@ -19,9 +19,7 @@ class UserView extends ModelView {
   }
 
   editModel() {
-    $('#user_id').val(this.model.id);
-    $('#user_name').val(this.model.get('name'));
-    $('#user_email').val(this.model.get('email'));
+    this.populateDialog('user', ['name', 'email']);
   }
 }
 

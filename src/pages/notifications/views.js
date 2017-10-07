@@ -8,7 +8,7 @@ class NotificationView extends ModelView {
   }
 
   viewData() {
-    const data = super.viewData();
+    const data = this.model.toJSON();
 
     let icon = 'cogs';
     let label = 'Custom';

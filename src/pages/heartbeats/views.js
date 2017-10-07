@@ -10,7 +10,7 @@ class HeartbeatView extends ModelView {
   }
 
   viewData() {
-    const data = super.viewData();
+    const data = this.model.toJSON();
 
     let css = 'primary';
     let icon = 'question';
@@ -41,8 +41,8 @@ class HeartbeatView extends ModelView {
   }
 
   editModel() {
-    $('#heartbeat_id').val(this.model.id);
-    $('#heartbeat_name').val(this.model.get('name'));
+    this.populateDialog('heartbeat', ['name']);
+
     $(`#heartbeat_interval_${this.model.get('interval')}`).prop('checked', true);
   }
 }

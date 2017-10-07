@@ -22,14 +22,13 @@ class CheckUrlView extends ModelView {
   }
 
   editModel() {
-    $('#url_id').val(this.model.id);
-    $('#url_name').val(this.model.get('name'));
-    $('#url_url').val(this.model.get('url'));
+    this.populateDialog('url', ['name', 'url']);
+
     $(`#period_${this.model.get('period')}`).prop('checked', true);
   }
 
   viewData() {
-    const data = super.viewData();
+    const data = this.model.toJSON();
 
     let css = 'primary';
     let icon = 'question';

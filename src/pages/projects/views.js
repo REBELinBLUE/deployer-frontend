@@ -10,7 +10,7 @@ class ProjectView extends ModelView {
   }
 
   viewData() {
-    const data = super.viewData();
+    const data = this.model.toJSON();
 
     return {
       ...data,
@@ -19,14 +19,10 @@ class ProjectView extends ModelView {
   }
 
   editModel() {
-    $('#project_id').val(this.model.id);
-    $('#project_name').val(this.model.get('name'));
-    $('#project_repository').val(this.model.get('repository'));
-    $('#project_branch').val(this.model.get('branch'));
-    $('#project_group_id').val(this.model.get('group_id'));
-    $('#project_builds_to_keep').val(this.model.get('builds_to_keep'));
-    $('#project_url').val(this.model.get('url'));
-    $('#project_build_url').val(this.model.get('build_url'));
+    this.populateDialog('project', [
+      'name', 'repository', 'branch', 'group_id', 'builds_to_keep', 'url', 'build_url',
+    ]);
+
     $('#project_allow_other_branch').prop('checked', (this.model.get('allow_other_branch') === true));
     $('#project_include_dev').prop('checked', (this.model.get('include_dev') === true));
     $('#project_private_key').val('');

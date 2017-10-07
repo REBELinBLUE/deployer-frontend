@@ -8,8 +8,7 @@ class GroupView extends ModelView {
   }
 
   editModel() {
-    $('#group_id').val(this.model.id);
-    $('#group_name').val(this.model.get('name'));
+    this.populateDialog('group', ['name']);
   }
 }
 

@@ -8,8 +8,7 @@ class TemplateView extends ModelView {
   }
 
   editModel() {
-    $('#template_id').val(this.model.id);
-    $('#template_name').val(this.model.get('name'));
+    this.populateDialog('template', ['name']);
   }
 }
 
