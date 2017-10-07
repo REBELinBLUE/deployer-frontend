@@ -8,7 +8,6 @@ const UNTESTED = 1;
 const FAILED = 2;
 const TESTING = 3;
 
-// FIXME: Change to a model factory!
 export default class Server extends Backbone.Model {
   constructor(options) {
     super(options);

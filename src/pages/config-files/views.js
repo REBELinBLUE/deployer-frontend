@@ -17,9 +17,9 @@ class ConfigFileView extends ModelView {
   }
 
   editModel() {
-    this.populateDialog('config_file', ['name', 'path']);
+    this.populateDialog('configfile', ['name', 'path']);
 
-    $('#config_file_content').text(this.model.get('content'));
+    $('#configfile_content').text(this.model.get('content'));
   }
 }
 

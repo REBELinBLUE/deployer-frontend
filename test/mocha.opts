@@ -1,0 +1,4 @@
+--require reify
+--compilers buble/register
+--recursive
+--reporter spec

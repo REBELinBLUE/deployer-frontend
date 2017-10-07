@@ -4,11 +4,11 @@ import ModelView from '../../factories/ModelView';
 
 class SharedFileView extends ModelView {
   constructor(options) {
-    super(options, '#files-template');
+    super(options, '#sharedfile-template');
   }
 
   editModel() {
-    this.populateDialog('shared_file', ['name', 'file']);
+    this.populateDialog('sharedfile', ['name', 'file']);
   }
 }
 

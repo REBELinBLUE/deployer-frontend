@@ -13,9 +13,11 @@
     "fontawesome": "^4.7.2",
     "html5shiv": "^3.7.3",
     "ionicons": "^3.0.0",
+    "istanbul": "^0.4.5",
     "jquery": "^3.2.1",
     "jquery-sortable": "^0.9.13",
     "moment": "^2.18.1",
+    "reify": "^0.12.3",
     "respond.js": "^1.4.2",
     "select2": "^4.0.4",
     "socket.io-client": "^2.0.3",
@@ -37,8 +39,9 @@
   },
   "scripts": {
     "build": "gulp",
-    "test": "NODE_ENV=test mocha --recursive --reporter spec",
-    "lint": "eslint -c .eslintrc --quiet src/",
+    "test": "NODE_ENV=test mocha",
+    "test:coverage": "NODE_ENV=test istanbul cover _mocha",
+    "lint": "eslint src/",
     "prepare": "patch-package"
   }
 }

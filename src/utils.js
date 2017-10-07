@@ -12,7 +12,6 @@ export function dateTimeFormatter(datetime) {
   return moment(datetime).format('Do MMMM YYYY h:mm:ss A');
 }
 
-
 export default {
   logFormatter,
   dateTimeFormatter,
