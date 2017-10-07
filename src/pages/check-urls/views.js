@@ -1,31 +1,19 @@
 import CheckUrlCollection from './collection';
-import CollectionViewFactory from '../../factories/CollectionView';
-import ModelView from '../../factories/ModelView';
+import CollectionViewFactory from '../../factories/CollectionViewFactory';
+import ModelViewFactory from '../../factories/ModelViewFactory';
 import { dateTimeFormatter } from '../../utils';
 
+const element = 'checkurl';
+
+const ModelView = ModelViewFactory(
+  element,
+  ['name', 'url'],
+  {
+    'click .btn-view': 'showLog',
+  }
+);
+
 class CheckUrlView extends ModelView {
-  constructor(options) {
-    super({
-      ...options,
-      events: {
-        'click .btn-view': 'showLog',
-      },
-    }, '#checkurl-template');
-  }
-
-  showLog() {
-    const modal = $('div.modal#result');
-
-    modal.find('pre').text(this.model.get('last_log'));
-    modal.find('.modal-title span').text('Log');
-  }
-
-  editModel() {
-    this.populateDialog('url', ['name', 'url']);
-
-    $(`#period_${this.model.get('period')}`).prop('checked', true);
-  }
-
   viewData() {
     const data = this.model.toJSON();
 
@@ -59,6 +47,19 @@ class CheckUrlView extends ModelView {
       formatted_date: hasRun ? dateTimeFormatter(data.last_seen) : null,
     };
   }
+
+  showLog() {
+    const modal = $('div.modal#result');
+
+    modal.find('pre').text(this.model.get('last_log'));
+    modal.find('.modal-title span').text('Log');
+  }
+
+  editModel() {
+    super.editModel();
+
+    $(`#${element}_period_${this.model.get('period')}`).prop('checked', true);
+  }
 }
 
-export default CollectionViewFactory('checkurl', CheckUrlCollection, CheckUrlView);
+export default CollectionViewFactory(element, CheckUrlCollection, CheckUrlView);

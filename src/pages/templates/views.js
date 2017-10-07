@@ -1,15 +1,9 @@
 import TemplateCollection from './collection';
-import CollectionViewFactory from '../../factories/CollectionView';
-import ModelView from '../../factories/ModelView';
+import CollectionViewFactory from '../../factories/CollectionViewFactory';
+import ModelViewFactory from '../../factories/ModelViewFactory';
 
-class TemplateView extends ModelView {
-  constructor(options) {
-    super(options, '#template-template');
-  }
+const element = 'template';
 
-  editModel() {
-    this.populateDialog('template', ['name']);
-  }
-}
+const TemplateView = ModelViewFactory(element, ['name']);
 
-export default CollectionViewFactory('template', TemplateCollection, TemplateView);
+export default CollectionViewFactory(element, TemplateCollection, TemplateView);

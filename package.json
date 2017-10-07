@@ -44,7 +44,7 @@
   "scripts": {
     "build": "gulp",
     "test": "NODE_ENV=test mocha",
-    "test:coverage": "NODE_ENV=test istanbul cover _mocha",
+    "test:coverage": "NODE_ENV=test istanbul cover ./_mocha",
     "lint": "eslint src/",
     "prepare": "patch-package"
   }

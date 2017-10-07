@@ -1,14 +1,13 @@
 import HeartbeatCollection from './collection';
-import CollectionViewFactory from '../../factories/CollectionView';
-import ModelView from '../../factories/ModelView';
-
+import CollectionViewFactory from '../../factories/CollectionViewFactory';
+import ModelViewFactory from '../../factories/ModelViewFactory';
 import { dateTimeFormatter } from '../../utils';
 
-class HeartbeatView extends ModelView {
-  constructor(options) {
-    super(options, '#heartbeat-template');
-  }
+const element = 'heartbeat';
 
+const ModelView = ModelViewFactory(element, ['name']);
+
+class HeartbeatView extends ModelView {
   viewData() {
     const data = this.model.toJSON();
 
@@ -41,10 +40,10 @@ class HeartbeatView extends ModelView {
   }
 
   editModel() {
-    this.populateDialog('heartbeat', ['name']);
+    this.editModel();
 
-    $(`#heartbeat_interval_${this.model.get('interval')}`).prop('checked', true);
+    $(`#${element}_interval_${this.model.get('interval')}`).prop('checked', true);
   }
 }
 
-export default CollectionViewFactory('heartbeat', HeartbeatCollection, HeartbeatView);
+export default CollectionViewFactory(element, HeartbeatCollection, HeartbeatView);

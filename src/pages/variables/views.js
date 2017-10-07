@@ -1,15 +1,9 @@
 import VariableCollection from './collection';
-import CollectionViewFactory from '../../factories/CollectionView';
-import ModelView from '../../factories/ModelView';
+import CollectionViewFactory from '../../factories/CollectionViewFactory';
+import ModelViewFactory from '../../factories/ModelViewFactory';
 
-class VariableView extends ModelView {
-  constructor(options) {
-    super(options, '#variable-template');
-  }
+const element = 'variable';
 
-  editModel() {
-    this.populateDialog('variable', ['name', 'value']);
-  }
-}
+const VariableView = ModelViewFactory(element, ['name', 'value']);
 
-export default CollectionViewFactory('variable', VariableCollection, VariableView);
+export default CollectionViewFactory(element, VariableCollection, VariableView);

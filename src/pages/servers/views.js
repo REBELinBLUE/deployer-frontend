@@ -1,34 +1,20 @@
 import ServerCollection from './collection';
-import CollectionViewFactory from '../../factories/CollectionView';
-import ModelView from '../../factories/ModelView';
+import CollectionViewFactory from '../../factories/CollectionViewFactory';
+import ModelViewFactory from '../../factories/ModelViewFactory';
 import { logFormatter } from '../../utils';
 
+const element = 'server';
+
+const ModelView = ModelViewFactory(
+  element,
+  ['name', 'ip_address', 'port', 'user', 'path'],
+  {
+    'click .btn-test': 'testConnection',
+    'click .btn-view': 'showLog',
+  }
+);
+
 class ServerView extends ModelView {
-  constructor(options) {
-    super({
-      ...options,
-      events: {
-        'click .btn-test': 'testConnection',
-        'click .btn-view': 'showLog',
-      },
-    }, '#server-template');
-  }
-
-  showLog() {
-    const modal = $('div.modal#result');
-
-    modal.find('pre').html(logFormatter(this.model.get('connect_log')));
-    modal.find('.modal-title span').text('View Log');
-  }
-
-  testConnection() {
-    if (this.model.isTesting()) {
-      return;
-    }
-
-    this.model.testConnection();
-  }
-
   viewData() {
     const data = this.model.toJSON();
 
@@ -62,10 +48,25 @@ class ServerView extends ModelView {
   }
 
   editModel() {
-    this.populateDialog('server', ['name', 'ip_address', 'port', 'user', 'path']);
+    super.editModel();
 
-    $('#server_deploy_code').prop('checked', (this.model.get('deploy_code') === true));
+    $(`#${element}_deploy_code`).prop('checked', (this.model.get('deploy_code') === true));
+  }
+
+  showLog() {
+    const modal = $('div.modal#result');
+
+    modal.find('pre').html(logFormatter(this.model.get('connect_log')));
+    modal.find('.modal-title span').text('View Log');
+  }
+
+  testConnection() {
+    if (this.model.isTesting()) {
+      return;
+    }
+
+    this.model.testConnection();
   }
 }
 
-export default CollectionViewFactory('server', ServerCollection, ServerView);
+export default CollectionViewFactory(element, ServerCollection, ServerView);

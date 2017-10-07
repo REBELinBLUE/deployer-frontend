@@ -3,6 +3,7 @@ import Backbone from 'backbone';
 import listener from '../listener';
 import { MODEL_CHANGED, MODEL_TRASHED, MODEL_CREATED } from '../events';
 
+// FIXME: Change to use the spread operator
 export default (element, Collection, ModelView) => {
   return class CollectionView extends Backbone.View {
     constructor(options) {

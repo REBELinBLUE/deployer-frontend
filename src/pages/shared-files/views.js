@@ -1,15 +1,9 @@
 import SharedFileCollection from './collection';
-import CollectionViewFactory from '../../factories/CollectionView';
-import ModelView from '../../factories/ModelView';
+import CollectionViewFactory from '../../factories/CollectionViewFactory';
+import ModelViewFactory from '../../factories/ModelViewFactory';
 
-class SharedFileView extends ModelView {
-  constructor(options) {
-    super(options, '#sharedfile-template');
-  }
+const element = 'sharedfile';
 
-  editModel() {
-    this.populateDialog('sharedfile', ['name', 'file']);
-  }
-}
+const SharedFileView = ModelViewFactory(element, ['name', 'file']);
 
-export default CollectionViewFactory('file', SharedFileCollection, SharedFileView);
+export default CollectionViewFactory(element, SharedFileCollection, SharedFileView);

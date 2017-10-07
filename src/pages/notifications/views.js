@@ -1,12 +1,13 @@
 import NotificationCollection from './collection';
-import CollectionViewFactory from '../../factories/CollectionView';
-import ModelView from '../../factories/ModelView';
+import CollectionViewFactory from '../../factories/CollectionViewFactory';
+import ModelViewFactory from '../../factories/ModelViewFactory';
+
+const element = 'notification';
+
+// FIXME: Still need to do the editModel() method
+const ModelView = ModelViewFactory(element, []);
 
 class NotificationView extends ModelView {
-  constructor(options) {
-    super(options, '#notification-template');
-  }
-
   viewData() {
     const data = this.model.toJSON();
 
@@ -35,4 +36,4 @@ class NotificationView extends ModelView {
   }
 }
 
-export default CollectionViewFactory('notification', NotificationCollection, NotificationView);
+export default CollectionViewFactory(element, NotificationCollection, NotificationView);

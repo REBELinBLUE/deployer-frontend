@@ -1,14 +1,13 @@
 import UserCollection from './collection';
-import CollectionViewFactory from '../../factories/CollectionView';
-import ModelView from '../../factories/ModelView';
-
+import CollectionViewFactory from '../../factories/CollectionViewFactory';
+import ModelViewFactory from '../../factories/ModelViewFactory';
 import { dateTimeFormatter } from '../../utils';
 
-class UserView extends ModelView {
-  constructor(options) {
-    super(options, '#user-template');
-  }
+const element = 'user';
 
+const ModelView = ModelViewFactory(element, ['name', 'email']);
+
+class UserView extends ModelView {
   viewData() {
     const data = this.model.toJSON();
 
@@ -17,11 +16,7 @@ class UserView extends ModelView {
       created: dateTimeFormatter(data.created_at),
     };
   }
-
-  editModel() {
-    this.populateDialog('user', ['name', 'email']);
-  }
 }
 
-export default CollectionViewFactory('user', UserCollection, UserView);
+export default CollectionViewFactory(element, UserCollection, UserView);
 

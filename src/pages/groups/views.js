@@ -1,15 +1,9 @@
 import GroupCollection from './collection';
-import CollectionViewFactory from '../../factories/CollectionView';
-import ModelView from '../../factories/ModelView';
+import CollectionViewFactory from '../../factories/CollectionViewFactory';
+import ModelViewFactory from '../../factories/ModelViewFactory';
 
-class GroupView extends ModelView {
-  constructor(options) {
-    super(options, '#group-template');
-  }
+const element = 'group';
 
-  editModel() {
-    this.populateDialog('group', ['name']);
-  }
-}
+const GroupView = ModelViewFactory(element, ['name']);
 
-export default CollectionViewFactory('group', GroupCollection, GroupView);
+export default CollectionViewFactory(element, GroupCollection, GroupView);

@@ -1,4 +1,4 @@
-import Collection from '../../factories/CollectionFactory';
+import Collection from '../../factories/Collection';
 import SharedFile from './model';
 
 export default new Collection(SharedFile);

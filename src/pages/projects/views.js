@@ -1,13 +1,16 @@
 import ProjectCollection from './collection';
-import CollectionViewFactory from '../../factories/CollectionView';
-import ModelView from '../../factories/ModelView';
+import CollectionViewFactory from '../../factories/CollectionViewFactory';
+import ModelViewFactory from '../../factories/ModelViewFactory';
 import { dateTimeFormatter } from '../../utils';
 
-class ProjectView extends ModelView {
-  constructor(options) {
-    super(options, '#project-template');
-  }
+const element = 'project';
 
+const ModelView = ModelViewFactory(
+  element,
+  ['name', 'repository', 'branch', 'group_id', 'builds_to_keep', 'url', 'build_url']
+);
+
+class ProjectView extends ModelView {
   viewData() {
     const data = this.model.toJSON();
 
@@ -18,14 +21,12 @@ class ProjectView extends ModelView {
   }
 
   editModel() {
-    this.populateDialog('project', [
-      'name', 'repository', 'branch', 'group_id', 'builds_to_keep', 'url', 'build_url',
-    ]);
+    super.editModel();
 
-    $('#project_allow_other_branch').prop('checked', (this.model.get('allow_other_branch') === true));
-    $('#project_include_dev').prop('checked', (this.model.get('include_dev') === true));
-    $('#project_private_key').val('');
+    $(`#${element}_allow_other_branch`).prop('checked', (this.model.get('allow_other_branch') === true));
+    $(`#${element}_include_dev`).prop('checked', (this.model.get('include_dev') === true));
+    $(`#${element}_private_key`).val('');
   }
 }
 
-export default CollectionViewFactory('project', ProjectCollection, ProjectView);
+export default CollectionViewFactory(element, ProjectCollection, ProjectView);
