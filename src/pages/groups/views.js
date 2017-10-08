@@ -6,4 +6,10 @@ const element = 'group';
 
 const GroupView = ModelViewFactory(element, ['name']);
 
-export default CollectionViewFactory(element, GroupCollection, GroupView);
+const getInput = () => {
+  return {
+    name: $(`#${element}_name`).val()
+  };
+};
+
+export default CollectionViewFactory(element, GroupCollection, GroupView, getInput);

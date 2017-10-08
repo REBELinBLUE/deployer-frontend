@@ -22,7 +22,7 @@ Elixir.config.publicPath = 'build';
 
 const paths = {
   admin_lte: `${packages}/admin-lte`,
-  ace: `${packages}/ace-min-noconflict`,
+  ace: `${packages}/ace-code-editor/lib/ace`,
   backbone: `${packages}/backbone`,
   bootstrap: `${packages}/bootstrap`,
   underscore: `${packages}/underscore`,
@@ -77,10 +77,12 @@ Elixir((mix) => {
       `${paths.toastr}/toastr.js`,
       `${paths.cropper}/dist/cropper.js`,
       `${paths.ace}/ace.js`,
-      `${paths.ace}/mode-sh.js`,
-      `${paths.ace}/mode-php.js`,
-      `${paths.ace}/mode-yaml.js`,
-      `${paths.ace}/mode-ini.js`,
+      `${paths.ace}/mode/sh.js`,
+      `${paths.ace}/mode/php.js`,
+      `${paths.ace}/mode/yaml.js`,
+      `${paths.ace}/mode/ini.js`,
+      `${paths.ace}/mode/xml.js`,
+      `${paths.ace}/mode/json.js`,
     ], `${build}/js/vendor.js`, packages)
     .rollup('app.js', `${build}/js`, './src')
     .copy(`${paths.admin_lte}/bootstrap/fonts/**`, `${build}/fonts`)

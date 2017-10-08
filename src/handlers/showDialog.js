@@ -5,18 +5,21 @@ export default (event) => {
 
   $('.btn-danger', dialog).hide();
   $('.callout-danger', dialog).hide();
+  $('.existing-only', dialog).hide();
+  $('.new-only', dialog).hide();
   $('.has-error', dialog).removeClass('has-error');
   $('.label-danger', dialog).remove();
 
   if (button.hasClass('btn-edit')) {
     title = 'Edit';
     $('.btn-danger', dialog).show();
+    $('.existing-only', dialog).show();
   } else {
-    // $('#variable_id').val('');
-    // $('#variable_name').val('');
-    // $('#variable_value').val('');
+    // TODO: Test, not sure this is enough!
+    const form = dialog.find('form')[0];
+    form.reset();
 
-    // FIXME: Clear fields
+    $('.new-only', dialog).show();
   }
 
   dialog.find('.modal-title span').text(title);

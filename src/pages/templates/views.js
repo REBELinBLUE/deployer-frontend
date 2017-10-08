@@ -6,4 +6,10 @@ const element = 'template';
 
 const TemplateView = ModelViewFactory(element, ['name']);
 
-export default CollectionViewFactory(element, TemplateCollection, TemplateView);
+const getInput = () => {
+  return {
+    name: $(`#${element}_name`).val()
+  };
+};
+
+export default CollectionViewFactory(element, TemplateCollection, TemplateView, getInput);

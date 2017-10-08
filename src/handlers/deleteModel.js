@@ -1,31 +1,22 @@
+import { clearDialog, setBusy, clearBusy } from '../dialog';
+
 export default (Collection, element) => {
   return (event) => {
     const target = $(event.currentTarget);
-    const icon = target.find('i');
-    const dialog = target.parents('.modal');
 
-    icon.addClass('fa-refresh fa-spin').removeClass('fa-trash');
-    dialog.find('input').attr('disabled', 'disabled');
-    $('button.close', dialog).hide();
+    setBusy(target);
 
-    const id = $(`#${element}_id`).val();
-
-    const instance = Collection.get(id);
+    const instanceId = $(`#${element}_id`).val();
+    const instance = Collection.get(instanceId);
 
     instance.destroy({
       wait: true,
       success: () => {
-        dialog.modal('hide');
-        $('.callout-danger', dialog).hide();
-
-        icon.removeClass('fa-refresh fa-spin').addClass('fa-trash');
-        $('button.close', dialog).show();
-        dialog.find('input').removeAttr('disabled');
+        clearDialog(target);
+        clearBusy(target, 'trash');
       },
       error: () => {
-        icon.removeClass('fa-refresh fa-spin').addClass('fa-trash');
-        $('button.close', dialog).show();
-        dialog.find('input').removeAttr('disabled');
+        clearBusy(target, 'trash');
       }
     });
   };

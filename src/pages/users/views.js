@@ -18,5 +18,14 @@ class UserView extends ModelView {
   }
 }
 
-export default CollectionViewFactory(element, UserCollection, UserView);
+const getInput = () => {
+  return {
+    name: $(`#${element}_name`).val(),
+    email: $(`#${element}_email`).val(),
+    password: $(`#${element}_password`).val(),
+    password_confirmation: $(`#${element}_password_confirmation`).val()
+  };
+};
+
+export default CollectionViewFactory(element, UserCollection, UserView, getInput);
 

@@ -69,4 +69,17 @@ class ServerView extends ModelView {
   }
 }
 
-export default CollectionViewFactory(element, ServerCollection, ServerView);
+const getInput = () => {
+  return {
+    name: $(`#${element}_name`).val(),
+    ip_address: $(`#${element}_ip_address`).val(),
+    port: $(`#${element}_port`).val(),
+    user: $(`#${element}_user`).val(),
+    path: $(`#${element}_path`).val(),
+    deploy_code: $(`#${element}_deploy_code`).is(':checked'),
+    project_id: parseInt($('input[name="project_id"]').val(), 10),
+    add_commands: $(`#${element}_commands`).is(':checked')
+  };
+};
+
+export default CollectionViewFactory(element, ServerCollection, ServerView, getInput);

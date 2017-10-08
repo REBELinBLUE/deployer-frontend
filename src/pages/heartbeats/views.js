@@ -46,4 +46,12 @@ class HeartbeatView extends ModelView {
   }
 }
 
-export default CollectionViewFactory(element, HeartbeatCollection, HeartbeatView);
+const getInput = () => {
+  return {
+    name: $(`#${element}_name`).val(),
+    interval: parseInt($('input[name=interval]:checked').val(), 10), // FIXME: Need a better selector
+    project_id: parseInt($('input[name="project_id"]').val(), 10)
+  };
+};
+
+export default CollectionViewFactory(element, HeartbeatCollection, HeartbeatView, getInput);

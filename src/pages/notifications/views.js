@@ -4,7 +4,6 @@ import ModelViewFactory from '../../factories/ModelViewFactory';
 
 const element = 'notification';
 
-// FIXME: Still need to do the editModel() method
 const ModelView = ModelViewFactory(element, ['name', 'type']);
 
 class NotificationView extends ModelView {
@@ -34,6 +33,16 @@ class NotificationView extends ModelView {
       label,
     };
   }
+
+  editModel() {
+    super.editModel();
+    console.error('Not yet implemented editModel() for notifications');
+  }
 }
 
-export default CollectionViewFactory(element, NotificationCollection, NotificationView);
+const getInput = () => {
+  console.error('Not yet implemented getInput() for notifications');
+  return {};
+};
+
+export default CollectionViewFactory(element, NotificationCollection, NotificationView, getInput);

@@ -1,4 +1,4 @@
+.reify-cache/
 node_modules/
 build/
 coverage/
-.reify-cache/

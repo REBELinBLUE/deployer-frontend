@@ -6,13 +6,12 @@ import deleteModel from '../handlers/deleteModel';
 import saveModel from '../handlers/saveModel';
 import { MODEL_CHANGED, MODEL_TRASHED, MODEL_CREATED } from '../events';
 
-export default (element, Collection, ModelView) => {
-  // FIXME: Why does this fail if importing jquery?]
+export default (element, Collection, ModelView, getInput) => {
   const modal = `div#${element}.modal`;
 
   $(modal).on('show.bs.modal', showDialog);
   $(`${modal} button.btn-delete`).on('click', deleteModel(Collection, element));
-  $(`${modal} button.btn-save`).on('click', saveModel(Collection, element));
+  $(`${modal} button.btn-save`).on('click', saveModel(Collection, element, getInput));
 
   return class CollectionView extends Backbone.View {
     constructor(options) {
@@ -60,10 +59,16 @@ export default (element, Collection, ModelView) => {
       });
 
       listener.on(`${element}:${MODEL_CREATED}`, (data) => {
-        console.log(`${element}:${MODEL_CREATED}`, data);
+        console.error(`${element}:${MODEL_CREATED} not handled yet`, data);
         // FIXME: Figure out how to get the project_id
         // if (parseInt(data.model.project_id, 10) === parseInt(app.project_id, 10)) {
         //   this.collection.add(data.model);
+        // }
+
+        // var target_type = $('input[name="target_type"]').val();
+        // var target_id = $('input[name="target_id"]').val();
+        // if (target_type == data.model.target_type && parseInt(data.model.target_id) === parseInt(target_id)) {
+        //   app.ConfigFiles.add(data.model);
         // }
       });
 
@@ -88,26 +93,3 @@ export default (element, Collection, ModelView) => {
     }
   };
 };
-
-//
-// $('#variable').on('show.bs.modal', function (event) {
-//   var button = $(event.relatedTarget);
-//   var modal = $(this);
-//   var title = Lang.get('variables.create');
-//
-//   $('.btn-danger', modal).hide();
-//   $('.callout-danger', modal).hide();
-//   $('.has-error', modal).removeClass('has-error');
-//   $('.label-danger', modal).remove();
-//
-//   if (button.hasClass('btn-edit')) {
-//     title = Lang.get('variables.edit');
-//     $('.btn-danger', modal).show();
-//   } else {
-//     $('#variable_id').val('');
-//     $('#variable_name').val('');
-//     $('#variable_value').val('');
-//   }
-//
-//   modal.find('.modal-title span').text(title);
-// });

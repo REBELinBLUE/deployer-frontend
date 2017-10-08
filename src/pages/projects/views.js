@@ -29,4 +29,20 @@ class ProjectView extends ModelView {
   }
 }
 
-export default CollectionViewFactory(element, ProjectCollection, ProjectView);
+const getInput = () => {
+  return {
+    name: $(`#${element}_name`).val(),
+    repository: $(`#${element}_repository`).val(),
+    branch: $(`#${element}_branch`).val(),
+    group_id: parseInt($(`#${element}_group_id`).val(), 10),
+    builds_to_keep: $(`#${element}_builds_to_keep`).val(),
+    url: $(`#${element}_url`).val(),
+    build_url: $(`#${element}_build_url`).val(),
+    template_id: $(`#${element}_template_id`) ? parseInt($(`#${element}_template_id`).val(), 10) : null,
+    allow_other_branch: $(`#${element}_allow_other_branch`).is(':checked'),
+    include_dev: $(`#${element}_include_dev`).is(':checked'),
+    private_key: $(`#${element}_private_key`).val()
+  };
+};
+
+export default CollectionViewFactory(element, ProjectCollection, ProjectView, getInput);

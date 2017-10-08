@@ -62,4 +62,13 @@ class CheckUrlView extends ModelView {
   }
 }
 
-export default CollectionViewFactory(element, CheckUrlCollection, CheckUrlView);
+const getInput = () => {
+  return {
+    name: $(`#${element}_name`).val(),
+    url: $(`#${element}_url`).val(),
+    period: parseInt($('input[name=period]:checked').val(), 10),
+    project_id: parseInt($('input[name="project_id"]').val(), 10)
+  };
+};
+
+export default CollectionViewFactory(element, CheckUrlCollection, CheckUrlView, getInput);
