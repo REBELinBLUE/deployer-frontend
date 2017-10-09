@@ -1,7 +1,7 @@
-const { expect, use } = require('chai');
-const dirtyChai = require('dirty-chai');
+import { expect, use } from 'chai';
+import dirtyChai from 'dirty-chai';
 
-const { dateTimeFormatter, logFormatter } = require('../src/utils');
+import { dateTimeFormatter, logFormatter } from '../src/utils';
 
 use(dirtyChai);
 
