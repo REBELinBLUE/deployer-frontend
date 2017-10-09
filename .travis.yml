@@ -17,7 +17,6 @@ script:
   - npm run test:coverage
   - npm run production
   # - npm-check
-  - gulp
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
