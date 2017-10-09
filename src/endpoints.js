@@ -6,6 +6,7 @@ export default {
   projects: '/admin/projects',
   servers: '/servers',
   serversReorder: '/servers/reorder',
+  serversAutocomplete: '/servers/autocomplete',
   variables: '/variables',
   shared: '/shared-files',
   config: '/config-files',

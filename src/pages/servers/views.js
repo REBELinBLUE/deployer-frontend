@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import 'devbridge-autocomplete';
 
 import ServerCollection from './collection';
 import CollectionViewFactory from '../../factories/CollectionViewFactory';
@@ -8,15 +9,40 @@ import endpoints from '../../endpoints';
 import reorderModels from '../../handlers/reorderModels';
 
 const element = 'server';
+const fields = ['name', 'ip_address', 'port', 'user', 'path'];
 
 const ModelView = ModelViewFactory(
   element,
-  ['name', 'ip_address', 'port', 'user', 'path'],
+  fields,
   {
     'click .btn-test': 'testConnection',
     'click .btn-view': 'showLog',
   },
 );
+
+$(`#${element} #${element}_name`).autocomplete({
+  serviceUrl: endpoints.serversAutocomplete,
+  dataType: 'json',
+  noCache: true,
+  preserveInput: true,
+  transformResult: (response) => {
+    return {
+      suggestions: $.map(response.suggestions, (dataItem) => {
+        return {
+          value: `${dataItem.name} (${dataItem.user}@${dataItem.ip_address})`,
+          data: dataItem,
+        };
+      }),
+    };
+  },
+  onSelect: (suggestion) => {
+    fields.forEach((field) => {
+      $(`#${element}_${field}`).val(suggestion.data[field]);
+    });
+
+    $(`#${element}_deploy_code`).prop('checked', suggestion.data.deploy_code);
+  },
+});
 
 class ServerView extends ModelView {
   viewData() {
