@@ -1,3 +1,5 @@
+import $ from 'jquery';
+
 function getIcon(target) {
   return target.find('i');
 }
@@ -11,8 +13,8 @@ export function setTitle(title, icon) {
 }
 
 export function setBusy(target) {
-  const icon = getIcon(target);
-  const dialog = getDialog(target);
+  const icon = getIcon($(target));
+  const dialog = getDialog($(target));
 
   icon.addClass('fa-refresh fa-spin').removeClass('fa-save').removeClass('fa-trash');
   dialog.find('input').attr('disabled', 'disabled');
@@ -20,8 +22,8 @@ export function setBusy(target) {
 }
 
 export function clearBusy(target, iconClass) {
-  const icon = getIcon(target);
-  const dialog = getDialog(target);
+  const icon = getIcon($(target));
+  const dialog = getDialog($(target));
 
   icon.removeClass('fa-refresh fa-spin').addClass(`fa-${iconClass}`);
   $('button.close', dialog).show();
@@ -29,14 +31,14 @@ export function clearBusy(target, iconClass) {
 }
 
 export function clearDialog(target) {
-  const dialog = getDialog(target);
+  const dialog = getDialog($(target));
 
   dialog.modal('hide');
   $('.callout-danger', dialog).hide();
 }
 
 export function showErrors(target, errors) {
-  const dialog = getDialog(target);
+  const dialog = getDialog($(target));
 
   $('.callout-danger', dialog).show();
 

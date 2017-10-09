@@ -5,7 +5,7 @@ export default (Collection, element, getInput) => {
   const Model = Collection.model;
 
   return (event) => {
-    const target = $(event.currentTarget);
+    const target = event.currentTarget;
 
     setBusy(target);
 

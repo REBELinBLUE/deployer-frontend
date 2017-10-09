@@ -1,8 +1,9 @@
+import $ from 'jquery';
 import { clearDialog, setBusy, clearBusy } from '../dialog';
 
 export default (Collection, element) => {
   return (event) => {
-    const target = $(event.currentTarget);
+    const target = event.currentTarget;
 
     setBusy(target);
 
