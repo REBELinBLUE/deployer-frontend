@@ -1,6 +1,7 @@
 {
   "private": true,
   "name": "deployer",
+  "version": "0.0.1",
   "description": "The frontend source for Deployer",
   "author": "Stephen Ball",
   "license": "MIT",
