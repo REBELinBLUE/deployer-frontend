@@ -1,6 +1,8 @@
 import $ from 'jquery';
 import toastr from 'toastr';
 import Backbone from 'backbone';
+import 'bootstrap';
+import 'admin-lte';
 
 import views from './pages/views';
 import collections from './pages/collections';

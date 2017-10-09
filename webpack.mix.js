@@ -1,16 +1,7 @@
-// TODO: Replace with webpack and babel
-const Elixir = require('laravel-elixir');
-// const gulp = require('gulp');
-// const shell = require('gulp-shell');
-
-require('laravel-elixir-remove');
-
-
+const mix = require('laravel-mix');
 
 const packages = 'node_modules';
 const build = 'build';
-
-Elixir.config.publicPath = 'build';
 
 const paths = {
   admin_lte: `${packages}/admin-lte`,
@@ -30,30 +21,40 @@ const paths = {
   cropper: `${packages}/cropper`,
   toastr: `${packages}/toastr`,
   select2: `${packages}/select2`,
-  // localization: '../../../vendor/andywer/js-localization',
 };
 
-Elixir((mix) => {
-  mix
-    // .lang()
-    .styles([
-      `${paths.bootstrap}/dist/css/bootstrap.css`,
-      `${paths.select2}/dist/css/select2.css`,
-      `${paths.fontawesome}/css/font-awesome.css`,
-      `${paths.ionicons}/dist/css/ionicons.css`,
-      `${paths.admin_lte}/dist/css/AdminLTE.css`,
-      `${paths.admin_lte}/dist/css/skins/_all-skins.css`,
-      `${paths.toastr}/build/toastr.css`,
-      `${paths.cropper}/dist/cropper.css`,
-    ], `${build}/css/vendor.css`, './')
-    .styles([
-      'src/css/app.css',
-      'src/css/console.css',
-    ], `${build}/css/app.css`, './')
-    .scripts([
-      `${paths.html5shiv}/dist/html5shiv.js`,
-      `${paths.respond}/dest/respond.src.js`,
-    ], `${build}/js/ie.js`, packages)
+// FIXME: Add ie.js
+mix
+  .setPublicPath(`${build}/`)
+  .js('src/app.js', `${build}/js/`)
+  .autoload({
+    jquery: ['$', 'window.jQuery', 'jQuery', 'window.$', 'jquery', 'window.jquery']
+  })
+  .extract([
+    'backbone', 'jquery', 'moment', 'underscore', 'brace',
+    'toastr', 'socket.io-client', 'bootstrap', 'admin-lte',
+  ])
+  .sourceMaps()
+  .styles([
+    'src/css/app.css',
+    'src/css/console.css',
+  ], `${build}/css/app.css`)
+  .styles([
+    `${paths.bootstrap}/dist/css/bootstrap.css`,
+    `${paths.select2}/dist/css/select2.css`,
+    `${paths.fontawesome}/css/font-awesome.css`,
+    `${paths.ionicons}/dist/css/ionicons.css`,
+    `${paths.admin_lte}/dist/css/AdminLTE.css`,
+    `${paths.admin_lte}/dist/css/skins/_all-skins.css`,
+    `${paths.toastr}/build/toastr.css`,
+    `${paths.cropper}/dist/cropper.css`,
+  ], `${build}/css/vendor.css`)
+  .copy(`${paths.bootstrap}/fonts/**`, `${build}/fonts`)
+  .copy(`${paths.fontawesome}/fonts/**`, `${build}/fonts`)
+  .copy(`${paths.ionicons}/dist/fonts/**`, `${build}/fonts`)
+  .version();
+
+/*
     .scripts([
       `${paths.jquery}/dist/jquery.js`,
       `${paths.jquery_sortable}/source/js/jquery-sortable.js`,
@@ -76,15 +77,15 @@ Elixir((mix) => {
       `${paths.ace}/mode/xml.js`,
       `${paths.ace}/mode/json.js`,
     ], `${build}/js/vendor.js`, packages)
-    .rollup('app.js', `${build}/js`, './src')
-    .copy(`${paths.admin_lte}/bootstrap/fonts/**`, `${build}/fonts`)
-    .copy(`${paths.fontawesome}/fonts/**`, `${build}/fonts`)
-    .copy(`${paths.ionicons}/fonts/**`, `${build}/fonts`)
-    .version([
-      'css/app.css',
-      'css/vendor.css',
-      'js/app.js',
-      'js/ie.js',
-      'js/vendor.js',
-    ], build);
-});
+ */
+
+
+// Elixir.extend('lang', () => {
+//   new Elixir.Task('lang', () => {
+//     const command = shell('php artisan js-localization:export --quiet', {
+//       cwd: '../../../',
+//     });
+//
+//     return gulp.src('').pipe(command);
+//   });
+// });

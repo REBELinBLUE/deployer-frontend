@@ -13,16 +13,12 @@
     "brace": "^0.10.0",
     "cropper": "^3.0.0",
     "devbridge-autocomplete": "^1.4.3",
-    "dirty-chai": "^2.0.1",
-    "eslint-config-airbnb-base": "^12.0.2",
     "fontawesome": "^4.7.2",
     "html5shiv": "^3.7.3",
     "ionicons": "^3.0.0",
-    "istanbul": "^0.4.5",
     "jquery": "^3.2.1",
     "jquery-sortable": "^0.9.13",
     "moment": "^2.18.1",
-    "reify": "^0.12.3",
     "respond.js": "^1.4.2",
     "select2": "^4.0.4",
     "socket.io-client": "^2.0.3",
@@ -30,23 +26,28 @@
     "underscore": "^1.8.3"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-istanbul": "^0.12.2",
+    "babel-preset-stage-1": "^6.24.1",
     "chai": "^4.1.2",
+    "cross-env": "^5.0.5",
+    "dirty-chai": "^2.0.1",
     "eslint": "^4.8.0",
-    "eslint-config-airbnb": "^15.1.0",
+    "eslint-config-airbnb-base": "^12.0.2",
     "eslint-plugin-import": "^2.7.0",
-    "gulp": "^3.9.1",
-    "gulp-shell": "^0.5.2",
-    "laravel-elixir": "^6.0.0-1",
-    "laravel-elixir-remove": "^0.2.0",
-    "laravel-elixir-rollup-official": "^1.1.0",
-    "mocha": "^4.0.1",
-    "patch-package": "^3.5.0"
+    "laravel-mix": "^1.4.5",
+    "mocha": "^4.0.1"
   },
   "scripts": {
-    "build": "gulp",
-    "test": "NODE_ENV=test mocha",
-    "test:coverage": "NODE_ENV=test istanbul cover ./_mocha",
-    "lint": "eslint src/",
-    "prepare": "patch-package"
+    "dev": "npm run development",
+    "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "watch": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "watch-poll": "npm run watch -- --watch-poll",
+    "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "prod": "npm run production",
+    "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "test": "cross-env NODE_ENV=test mocha",
+    "test:coverage": "cross-env NODE_ENV=test babel-node -- ./node_modules/.bin/babel-istanbul cover ./node_modules/mocha/bin/_mocha",
+    "lint": "eslint src/"
   }
 }

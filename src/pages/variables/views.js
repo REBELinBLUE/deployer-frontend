@@ -1,3 +1,5 @@
+import $ from 'jquery';
+
 import VariableCollection from './collection';
 import CollectionViewFactory from '../../factories/CollectionViewFactory';
 import ModelViewFactory from '../../factories/ModelViewFactory';

@@ -6,12 +6,13 @@ YELLOW := $(shell tput -Txterm setaf 3)
 RESET  := $(shell tput -Txterm sgr0)
 
 ## Build the bundle
-build: # FIXME: This needs changing
-	@gulp
-	@rm build/js/app.js build/js/ie.js build/js/vendor.js
-	@rm build/css/app.css build/css/vendor.css
-	@rm -rf ~/Workspace/deployer/application/public/build/*
-	@cp -r build ~/Workspace/deployer/application/public
+build:
+	@npm run dev
+	@rm -rf ~/Workspace/deployer/application/public/mix-manifest.json
+	@rm -rf ~/Workspace/deployer/application/public/js/
+	@rm -rf ~/Workspace/deployer/application/public/css/
+	@rm -rf ~/Workspace/deployer/application/public/fonts/
+	@cp -r build/* ~/Workspace/deployer/application/public/
 
 ## Run tests
 test:
