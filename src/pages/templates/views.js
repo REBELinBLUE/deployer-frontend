@@ -10,7 +10,7 @@ const TemplateView = ModelViewFactory(element, ['name']);
 
 const getInput = () => {
   return {
-    name: $(`#${element}_name`).val()
+    name: $(`#${element}_name`).val(),
   };
 };
 

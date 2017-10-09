@@ -1,6 +1,3 @@
-// Notes
-//   - arrow-body-style and comma-dangle are disabled as they do not work with rollup/buble
-
 module.exports = {
   extends: 'airbnb-base',
   parserOptions: {
@@ -11,8 +8,7 @@ module.exports = {
     'no-underscore-dangle': [2, {
       allow: ['__backboneAgent']
     }],
-    'arrow-body-style': [0],
-    'comma-dangle': [0]
+    'arrow-body-style': [0] // FIXME: Remove
   },
   env: {
     browser: true,

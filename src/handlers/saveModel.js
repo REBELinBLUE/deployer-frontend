@@ -31,7 +31,7 @@ export default (Collection, element, getInput) => {
       error: (model, response) => {
         showErrors(target, response.responseJSON);
         clearBusy(target, 'save');
-      }
+      },
     });
   };
 };

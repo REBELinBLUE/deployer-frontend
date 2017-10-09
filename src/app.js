@@ -1,6 +1,6 @@
-import $ from 'jquery';
 import toastr from 'toastr';
 import Backbone from 'backbone';
+import $ from 'jquery';
 import 'bootstrap';
 import 'admin-lte';
 

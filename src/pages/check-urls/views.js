@@ -12,7 +12,7 @@ const ModelView = ModelViewFactory(
   ['name', 'url'],
   {
     'click .btn-view': 'showLog',
-  }
+  },
 );
 
 class CheckUrlView extends ModelView {
@@ -69,7 +69,7 @@ const getInput = () => {
     name: $(`#${element}_name`).val(),
     url: $(`#${element}_url`).val(),
     period: parseInt($('input[name=period]:checked').val(), 10),
-    project_id: parseInt($('input[name="project_id"]').val(), 10)
+    project_id: parseInt($('input[name="project_id"]').val(), 10),
   };
 };
 

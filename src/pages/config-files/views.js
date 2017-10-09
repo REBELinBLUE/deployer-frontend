@@ -18,7 +18,7 @@ const ModelView = ModelViewFactory(
   ['name', 'path'],
   {
     'click .btn-view': 'showFile',
-  }
+  },
 );
 
 let editor;
@@ -62,7 +62,7 @@ const getInput = () => {
     path: $(`#${element}_path`).val(),
     content: editor.getValue(),
     target_type: $('input[name="target_type"]').val(),
-    target_id: parseInt($('input[name="target_id"]').val(), 10)
+    target_id: parseInt($('input[name="target_id"]').val(), 10),
   };
 };
 

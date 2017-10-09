@@ -17,7 +17,7 @@ export default (Collection, element) => {
       },
       error: () => {
         clearBusy(target, 'trash');
-      }
+      },
     });
   };
 };

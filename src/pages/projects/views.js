@@ -9,7 +9,7 @@ const element = 'project';
 
 const ModelView = ModelViewFactory(
   element,
-  ['name', 'repository', 'branch', 'group_id', 'builds_to_keep', 'url', 'build_url']
+  ['name', 'repository', 'branch', 'group_id', 'builds_to_keep', 'url', 'build_url'],
 );
 
 class ProjectView extends ModelView {
@@ -43,7 +43,7 @@ const getInput = () => {
     template_id: $(`#${element}_template_id`) ? parseInt($(`#${element}_template_id`).val(), 10) : null,
     allow_other_branch: $(`#${element}_allow_other_branch`).is(':checked'),
     include_dev: $(`#${element}_include_dev`).is(':checked'),
-    private_key: $(`#${element}_private_key`).val()
+    private_key: $(`#${element}_private_key`).val(),
   };
 };
 

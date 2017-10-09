@@ -13,7 +13,7 @@ const ModelView = ModelViewFactory(
   {
     'click .btn-test': 'testConnection',
     'click .btn-view': 'showLog',
-  }
+  },
 );
 
 class ServerView extends ModelView {
@@ -80,7 +80,7 @@ const getInput = () => {
     path: $(`#${element}_path`).val(),
     deploy_code: $(`#${element}_deploy_code`).is(':checked'),
     project_id: parseInt($('input[name="project_id"]').val(), 10),
-    add_commands: $(`#${element}_commands`).is(':checked')
+    add_commands: $(`#${element}_commands`).is(':checked'),
   };
 };
 

@@ -31,8 +31,8 @@ mix
     jquery: ['$', 'window.jQuery', 'jQuery', 'window.$', 'jquery', 'window.jquery']
   })
   .extract([
-    'backbone', 'jquery', 'moment', 'underscore', 'brace',
-    'toastr', 'socket.io-client', 'bootstrap', 'admin-lte',
+    'admin-lte', 'backbone', 'jquery', 'moment', 'underscore',
+    'brace', 'toastr', 'socket.io-client', 'bootstrap',
   ])
   .sourceMaps()
   .styles([
