@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import ace from 'brace';
 import 'brace/mode/php';
 import 'brace/mode/xml';
@@ -5,7 +6,6 @@ import 'brace/mode/ini';
 import 'brace/mode/yaml';
 import 'brace/mode/json';
 import 'brace/mode/sh';
-import $ from 'jquery';
 
 import ConfigFileCollection from './collection';
 import CollectionViewFactory from '../../factories/CollectionViewFactory';

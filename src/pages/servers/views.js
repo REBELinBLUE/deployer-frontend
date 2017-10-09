@@ -5,7 +5,7 @@ import CollectionViewFactory from '../../factories/CollectionViewFactory';
 import ModelViewFactory from '../../factories/ModelViewFactory';
 import { logFormatter } from '../../utils';
 import endpoints from '../../endpoints';
-import reorderModels from '../../handlers/reorderModels'
+import reorderModels from '../../handlers/reorderModels';
 
 const element = 'server';
 

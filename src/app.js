@@ -3,6 +3,7 @@ import Backbone from 'backbone';
 import $ from 'jquery';
 import 'bootstrap';
 import 'admin-lte';
+import 'select2';
 
 import views from './pages/views';
 import collections from './pages/collections';

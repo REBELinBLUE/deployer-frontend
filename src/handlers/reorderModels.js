@@ -1,3 +1,6 @@
+import $ from 'jquery';
+import 'jquery-sortable';
+
 export default (element, endpoint) => {
   $(`#${element}_list table`).sortable({
     containerSelector: 'table',
@@ -19,6 +22,6 @@ export default (element, endpoint) => {
         method: 'POST',
         data,
       });
-    }
+    },
   });
 };

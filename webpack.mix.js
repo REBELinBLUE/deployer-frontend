@@ -23,17 +23,20 @@ const paths = {
   select2: `${packages}/select2`,
 };
 
-// FIXME: Add ie.js
 mix
   .setPublicPath(`${build}/`)
   .js('src/app.js', `${build}/js/`)
   .autoload({
-    jquery: ['$', 'window.jQuery', 'jQuery', 'window.$', 'jquery', 'window.jquery']
+    jquery: ['$', 'window.jQuery', 'jQuery', 'window.$', 'jquery', 'window.jquery'],
   })
   .extract([
-    'admin-lte', 'backbone', 'jquery', 'moment', 'underscore',
-    'brace', 'toastr', 'socket.io-client', 'bootstrap',
+    'admin-lte', 'backbone', 'jquery', 'jquery-sortable', 'moment',
+    'underscore', 'brace', 'toastr', 'socket.io-client', 'bootstrap',
   ])
+  .scripts([
+    `${paths.html5shiv}/dist/html5shiv.js`,
+    `${paths.respond}/dest/respond.src.js`,
+  ], `${build}/js/ie.js`)
   .sourceMaps()
   .styles([
     'src/css/app.css',
@@ -56,26 +59,9 @@ mix
 
 /*
     .scripts([
-      `${paths.jquery}/dist/jquery.js`,
-      `${paths.jquery_sortable}/source/js/jquery-sortable.js`,
       `${paths.jquery_complete}/dist/jquery.autocomplete.js`,
-      `${paths.underscore}/underscore.js`,
-      `${paths.moment}/moment.js`,
-      `${paths.bootstrap}/dist/js/bootstrap.js`,
-      `${paths.select2}/dist/js/select2.js`,
-      `${paths.admin_lte}/dist/js/adminlte.js`,
-      `${paths.backbone}/backbone.js`,
-      `${paths.socketio_client}/dist/socket.io.js`,
       //`${paths.localization}/resources/js/localization.js`,
-      `${paths.toastr}/toastr.js`,
       `${paths.cropper}/dist/cropper.js`,
-      `${paths.ace}/ace.js`,
-      `${paths.ace}/mode/sh.js`,
-      `${paths.ace}/mode/php.js`,
-      `${paths.ace}/mode/yaml.js`,
-      `${paths.ace}/mode/ini.js`,
-      `${paths.ace}/mode/xml.js`,
-      `${paths.ace}/mode/json.js`,
     ], `${build}/js/vendor.js`, packages)
  */
 
