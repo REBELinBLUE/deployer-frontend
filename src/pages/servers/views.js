@@ -4,6 +4,8 @@ import ServerCollection from './collection';
 import CollectionViewFactory from '../../factories/CollectionViewFactory';
 import ModelViewFactory from '../../factories/ModelViewFactory';
 import { logFormatter } from '../../utils';
+import endpoints from '../../endpoints';
+import reorderModels from '../../handlers/reorderModels'
 
 const element = 'server';
 
@@ -70,6 +72,8 @@ class ServerView extends ModelView {
     this.model.testConnection();
   }
 }
+
+reorderModels(element, endpoints.serversReorder);
 
 const getInput = () => {
   return {

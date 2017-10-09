@@ -1,9 +1,11 @@
 export default {
   groups: '/admin/groups',
+  groupsReorder: '/admin/groups/reorder',
   users: '/admin/users',
   templates: '/admin/templates',
   projects: '/admin/projects',
   servers: '/servers',
+  serversReorder: '/servers/reorder',
   variables: '/variables',
   shared: '/shared-files',
   config: '/config-files',
