@@ -49,7 +49,7 @@
     "prod": "npm run production",
     "production": "cross-env NODE_ENV=production rimraf build/ && node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
     "test": "cross-env NODE_ENV=test mocha",
-    "test:coverage": "cross-env NODE_ENV=test babel-node -- ./node_modules/.bin/babel-istanbul cover ./node_modules/mocha/bin/_mocha",
+    "test:coverage": "cross-env NODE_ENV=test babel-node -- ./node_modules/.bin/babel-istanbul cover --include-all-sources --root src/ ./node_modules/mocha/bin/_mocha",
     "lint": "eslint src/"
   }
 }
