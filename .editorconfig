@@ -13,6 +13,10 @@ trim_trailing_whitespace = true
 [*.js]
 max_line_length = 120
 
+[Makefile]
+indent_size = 4
+indent_style = tab
+
 [*.md]
 trim_trailing_whitespace = false
 
