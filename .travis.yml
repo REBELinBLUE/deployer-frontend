@@ -13,10 +13,11 @@ install:
   - travis_retry npm install
 
 script:
-  # - npm run lint
-  - npm run test
+  - npm run lint
+  - npm run test:coverage
+  - npm run production
   # - npm-check
   - gulp
 
-notifications:
-  email: false
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
