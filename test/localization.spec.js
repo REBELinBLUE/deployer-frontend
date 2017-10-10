@@ -25,7 +25,7 @@ describe('Localization', () => {
   });
 
   it('Returns the current locale', () => {
-    expect(localize.locale()).to.be.equal('en');
+    expect(localize.getLocale()).to.be.equal('en');
   });
 
   it('Returns the translation for a key', () => {
@@ -68,13 +68,13 @@ describe('Localization', () => {
   });
 
   // FIXME: This isn't working as intended
-  // it('Overwrites previous translations with newer ones', () => {
-  //   localize.addMessages({
-  //     en: {
-  //       'foo.bar': 'new value',
-  //     },
-  //   });
-  //
-  //   expect(localize.has('foo.bar')).to.be.equal('new value');
-  // });
+  it('Overwrites previous translations with newer ones', () => {
+    localize.addMessages({
+      en: {
+        'foo.bar': 'new value',
+      },
+    });
+
+    expect(localize.get('foo.bar')).to.be.equal('new value');
+  });
 });

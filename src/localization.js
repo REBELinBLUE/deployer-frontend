@@ -1,4 +1,4 @@
-let messages = {};
+const messages = {};
 let currentLocale;
 
 function applyReplacements(message, replacements) {
@@ -14,14 +14,12 @@ function applyReplacements(message, replacements) {
 }
 
 function addMessages(newMessages) {
-  messages = {
-    ...messages,
-    ...newMessages,
-  };
-  //
-  // for (var key in _messages) {
-  //   messages[key] = _messages[key];
-  // }
+  Object.entries(newMessages).forEach(([key, value]) => {
+    messages[key] = {
+      ...messages[key],
+      ...value,
+    };
+  });
 }
 
 function has(messageKey) {
@@ -36,7 +34,7 @@ function setLocale(localeId) {
   currentLocale = localeId;
 }
 
-function locale() {
+function getLocale() {
   return currentLocale;
 }
 
