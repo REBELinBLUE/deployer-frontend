@@ -46,7 +46,7 @@ class NotificationView extends ModelView {
     });
 
     const properties = [
-      'on_deployment_success', 'on_deployment_failure', 'on_link_down','on_link_still_down', 'on_link_recovered',
+      'on_deployment_success', 'on_deployment_failure', 'on_link_down', 'on_link_still_down', 'on_link_recovered',
       'on_heartbeat_missing', 'on_heartbeat_still_missing', 'on_heartbeat_recovered',
     ];
 
