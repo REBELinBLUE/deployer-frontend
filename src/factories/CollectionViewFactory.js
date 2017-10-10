@@ -10,7 +10,6 @@ import { MODEL_CHANGED, MODEL_TRASHED, MODEL_CREATED } from '../events';
 export default (element, Collection, ModelView, getInput) => {
   const modal = `div#${element}.modal`;
 
-  // fixme: this doesn't work!
   $(modal).on('show.bs.modal', showDialog);
   $(`${modal} button.btn-delete`).on('click', deleteModel(Collection, element));
   $(`${modal} button.btn-save`).on('click', saveModel(Collection, element, getInput));
@@ -29,7 +28,7 @@ export default (element, Collection, ModelView, getInput) => {
     }
 
     render() {
-      if (this.collection.length) {
+      if (this.collection.length > 0) {
         $(`#no_${element}s`).hide();
         $(`#${element}_list`).show();
       } else {
