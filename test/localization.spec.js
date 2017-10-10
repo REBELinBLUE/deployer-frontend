@@ -1,7 +1,7 @@
 import { expect, use } from 'chai';
 import dirtyChai from 'dirty-chai';
 
-import localize from '../src/localization';
+import * as localize from '../src/localization';
 
 use(dirtyChai);
 
@@ -67,7 +67,6 @@ describe('Localization', () => {
     expect(localize.has('bar.foo')).to.be.true();
   });
 
-  // FIXME: This isn't working as intended
   it('Overwrites previous translations with newer ones', () => {
     localize.addMessages({
       en: {

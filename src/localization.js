@@ -1,5 +1,5 @@
 const messages = {};
-let currentLocale;
+let locale;
 
 function applyReplacements(message, replacements) {
   let result = message;
@@ -13,7 +13,8 @@ function applyReplacements(message, replacements) {
   return result;
 }
 
-function addMessages(newMessages) {
+// FIXME: This should not need to be exported, currently needed for webpack
+export function addMessages(newMessages) {
   Object.entries(newMessages).forEach(([key, value]) => {
     messages[key] = {
       ...messages[key],
@@ -23,7 +24,7 @@ function addMessages(newMessages) {
 }
 
 function has(messageKey) {
-  return typeof messages[currentLocale][messageKey] !== 'undefined';
+  return typeof messages[locale][messageKey] !== 'undefined';
 }
 
 function setLocale(localeId) {
@@ -31,21 +32,21 @@ function setLocale(localeId) {
     throw new Error(`No messages defined for locale: "${localeId}".`);
   }
 
-  currentLocale = localeId;
+  locale = localeId;
 }
 
 function getLocale() {
-  return currentLocale;
+  return locale;
 }
 
 export function trans(messageKey, replacements) {
-  if (typeof messages[currentLocale][messageKey] === 'undefined') {
+  if (typeof messages[locale][messageKey] === 'undefined') {
     const result = {};
-    Object.keys(messages[currentLocale]).forEach((prop) => {
+    Object.keys(messages[locale]).forEach((prop) => {
       const prefix = `${messageKey}.`;
 
       if (prop.indexOf(prefix) > -1) {
-        result[prop.replace(prefix, '')] = messages[currentLocale][prop];
+        result[prop.replace(prefix, '')] = messages[locale][prop];
       }
     });
 
@@ -56,15 +57,15 @@ export function trans(messageKey, replacements) {
     return messageKey;
   }
 
-  return applyReplacements(messages[currentLocale][messageKey], replacements);
+  return applyReplacements(messages[locale][messageKey], replacements);
 }
 
 export function transChoice(messageKey, count, replacements) {
-  if (typeof messages[currentLocale][messageKey] === 'undefined') {
+  if (typeof messages[locale][messageKey] === 'undefined') {
     return messageKey;
   }
 
-  const parts = messages[currentLocale][messageKey].split('|');
+  const parts = messages[locale][messageKey].split('|');
 
   if (count === 1) {
     return applyReplacements(parts[0], replacements);
@@ -79,6 +80,6 @@ export default {
   addMessages,
   has,
   setLocale,
-  locale,
+  getLocale,
 };
 
