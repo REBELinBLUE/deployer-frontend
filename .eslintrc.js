@@ -8,7 +8,7 @@ module.exports = {
     'no-underscore-dangle': [2, {
       allow: ['__backboneAgent']
     }],
-    //'arrow-body-style': [0] // FIXME: Remove
+    'arrow-body-style': [0] // FIXME: Remove
   },
   env: {
     browser: true,
