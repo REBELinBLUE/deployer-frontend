@@ -8,6 +8,7 @@ import 'select2';
 import views from './pages/views';
 import collections from './pages/collections';
 import listener from './listener';
+import localize from './localization';
 
 toastr.options.closeButton = true;
 toastr.options.progressBar = true;
@@ -22,6 +23,8 @@ toastr.options.extendedTimeOut = 7000;
 $.ajaxPrefilter((options, originalOptions, jqXHR) => {
   jqXHR.setRequestHeader('X-CSRF-Token', $('meta[name="token"]').attr('content'));
 });
+
+localize.setLocale($('meta[name="locale"]').attr('content') || 'en');
 
 // Needed for Backbone debugger
 if (window.__backboneAgent) {
