@@ -1,8 +1,8 @@
 import $ from 'jquery';
-import { clearDialog, setBusy, clearBusy } from '../dialog';
+import { clearDialog, setBusy, clearBusy } from '../utils/dialog';
 
-export default (Collection, element) => {
-  return (event) => {
+export default (Collection, element) =>
+  (event) => {
     const target = event.currentTarget;
 
     setBusy(target);
@@ -21,4 +21,3 @@ export default (Collection, element) => {
       },
     });
   };
-};

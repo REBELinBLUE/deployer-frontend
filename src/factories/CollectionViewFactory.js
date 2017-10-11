@@ -5,7 +5,7 @@ import listener from '../listener';
 import showDialog from '../handlers/showDialog';
 import deleteModel from '../handlers/deleteModel';
 import saveModel from '../handlers/saveModel';
-import { MODEL_CHANGED, MODEL_TRASHED, MODEL_CREATED } from '../events';
+import { MODEL_CHANGED, MODEL_TRASHED, MODEL_CREATED } from '../listener/events';
 
 export default (element, Collection, ModelView, getInput) => {
   const modal = `div#${element}.modal`;
@@ -59,18 +59,23 @@ export default (element, Collection, ModelView, getInput) => {
         }
       });
 
+      // FIXME: Is there a better way to get the project_id
       listener.on(`${element}:${MODEL_CREATED}`, (data) => {
-        console.error(`${element}:${MODEL_CREATED} not handled yet`, data);
-        // FIXME: Figure out how to get the project_id
-        // if (parseInt(data.model.project_id, 10) === parseInt(app.project_id, 10)) {
-        //   this.collection.add(data.model);
-        // }
+        if (data.model.target_id) {
+          const targetType = $('input[name="target_type"]').val();
+          const targetId = $('input[name="target_id"]').val();
 
-        // var target_type = $('input[name="target_type"]').val();
-        // var target_id = $('input[name="target_id"]').val();
-        // if (target_type == data.model.target_type && parseInt(data.model.target_id) === parseInt(target_id)) {
-        //   app.ConfigFiles.add(data.model);
-        // }
+          if (
+            targetType === data.model.target_type &&
+            parseInt(data.model.target_id, 10) === parseInt(targetId, 10)
+          ) {
+            this.collection.add(data.model);
+          }
+        } else if (data.model.project_id) {
+          if (parseInt(data.model.project_id, 10) === parseInt(window.app.project_id, 10)) {
+            this.collection.add(data.model);
+          }
+        }
       });
 
       // FIXME: Figure out why if we do this collections is null in the method

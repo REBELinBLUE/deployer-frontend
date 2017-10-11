@@ -30,7 +30,7 @@ mix
   .js('src/app.js', `${build}/js/`)
   .autoload({
     jquery: ['$', 'window.jQuery', 'jQuery', 'window.$', 'jquery', 'window.jquery'],
-    './localization.js': ['Lang'],
+    './utils/localization.js': ['Lang'],
   })
   .extract([
     'admin-lte', 'backbone', 'jquery', 'jquery-sortable', 'devbridge-autocomplete',
@@ -59,14 +59,3 @@ mix
   .copy(`${paths.fontawesome}/fonts/**`, `${build}/fonts`)
   .copy(`${paths.ionicons}/dist/fonts/**`, `${build}/fonts`)
   .version();
-
-// `${paths.localization}/resources/js/localization.js`,
-// Elixir.extend('lang', () => {
-//   new Elixir.Task('lang', () => {
-//     const command = shell('php artisan js-localization:export --quiet', {
-//       cwd: '../../../',
-//     });
-//
-//     return gulp.src('').pipe(command);
-//   });
-// });

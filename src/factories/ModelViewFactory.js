@@ -2,8 +2,8 @@ import $ from 'jquery';
 import _ from 'underscore';
 import Backbone from 'backbone';
 
-export default (element, fields, events) => {
-  return class ModelView extends Backbone.View {
+export default (element, fields, events) =>
+  class ModelView extends Backbone.View {
     constructor(options) {
       super({
         ...options,
@@ -46,4 +46,3 @@ export default (element, fields, events) => {
       this.populateDialog(element, fields);
     }
   };
-};

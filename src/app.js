@@ -1,40 +1,13 @@
-import toastr from 'toastr';
-import Backbone from 'backbone';
-import $ from 'jquery';
-import 'bootstrap';
-import 'admin-lte';
-import 'select2';
-
-import views from './pages/views';
-import collections from './pages/collections';
+import './bootstrap';
+import views from './views';
+import models from './models';
+import collections from './collections';
 import listener from './listener';
-import Lang from './localization';
-import './messages';
-
-toastr.options.closeButton = true;
-toastr.options.progressBar = true;
-toastr.options.preventDuplicates = true;
-toastr.options.closeMethod = 'fadeOut';
-toastr.options.closeDuration = 300;
-toastr.options.closeEasing = 'swing';
-toastr.options.positionClass = 'toast-bottom-right';
-toastr.options.timeOut = 5000;
-toastr.options.extendedTimeOut = 7000;
-
-$.ajaxPrefilter((options, originalOptions, jqXHR) => {
-  jqXHR.setRequestHeader('X-CSRF-Token', $('meta[name="token"]').attr('content'));
-});
-
-Lang.setLocale($('meta[name="locale"]').attr('content') || 'en');
-
-// Needed for Backbone debugger
-if (window.__backboneAgent) {
-  window.__backboneAgent.handleBackbone(Backbone);
-}
 
 window.app = {
-  project_id: null,
   views,
+  models,
   collections,
   listener,
+  project_id: null,
 };
