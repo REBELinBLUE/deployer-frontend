@@ -7,10 +7,10 @@ import deleteModel from '../handlers/deleteModel';
 import saveModel from '../handlers/saveModel';
 import { MODEL_CHANGED, MODEL_TRASHED, MODEL_CREATED } from '../listener/events';
 
-export default (element, Collection, ModelView, getInput) => {
+export default (element, Collection, ModelView, getInput, translationKey) => {
   const modal = `div#${element}.modal`;
 
-  $(modal).on('show.bs.modal', showDialog);
+  $(modal).on('show.bs.modal', showDialog(translationKey));
   $(`${modal} button.btn-delete`).on('click', deleteModel(Collection, element));
   $(`${modal} button.btn-save`).on('click', saveModel(Collection, element, getInput));
 

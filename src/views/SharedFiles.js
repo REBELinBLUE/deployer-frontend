@@ -5,6 +5,7 @@ import CollectionViewFactory from '../factories/CollectionViewFactory';
 import ModelViewFactory from '../factories/ModelViewFactory';
 
 const element = 'sharedfile';
+const translationKey = 'sharedFiles';
 
 const SharedFileView = ModelViewFactory(element, ['name', 'file']);
 
@@ -15,4 +16,4 @@ const getInput = () => ({
   target_id: parseInt($('input[name="target_id"]').val(), 10),
 });
 
-export default CollectionViewFactory(element, SharedFileCollection, SharedFileView, getInput);
+export default CollectionViewFactory(element, SharedFileCollection, SharedFileView, getInput, translationKey);

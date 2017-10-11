@@ -1,6 +1,7 @@
 import $ from 'jquery';
 import 'devbridge-autocomplete';
 
+import localize from '../utils/localization';
 import ServerCollection from '../collections/Servers';
 import CollectionViewFactory from '../factories/CollectionViewFactory';
 import ModelViewFactory from '../factories/ModelViewFactory';
@@ -9,6 +10,7 @@ import routes from '../routes';
 import reorderModels from '../handlers/reorderModels';
 
 const element = 'server';
+const translationKey = 'servers';
 const fields = ['name', 'ip_address', 'port', 'user', 'path'];
 
 const ModelView = ModelViewFactory(
@@ -46,21 +48,21 @@ class ServerView extends ModelView {
 
     let css = 'primary';
     let icon = 'question';
-    let status = 'Untested';
+    let status = localize.get(`${translationKey}.untested`);
     let hasLog = false;
 
     if (this.model.isSuccessful()) {
       css = 'success';
       icon = 'check';
-      status = 'Successful';
+      status = localize.get(`${translationKey}.successful`);
     } else if (this.model.isTesting()) {
       css = 'warning';
       icon = 'spinner fa-pulse';
-      status = 'Testing';
+      status = localize.get(`${translationKey}.testing`);
     } else if (this.model.isFailed()) {
       css = 'danger';
       icon = 'warning';
-      status = 'Failed';
+      status = localize.get(`${translationKey}.failed`);
       hasLog = !!data.connect_log;
     }
 
@@ -83,7 +85,8 @@ class ServerView extends ModelView {
     const modal = $('div.modal#result');
 
     modal.find('pre').html(logFormatter(this.model.get('connect_log')));
-    modal.find('.modal-title span').text('View Log');
+    modal.find('.modal-title span').text('View Log'); // FIXME: Why does this need translating?
+    // Lang.get('servers.log_title');
   }
 
   testConnection() {
@@ -108,4 +111,4 @@ const getInput = () => ({
   add_commands: $(`#${element}_commands`).is(':checked'),
 });
 
-export default CollectionViewFactory(element, ServerCollection, ServerView, getInput);
+export default CollectionViewFactory(element, ServerCollection, ServerView, getInput, translationKey);

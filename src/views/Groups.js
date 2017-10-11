@@ -7,6 +7,7 @@ import routes from '../routes';
 import reorderModels from '../handlers/reorderModels';
 
 const element = 'group';
+const translationKey = 'groups';
 
 const GroupView = ModelViewFactory(element, ['name']);
 
@@ -16,4 +17,4 @@ const getInput = () => ({
   name: $(`#${element}_name`).val(),
 });
 
-export default CollectionViewFactory(element, GroupCollection, GroupView, getInput);
+export default CollectionViewFactory(element, GroupCollection, GroupView, getInput, translationKey);

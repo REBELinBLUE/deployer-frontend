@@ -6,6 +6,7 @@ import ModelViewFactory from '../factories/ModelViewFactory';
 import { dateTimeFormatter } from '../utils/formatters';
 
 const element = 'user';
+const translationKey = 'users';
 
 const ModelView = ModelViewFactory(element, ['name', 'email']);
 
@@ -27,5 +28,5 @@ const getInput = () => ({
   password_confirmation: $(`#${element}_password_confirmation`).val(),
 });
 
-export default CollectionViewFactory(element, UserCollection, UserView, getInput);
+export default CollectionViewFactory(element, UserCollection, UserView, getInput, translationKey);
 

@@ -12,6 +12,7 @@ import CollectionViewFactory from '../factories/CollectionViewFactory';
 import ModelViewFactory from '../factories/ModelViewFactory';
 
 const element = 'configfile';
+const translationKey = 'configFiles';
 
 const ModelView = ModelViewFactory(
   element,
@@ -66,4 +67,4 @@ const getInput = () => {
   };
 };
 
-export default CollectionViewFactory(element, ConfigFileCollection, ConfigFileView, getInput);
+export default CollectionViewFactory(element, ConfigFileCollection, ConfigFileView, getInput, translationKey);

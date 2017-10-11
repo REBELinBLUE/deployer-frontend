@@ -1,11 +1,13 @@
 import $ from 'jquery';
 
+import localize from '../utils/localization';
 import HeartbeatCollection from '../collections/Heartbeats';
 import CollectionViewFactory from '../factories/CollectionViewFactory';
 import ModelViewFactory from '../factories/ModelViewFactory';
 import { dateTimeFormatter } from '../utils/formatters';
 
 const element = 'heartbeat';
+const translationKey = 'heartbeats';
 
 const ModelView = ModelViewFactory(element, ['name']);
 
@@ -15,18 +17,18 @@ class HeartbeatView extends ModelView {
 
     let css = 'primary';
     let icon = 'question';
-    let status = 'Untested';
+    let status = localize.get(`${translationKey}.untested`);
     let hasRun = false;
 
     if (this.model.isOK()) {
       css = 'success';
       icon = 'check';
-      status = 'OK';
+      status = localize.get(`${translationKey}.ok`);
       hasRun = true;
     } else if (this.model.isMissing()) {
       css = 'danger';
       icon = 'warning';
-      status = 'Missing';
+      status = localize.get(`${translationKey}.missing`);
       hasRun = !!data.last_activity;
     }
 
@@ -36,7 +38,7 @@ class HeartbeatView extends ModelView {
       icon_css: icon,
       status,
       has_run: hasRun,
-      interval_label: `${data.interval} mins`,
+      interval_label: localize.get(`${translationKey}.interval_${data.interval}`),
       formatted_date: hasRun ? dateTimeFormatter(data.last_activity) : null,
     };
   }
@@ -54,4 +56,4 @@ const getInput = () => ({
   project_id: parseInt($('input[name="project_id"]').val(), 10),
 });
 
-export default CollectionViewFactory(element, HeartbeatCollection, HeartbeatView, getInput);
+export default CollectionViewFactory(element, HeartbeatCollection, HeartbeatView, getInput, translationKey);

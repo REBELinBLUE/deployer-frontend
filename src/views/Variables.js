@@ -5,6 +5,7 @@ import CollectionViewFactory from '../factories/CollectionViewFactory';
 import ModelViewFactory from '../factories/ModelViewFactory';
 
 const element = 'variable';
+const translationKey = 'variables';
 
 const VariableView = ModelViewFactory(element, ['name', 'value']);
 
@@ -15,4 +16,4 @@ const getInput = () => ({
   target_id: parseInt($('input[name="target_id"]').val(), 10),
 });
 
-export default CollectionViewFactory(element, VariableCollection, VariableView, getInput);
+export default CollectionViewFactory(element, VariableCollection, VariableView, getInput, translationKey);

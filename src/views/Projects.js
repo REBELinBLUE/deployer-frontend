@@ -6,6 +6,7 @@ import ModelViewFactory from '../factories/ModelViewFactory';
 import { dateTimeFormatter } from '../utils/formatters';
 
 const element = 'project';
+const translationKey = 'projects';
 
 const ModelView = ModelViewFactory(
   element,
@@ -45,4 +46,4 @@ const getInput = () => ({
   private_key: $(`#${element}_private_key`).val(),
 });
 
-export default CollectionViewFactory(element, ProjectCollection, ProjectView, getInput);
+export default CollectionViewFactory(element, ProjectCollection, ProjectView, getInput, translationKey);

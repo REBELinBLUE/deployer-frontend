@@ -3,6 +3,7 @@ import CollectionViewFactory from '../factories/CollectionViewFactory';
 import ModelViewFactory from '../factories/ModelViewFactory';
 
 const element = 'notification';
+const translationKey = 'channels';
 
 const ModelView = ModelViewFactory(element, ['name', 'type']);
 
@@ -94,4 +95,4 @@ const getInput = () => {
   return {};
 };
 
-export default CollectionViewFactory(element, NotificationCollection, NotificationView, getInput);
+export default CollectionViewFactory(element, NotificationCollection, NotificationView, getInput, translationKey);

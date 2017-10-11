@@ -1,11 +1,13 @@
 import $ from 'jquery';
 
+import localize from '../utils/localization';
 import CheckUrlCollection from '../collections/CheckUrls';
 import CollectionViewFactory from '../factories/CollectionViewFactory';
 import ModelViewFactory from '../factories/ModelViewFactory';
 import { dateTimeFormatter } from '../utils/formatters';
 
 const element = 'checkurl';
+const translationKey = 'checkUrls';
 
 const ModelView = ModelViewFactory(
   element,
@@ -21,20 +23,20 @@ class CheckUrlView extends ModelView {
 
     let css = 'primary';
     let icon = 'question';
-    let status = 'Untested';
+    let status = localize.get(`${translationKey}.untested`);
     let hasRun = false;
     let hasLog = false;
 
     if (this.model.isOffline()) {
       css = 'danger';
       icon = 'warning';
-      status = 'Failed';
+      status = localize.get(`${translationKey}.failed`);
       hasRun = !!data.last_seen;
       hasLog = !!data.last_log;
     } else if (this.model.isOnline()) {
       css = 'success';
       icon = 'check';
-      status = 'Online';
+      status = localize.get(`${translationKey}.successful`);
       hasRun = true;
     }
 
@@ -45,7 +47,7 @@ class CheckUrlView extends ModelView {
       status,
       has_run: hasRun,
       has_log: hasLog,
-      interval_label: `${data.period} mins`,
+      interval_label: localize.get(`${translationKey}.length`, { time: data.period }),
       formatted_date: hasRun ? dateTimeFormatter(data.last_seen) : null,
     };
   }
@@ -71,4 +73,4 @@ const getInput = () => ({
   project_id: parseInt($('input[name="project_id"]').val(), 10),
 });
 
-export default CollectionViewFactory(element, CheckUrlCollection, CheckUrlView, getInput);
+export default CollectionViewFactory(element, CheckUrlCollection, CheckUrlView, getInput, translationKey);

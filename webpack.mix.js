@@ -1,4 +1,4 @@
-const ShellPlugin = require('webpack-shell-plugin');
+// const ShellPlugin = require('webpack-shell-plugin');
 const mix = require('laravel-mix');
 
 const packages = 'node_modules';
@@ -16,16 +16,15 @@ const paths = {
   select2: `${packages}/select2`,
 };
 
-
 // Add shell command plugin configured to create JavaScript language file
 mix
-  .webpackConfig({
-    plugins: [
-      new ShellPlugin({
-        onBuildStart: ['php ../deployer/application/artisan js-localization:export --quiet'],
-      }),
-    ],
-  })
+  // .webpackConfig({
+  //   plugins: [
+  //     new ShellPlugin({
+  //       onBuildStart: ['php ../deployer/application/artisan js-localization:export --quiet'],
+  //     }),
+  //   ],
+  // })
   .setPublicPath(`${build}/`)
   .js('src/app.js', `${build}/js/`)
   .autoload({
