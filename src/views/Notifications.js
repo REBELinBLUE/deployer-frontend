@@ -1,6 +1,7 @@
 import NotificationCollection from '../collections/Notifications';
 import CollectionViewFactory from '../factories/CollectionViewFactory';
 import ModelViewFactory from '../factories/ModelViewFactory';
+import bindDialogs from '../handlers/dialogs';
 
 const element = 'notification';
 const translationKey = 'channels';
@@ -95,4 +96,6 @@ const getInput = () => {
   return {};
 };
 
-export default CollectionViewFactory(element, NotificationCollection, NotificationView, getInput, translationKey);
+bindDialogs(element, translationKey, getInput, NotificationCollection);
+
+export default CollectionViewFactory(element, NotificationCollection, NotificationView);

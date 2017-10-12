@@ -5,6 +5,7 @@ import CheckUrlCollection from '../collections/CheckUrls';
 import CollectionViewFactory from '../factories/CollectionViewFactory';
 import ModelViewFactory from '../factories/ModelViewFactory';
 import { dateTimeFormatter } from '../utils/formatters';
+import bindDialogs from '../handlers/dialogs';
 
 const element = 'checkurl';
 const translationKey = 'checkUrls';
@@ -73,4 +74,7 @@ const getInput = () => ({
   project_id: parseInt($('input[name="project_id"]').val(), 10),
 });
 
-export default CollectionViewFactory(element, CheckUrlCollection, CheckUrlView, getInput, translationKey);
+bindDialogs(element, translationKey, getInput, CheckUrlCollection);
+
+export default CollectionViewFactory(element, CheckUrlCollection, CheckUrlView);
+

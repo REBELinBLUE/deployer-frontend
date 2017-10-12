@@ -4,6 +4,7 @@ import ProjectCollection from '../collections/Projects';
 import CollectionViewFactory from '../factories/CollectionViewFactory';
 import ModelViewFactory from '../factories/ModelViewFactory';
 import { dateTimeFormatter } from '../utils/formatters';
+import bindDialogs from '../handlers/dialogs';
 
 const element = 'project';
 const translationKey = 'projects';
@@ -46,4 +47,6 @@ const getInput = () => ({
   private_key: $(`#${element}_private_key`).val(),
 });
 
-export default CollectionViewFactory(element, ProjectCollection, ProjectView, getInput, translationKey);
+bindDialogs(element, translationKey, getInput, ProjectCollection);
+
+export default CollectionViewFactory(element, ProjectCollection, ProjectView);

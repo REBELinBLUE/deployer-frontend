@@ -3,6 +3,7 @@ import $ from 'jquery';
 import SharedFileCollection from '../collections/SharedFiles';
 import CollectionViewFactory from '../factories/CollectionViewFactory';
 import ModelViewFactory from '../factories/ModelViewFactory';
+import bindDialogs from '../handlers/dialogs';
 
 const element = 'sharedfile';
 const translationKey = 'sharedFiles';
@@ -16,4 +17,6 @@ const getInput = () => ({
   target_id: parseInt($('input[name="target_id"]').val(), 10),
 });
 
-export default CollectionViewFactory(element, SharedFileCollection, SharedFileView, getInput, translationKey);
+bindDialogs(element, translationKey, getInput, SharedFileCollection);
+
+export default CollectionViewFactory(element, SharedFileCollection, SharedFileView);

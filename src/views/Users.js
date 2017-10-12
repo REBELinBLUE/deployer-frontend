@@ -4,6 +4,7 @@ import UserCollection from '../collections/Users';
 import CollectionViewFactory from '../factories/CollectionViewFactory';
 import ModelViewFactory from '../factories/ModelViewFactory';
 import { dateTimeFormatter } from '../utils/formatters';
+import bindDialogs from '../handlers/dialogs';
 
 const element = 'user';
 const translationKey = 'users';
@@ -28,5 +29,7 @@ const getInput = () => ({
   password_confirmation: $(`#${element}_password_confirmation`).val(),
 });
 
-export default CollectionViewFactory(element, UserCollection, UserView, getInput, translationKey);
+bindDialogs(element, translationKey, getInput, UserCollection);
+
+export default CollectionViewFactory(element, UserCollection, UserView);
 

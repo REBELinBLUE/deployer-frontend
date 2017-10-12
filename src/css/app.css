@@ -110,7 +110,7 @@ div.deployment-source-container {
 }
 
 #command_script,
-#config-file-content {
+#configfile_content {
     height: 250px;
 }
 

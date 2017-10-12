@@ -5,6 +5,7 @@ import HeartbeatCollection from '../collections/Heartbeats';
 import CollectionViewFactory from '../factories/CollectionViewFactory';
 import ModelViewFactory from '../factories/ModelViewFactory';
 import { dateTimeFormatter } from '../utils/formatters';
+import bindDialogs from '../handlers/dialogs';
 
 const element = 'heartbeat';
 const translationKey = 'heartbeats';
@@ -56,4 +57,6 @@ const getInput = () => ({
   project_id: parseInt($('input[name="project_id"]').val(), 10),
 });
 
-export default CollectionViewFactory(element, HeartbeatCollection, HeartbeatView, getInput, translationKey);
+bindDialogs(element, translationKey, getInput, HeartbeatCollection);
+
+export default CollectionViewFactory(element, HeartbeatCollection, HeartbeatView);

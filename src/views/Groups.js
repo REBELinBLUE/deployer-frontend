@@ -5,6 +5,7 @@ import CollectionViewFactory from '../factories/CollectionViewFactory';
 import ModelViewFactory from '../factories/ModelViewFactory';
 import routes from '../routes';
 import reorderModels from '../handlers/reorderModels';
+import bindDialogs from '../handlers/dialogs';
 
 const element = 'group';
 const translationKey = 'groups';
@@ -17,4 +18,6 @@ const getInput = () => ({
   name: $(`#${element}_name`).val(),
 });
 
-export default CollectionViewFactory(element, GroupCollection, GroupView, getInput, translationKey);
+bindDialogs(element, translationKey, getInput, GroupCollection);
+
+export default CollectionViewFactory(element, GroupCollection, GroupView);

@@ -10,6 +10,7 @@ import 'brace/mode/sh';
 import ConfigFileCollection from '../collections/ConfigFiles';
 import CollectionViewFactory from '../factories/CollectionViewFactory';
 import ModelViewFactory from '../factories/ModelViewFactory';
+import bindDialogs from '../handlers/dialogs';
 
 const element = 'configfile';
 const translationKey = 'configFiles';
@@ -23,11 +24,44 @@ const ModelView = ModelViewFactory(
 );
 
 let editor;
-let previewFile;
+let openFile;
+
+function createEditor(content, readOnly) {
+  editor = ace.edit(content);
+  editor.setReadOnly(readOnly || false);
+  editor.getSession().setUseWrapMode(true);
+
+  let extension = openFile.substr(openFile.lastIndexOf('.') + 1).toLowerCase();
+  if (extension === 'yml') {
+    extension = 'yaml';
+  }
+
+  if (['php', 'ini', 'yaml', 'sh', 'xml', 'json'].indexOf(extension) !== -1) {
+    editor.getSession().setMode(`ace/mode/${extension}`);
+  }
+}
+
+function destroyEditor() {
+  editor.setValue('');
+  editor.gotoLine(1);
+  editor.destroy();
+  openFile = null;
+}
+
+$(`div#${element}.modal`)
+  .on('show.bs.modal', () => {
+    openFile = $(`#${element}_path`).val();
+    createEditor('configfile_content', false);
+  })
+  .on('hidden.bs.modal', destroyEditor);
+
+$(`div#view-${element}.modal`)
+  .on('show.bs.modal', () => createEditor('preview-content', true))
+  .on('hidden.bs.modal', destroyEditor);
 
 class ConfigFileView extends ModelView {
   showFile() {
-    previewFile = this.model.get('path'); // FIXME: This is horrible
+    openFile = this.model.get('path'); // FIXME: This is horrible
     $('#preview-content').text(this.model.get('content'));
   }
 
@@ -37,24 +71,6 @@ class ConfigFileView extends ModelView {
     $(`#${element}_content`).text(this.model.get('content'));
   }
 }
-
-$(`div#view-${element}.modal`).on('show.bs.modal', () => {
-  editor = ace.edit('preview-content');
-  editor.setReadOnly(true);
-  editor.getSession().setUseWrapMode(true);
-
-  let extension = previewFile.substr(previewFile.lastIndexOf('.') + 1).toLowerCase();
-  if (extension === 'yml') {
-    extension = 'yaml';
-  }
-
-  if (['php', 'ini', 'yaml', 'sh', 'xml', 'json'].indexOf(extension) !== -1) {
-    editor.getSession().setMode(`ace/mode/${extension}`);
-  }
-}).on('hidden.bs.modal', () => {
-  editor.destroy();
-  previewFile = null;
-});
 
 const getInput = () => {
   console.error('Need to implement editor for config files');
@@ -67,4 +83,6 @@ const getInput = () => {
   };
 };
 
-export default CollectionViewFactory(element, ConfigFileCollection, ConfigFileView, getInput, translationKey);
+bindDialogs(element, translationKey, getInput, ConfigFileCollection);
+
+export default CollectionViewFactory(element, ConfigFileCollection, ConfigFileView);

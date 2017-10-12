@@ -8,6 +8,7 @@ import ModelViewFactory from '../factories/ModelViewFactory';
 import { logFormatter } from '../utils/formatters';
 import routes from '../routes';
 import reorderModels from '../handlers/reorderModels';
+import bindDialogs from '../handlers/dialogs';
 
 const element = 'server';
 const translationKey = 'servers';
@@ -111,4 +112,6 @@ const getInput = () => ({
   add_commands: $(`#${element}_commands`).is(':checked'),
 });
 
-export default CollectionViewFactory(element, ServerCollection, ServerView, getInput, translationKey);
+bindDialogs(element, translationKey, getInput, ServerCollection);
+
+export default CollectionViewFactory(element, ServerCollection, ServerView);

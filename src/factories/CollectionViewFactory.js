@@ -2,19 +2,10 @@ import Backbone from 'backbone';
 import $ from 'jquery';
 
 import listener from '../listener';
-import showDialog from '../handlers/showDialog';
-import deleteModel from '../handlers/deleteModel';
-import saveModel from '../handlers/saveModel';
 import { MODEL_CHANGED, MODEL_TRASHED, MODEL_CREATED } from '../listener/events';
 
-export default (element, Collection, ModelView, getInput, translationKey) => {
-  const modal = `div#${element}.modal`;
-
-  $(modal).on('show.bs.modal', showDialog(translationKey));
-  $(`${modal} button.btn-delete`).on('click', deleteModel(Collection, element));
-  $(`${modal} button.btn-save`).on('click', saveModel(Collection, element, getInput));
-
-  return class CollectionView extends Backbone.View {
+export default (element, Collection, ModelView) =>
+  class CollectionView extends Backbone.View {
     constructor(options) {
       super({
         ...options,
@@ -98,4 +89,3 @@ export default (element, Collection, ModelView, getInput, translationKey) => {
       this.collection.each(this.addOne, this);
     }
   };
-};
