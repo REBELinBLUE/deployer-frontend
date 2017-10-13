@@ -16,4 +16,5 @@ export default {
   profileEmail: '/profile/email',
   profileImage: '/profile/avatar',
   profileGravatar: '/profile/gravatar',
+  profileUpload: '/profile/upload',
 };

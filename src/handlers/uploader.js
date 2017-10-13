@@ -315,6 +315,7 @@ function newIframe() {
   return iframe;
 }
 
+/*
 function MultipleUploader(options) {
   if (!(this instanceof MultipleUploader)) {
     return new MultipleUploader(options);
@@ -369,5 +370,6 @@ MultipleUploader.prototype.disable = function (){
   return this;
 };
 MultipleUploader.Uploader = Uploader;
+*/
 
-module.exports = { Uploader, MultipleUploader };
+module.exports = { Uploader };
