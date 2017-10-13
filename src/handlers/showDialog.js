@@ -7,7 +7,7 @@ export default translationKey =>
     const dialog = $(event.target);
 
     $('.btn-danger', dialog).hide();
-    $('.callout-danger', dialog).hide();
+    $('.callout', dialog).hide();
     $('.existing-only', dialog).hide();
     $('.new-only', dialog).hide();
     $('.has-error', dialog).removeClass('has-error');

@@ -57,7 +57,7 @@ class CheckUrlView extends ModelView {
     const modal = $('div.modal#result');
 
     modal.find('pre').text(this.model.get('last_log'));
-    modal.find('.modal-title span').text('Log');
+    modal.find('.modal-title span').text(localize.get(`${translationKey}.log_title`));
   }
 
   editModel() {

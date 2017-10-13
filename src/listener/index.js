@@ -4,8 +4,6 @@ import io from 'socket.io-client';
 const socket = $('meta[name="socket-url"]').attr('content');
 const jwt = $('meta[name="jwt"]').attr('content');
 
-// FIXME: Handle socket or JWT being missing
-
 let hasConnectionError = false;
 
 const listener = io.connect(socket, {

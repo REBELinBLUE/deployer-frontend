@@ -61,7 +61,7 @@ $(`div#view-${element}.modal`)
 
 class ConfigFileView extends ModelView {
   showFile() {
-    openFile = this.model.get('path'); // FIXME: This is horrible
+    openFile = this.model.get('path');
     $('#preview-content').text(this.model.get('content'));
   }
 
@@ -72,16 +72,13 @@ class ConfigFileView extends ModelView {
   }
 }
 
-const getInput = () => {
-  console.error('Need to implement editor for config files');
-  return {
-    name: $(`#${element}_name`).val(),
-    path: $(`#${element}_path`).val(),
-    content: editor.getValue(),
-    target_type: $('input[name="target_type"]').val(),
-    target_id: parseInt($('input[name="target_id"]').val(), 10),
-  };
-};
+const getInput = () => ({
+  name: $(`#${element}_name`).val(),
+  path: $(`#${element}_path`).val(),
+  content: editor.getValue(),
+  target_type: $('input[name="target_type"]').val(),
+  target_id: parseInt($('input[name="target_id"]').val(), 10),
+});
 
 bindDialogs(element, translationKey, getInput, ConfigFileCollection);
 

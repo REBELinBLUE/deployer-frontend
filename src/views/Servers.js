@@ -86,8 +86,7 @@ class ServerView extends ModelView {
     const modal = $('div.modal#result');
 
     modal.find('pre').html(logFormatter(this.model.get('connect_log')));
-    modal.find('.modal-title span').text('View Log'); // FIXME: Why does this need translating?
-    // Lang.get('servers.log_title');
+    modal.find('.modal-title span').text(localize.get(`${translationKey}.log_title`));
   }
 
   testConnection() {
