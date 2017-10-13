@@ -13,4 +13,7 @@ export default {
   notifications: '/notifications',
   heartbeats: '/heartbeats',
   urls: '/check-urls',
+  profileEmail: '/profile/email',
+  profileImage: '/profile/avatar',
+  profileGravatar: '/profile/gravatar',
 };

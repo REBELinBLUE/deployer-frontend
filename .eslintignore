@@ -1,2 +1,4 @@
 build/
 src/messages.js
+src/handlers/uploader.js
+src/views/Profile.js

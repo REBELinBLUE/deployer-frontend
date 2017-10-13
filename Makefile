@@ -5,14 +5,15 @@
 YELLOW := $(shell tput -Txterm setaf 3)
 RESET  := $(shell tput -Txterm sgr0)
 
-## Build the bundle
-build:
+## Build the bundle for development
+dev:
 	@npm run dev
-	@rm -rf ~/Workspace/deployer/application/public/mix-manifest.json
-	@rm -rf ~/Workspace/deployer/application/public/js/
-	@rm -rf ~/Workspace/deployer/application/public/css/
-	@rm -rf ~/Workspace/deployer/application/public/fonts/
-	@cp -r build/* ~/Workspace/deployer/application/public/
+	@$(MAKE) install
+
+## Build the bundle for production
+build:
+	@npm run production
+	@$(MAKE) install
 
 ## Run tests
 test:
@@ -35,3 +36,10 @@ help:
 		 /^#/  { doc=doc "\n" substr($$0, 2); next } \
 		 /:/   { sub(/:.*/, "", $$0); printf "\033[34m%-30s\033[0m\033[1m%s\033[0m %s\n", $$0, doc_h, doc; skip=1 }' \
 		$(MAKEFILE_LIST)
+
+install:
+	@rm -rf ~/Workspace/deployer/application/public/mix-manifest.json
+	@rm -rf ~/Workspace/deployer/application/public/js/
+	@rm -rf ~/Workspace/deployer/application/public/css/
+	@rm -rf ~/Workspace/deployer/application/public/fonts/
+	@cp -r build/* ~/Workspace/deployer/application/public/

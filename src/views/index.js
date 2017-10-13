@@ -9,6 +9,9 @@ import ConfigFilesView from './ConfigFiles';
 import NotificationsView from './Notifications';
 import HeartbeatsView from './Heartbeats';
 import CheckUrlsView from './CheckUrls';
+import ProfileView from './Profile';
+
+ProfileView();
 
 export default {
   Groups: GroupsView,
