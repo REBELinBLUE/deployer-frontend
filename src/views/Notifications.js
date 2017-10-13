@@ -39,12 +39,12 @@ function setTitleWithIcon(type, action) {
   iconElement.addClass(`fa-${icon}`);
 
   $(`${modal} .modal-footer`).show();
-  $('.channel-config').hide();
-  $('#channel-type').hide();
-  $('#channel-name').show();
-  $('#channel-triggers').show();
-  $(`#channel-config-${type}`).show();
-  $('#notification_type').val(type);
+  $(`${modal} .channel-config`).hide();
+  $(`${modal} #channel-type`).hide();
+  $(`${modal} #channel-name`).show();
+  $(`${modal} #channel-triggers`).show();
+  $(`${modal} #channel-config-${type}`).show();
+  $(`${modal} #notification_type`).val(type);
 }
 
 class NotificationView extends ModelView {

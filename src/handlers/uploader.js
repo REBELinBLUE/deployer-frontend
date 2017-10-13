@@ -1,14 +1,16 @@
-var iframeCount = 0;
+// TODO: Convert to ES6
+let iframeCount = 0;
 
 function Uploader(options) {
   if (!(this instanceof Uploader)) {
     return new Uploader(options);
   }
+
   if (isString(options)) {
-    options = {trigger: options};
+    options = { trigger: options };
   }
 
-  var settings = {
+  const settings = {
     trigger: null,
     name: null,
     action: null,
@@ -19,16 +21,19 @@ function Uploader(options) {
     multiple: true,
     success: null
   };
+
   if (options) {
     $.extend(settings, options);
   }
-  var $trigger = $(settings.trigger);
+
+  const $trigger = $(settings.trigger);
 
   settings.action = settings.action || $trigger.data('action') || '/upload';
   settings.name = settings.name || $trigger.attr('name') || $trigger.data('name') || 'file';
   settings.data = settings.data || parse($trigger.data('data'));
   settings.accept = settings.accept || $trigger.data('accept');
   settings.success = settings.success || $trigger.data('success');
+
   this.settings = settings;
 
   this.setup();
@@ -38,32 +43,36 @@ function Uploader(options) {
 // initialize
 // create input, form, iframe
 Uploader.prototype.setup = function() {
-  this.form = $(
-    '<form method="post" enctype="multipart/form-data"'
-    + 'target="" action="' + this.settings.action + '" />'
-  );
+  this.form = $(`<form method="post" enctype="multipart/form-data" target="" action="${this.settings.action}" />`);
 
   this.iframe = newIframe();
   this.form.attr('target', this.iframe.attr('name'));
 
-  var data = this.settings.data;
+  const data = this.settings.data;
   this.form.append(createInputs(data));
+
+  let uploader = 'iframe';
   if (window.FormData) {
-    this.form.append(createInputs({'_uploader_': 'formdata'}));
-  } else {
-    this.form.append(createInputs({'_uploader_': 'iframe'}));
+    uploader = 'formdata';
   }
 
-  var input = document.createElement('input');
+  this.form.append(createInputs({
+    _uploader_: uploader
+  }));
+
+  const input = document.createElement('input');
   input.type = 'file';
   input.name = this.settings.name;
+
   if (this.settings.accept) {
     input.accept = this.settings.accept;
   }
+
   if (this.settings.multiple) {
     input.multiple = true;
     input.setAttribute('multiple', 'multiple');
   }
+
   this.input = $(input);
 
   var $trigger = $(this.settings.trigger);
@@ -75,9 +84,11 @@ Uploader.prototype.setup = function() {
     outline: 0,
     cursor: 'pointer',
     height: $trigger.outerHeight(),
-    fontSize: Math.max(64, $trigger.outerHeight() * 5)
+    fontSize: Math.max(64, $trigger.outerHeight() * 5),
   });
+
   this.form.append(this.input);
+
   this.form.css({
     position: 'absolute',
     top: $trigger.offset().top,
@@ -85,36 +96,38 @@ Uploader.prototype.setup = function() {
     overflow: 'hidden',
     width: $trigger.outerWidth(),
     height: $trigger.outerHeight(),
-    zIndex: findzIndex($trigger) + 10
+    zIndex: findzIndex($trigger) + 10,
   }).appendTo('body');
+
   return this;
 };
 
 // bind events
 Uploader.prototype.bind = function() {
-  var self = this;
-  var $trigger = $(self.settings.trigger);
+  const self = this;
+  const $trigger = $(self.settings.trigger);
+
   $trigger.mouseenter(function() {
     self.form.css({
       top: $trigger.offset().top,
       left: $trigger.offset().left,
       width: $trigger.outerWidth(),
-      height: $trigger.outerHeight()
+      height: $trigger.outerHeight(),
     });
   });
+
   self.bindInput();
 };
 
 Uploader.prototype.bindInput = function() {
-  var self = this;
+  const self = this;
+
   self.input.change(function(e) {
-    console.log(e);
     // ie9 don't support FileList Object
     // http://stackoverflow.com/questions/12830058/ie8-input-type-file-get-files
-    self._files = this.files || [{
-      name: e.target.value
-    }];
-    var file = self.input.val();
+    self._files = this.files || [{ name: e.target.value }];
+
+    const file = self.input.val();
     if (self.settings.change) {
       self.settings.change.call(self, self._files);
     } else if (file) {
@@ -126,33 +139,41 @@ Uploader.prototype.bindInput = function() {
 // handle submit event
 // prepare for submiting form
 Uploader.prototype.submit = function() {
-  var self = this;
+  const self = this;
+
   if (window.FormData && self._files) {
     // build a FormData
-    var form = new FormData(self.form.get(0));
+    const form = new FormData(self.form.get(0));
+
     // use FormData to upload
     form.append(self.settings.name, self._files);
 
-    var optionXhr;
+    let optionXhr;
     if (self.settings.progress) {
       // fix the progress target file
-      var files = self._files;
+      const files = self._files;
+
       optionXhr = function() {
-        var xhr = $.ajaxSettings.xhr();
+        const xhr = $.ajaxSettings.xhr();
+
         if (xhr.upload) {
           xhr.upload.addEventListener('progress', function(event) {
-            var percent = 0;
-            var position = event.loaded || event.position; /*event.position is deprecated*/
-            var total = event.total;
+            let percent = 0;
+            const position = event.loaded || event.position; /*event.position is deprecated*/
+            const total = event.total;
+
             if (event.lengthComputable) {
               percent = Math.ceil(position / total * 100);
             }
+
             self.settings.progress(event, position, total, percent, files);
           }, false);
         }
+
         return xhr;
       };
     }
+
     $.ajax({
       url: self.settings.action,
       type: 'post',
@@ -162,14 +183,17 @@ Uploader.prototype.submit = function() {
       xhr: optionXhr,
       context: this,
       success: self.settings.success,
-      error: self.settings.error
+      error: self.settings.error,
     });
+
     return this;
   } else {
     // iframe upload
     self.iframe = newIframe();
     self.form.attr('target', self.iframe.attr('name'));
+
     $('body').append(self.iframe);
+
     self.iframe.one('load', function() {
       // https://github.com/blueimp/jQuery-File-Upload/blob/9.5.6/js/jquery.iframe-transport.js#L102
       // Fix for IE endless progress bar activity bug
@@ -177,13 +201,16 @@ Uploader.prototype.submit = function() {
       $('<iframe src="javascript:false;"></iframe>')
         .appendTo(self.form)
         .remove();
-      var response;
+
+      let response;
       try {
-        response = $(this).contents().find("body").html();
+        response = $(this).contents().find('body').html();
       } catch (e) {
-        response = "cross-domain";
+        response = 'cross-domain';
       }
+
       $(this).remove();
+
       if (!response) {
         if (self.settings.error) {
           self.settings.error(self.input.val());
@@ -194,18 +221,22 @@ Uploader.prototype.submit = function() {
         }
       }
     });
+
     self.form.submit();
   }
+
   return this;
 };
 
 Uploader.prototype.refreshInput = function() {
-  //replace the input element, or the same file can not to be uploaded
-  var newInput = this.input.clone();
+  // replace the input element, or the same file can not to be uploaded
+  const newInput = this.input.clone();
+
   this.input.before(newInput);
   this.input.off('change');
   this.input.remove();
   this.input = newInput;
+
   this.bindInput();
 };
 
@@ -215,15 +246,19 @@ Uploader.prototype.change = function(callback) {
   if (!callback) {
     return this;
   }
+
   this.settings.change = callback;
+
   return this;
 };
 
 // handle when upload success
 Uploader.prototype.success = function(callback) {
-  var me = this;
+  const self = this;
+
   this.settings.success = function(response) {
-    me.refreshInput();
+    self.refreshInput();
+
     if (callback) {
       callback(response);
     }
@@ -234,10 +269,12 @@ Uploader.prototype.success = function(callback) {
 
 // handle when upload success
 Uploader.prototype.error = function(callback) {
-  var me = this;
+  const self = this;
+
   this.settings.error = function(response) {
     if (callback) {
-      me.refreshInput();
+      self.refreshInput();
+
       callback(response);
     }
   };
@@ -245,13 +282,13 @@ Uploader.prototype.error = function(callback) {
 };
 
 // enable
-Uploader.prototype.enable = function(){
+Uploader.prototype.enable = function() {
   this.input.prop('disabled', false);
   this.input.css('cursor', 'pointer');
 };
 
 // disable
-Uploader.prototype.disable = function(){
+Uploader.prototype.disable = function() {
   this.input.prop('disabled', true);
   this.input.css('cursor', 'not-allowed');
 };
@@ -264,32 +301,39 @@ function isString(val) {
 }
 
 function createInputs(data) {
-  if (!data) return [];
-
-  var inputs = [], i;
-  for (var name in data) {
-    i = document.createElement('input');
-    i.type = 'hidden';
-    i.name = name;
-    i.value = data[name];
-    inputs.push(i);
+  if (!data) {
+    return [];
   }
+
+  const inputs = [];
+  for (var name in data) {
+    const input = document.createElement('input');
+
+    input.type = 'hidden';
+    input.name = name;
+    input.value = data[name];
+
+    inputs.push(input);
+  }
+
   return inputs;
 }
 
 function parse(str) {
-  if (!str) return {};
-  var ret = {};
+  if (!str) {
+    return {};
+  }
 
-  var pairs = str.split('&');
-  var unescape = function(s) {
-    return decodeURIComponent(s.replace(/\+/g, ' '));
-  };
+  const ret = {};
 
-  for (var i = 0; i < pairs.length; i++) {
-    var pair = pairs[i].split('=');
-    var key = unescape(pair[0]);
-    var val = unescape(pair[1]);
+  const pairs = str.split('&');
+  const unescape = s => decodeURIComponent(s.replace(/\+/g, ' '));
+
+  for (let i = 0; i < pairs.length; i++) {
+    const pair = pairs[i].split('=');
+    const key = unescape(pair[0]);
+    const val = unescape(pair[1]);
+
     ret[key] = val;
   }
 
@@ -297,21 +341,25 @@ function parse(str) {
 }
 
 function findzIndex($node) {
-  var parents = $node.parentsUntil('body');
-  var zIndex = 0;
-  for (var i = 0; i < parents.length; i++) {
-    var item = parents.eq(i);
+  const parents = $node.parentsUntil('body');
+  let zIndex = 0;
+
+  for (let i = 0; i < parents.length; i++) {
+    const item = parents.eq(i);
+
     if (item.css('position') !== 'static') {
       zIndex = parseInt(item.css('zIndex'), 10) || zIndex;
     }
   }
+
   return zIndex;
 }
 
 function newIframe() {
-  var iframeName = 'iframe-uploader-' + iframeCount;
-  var iframe = $('<iframe name="' + iframeName + '" />').hide();
+  const iframe = $(`<iframe name="iframe-uploader-${iframeCount}" />`).hide();
+
   iframeCount += 1;
+
   return iframe;
 }
 
@@ -372,4 +420,4 @@ MultipleUploader.prototype.disable = function (){
 MultipleUploader.Uploader = Uploader;
 */
 
-module.exports = { Uploader };
+module.exports = Uploader;

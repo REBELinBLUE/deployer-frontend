@@ -8,11 +8,6 @@ function getDialog(target) {
   return target.parents('.modal');
 }
 
-// FIXME: Use this!
-export function setTitle(title, icon) {
-  console.log(title, icon);
-}
-
 export function setBusy(target) {
   const icon = getIcon($(target));
   const dialog = getDialog($(target));

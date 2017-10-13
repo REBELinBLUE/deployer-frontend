@@ -18,7 +18,6 @@ export default translationKey =>
       $('.btn-danger', dialog).show();
       $('.existing-only', dialog).show();
     } else {
-      // TODO: Test, not sure this is enough!
       const form = dialog.find('form')[0];
       form.reset();
 

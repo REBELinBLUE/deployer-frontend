@@ -3,7 +3,7 @@ import 'select2';
 import 'cropper';
 
 import routes from '../routes';
-import { Uploader } from '../handlers/uploader';
+import Uploader from '../handlers/uploader';
 
 const cropperData = {};
 
