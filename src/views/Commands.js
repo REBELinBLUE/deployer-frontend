@@ -12,14 +12,13 @@ const translationKey = 'commands';
 
 const ModelView = ModelViewFactory(element, ['name', 'step', 'user']);
 
+// FIXME: Need to reset optional/default_on_row been displays of the dialog
+
 let editor;
 $(`div#${element}.modal`)
   .on('show.bs.modal', () => {
     editor = ace.edit('command_script');
     editor.getSession().setMode('ace/mode/sh');
-
-    // editor.setReadOnly(false);
-    // editor.getSession().setUseWrapMode(true);
   })
   .on('hidden.bs.modal', () => {
     editor.setValue('');
@@ -160,7 +159,8 @@ export default class CommandsCollectionView extends Backbone.View {
 //     var target_id = $('input[name="target_id"]').val();
 //     if (target_type == data.model.target_type && parseInt(data.model.target_id) === parseInt(target_id)) {
 //         // Make sure the command is for this action (clone, install, activate, purge)
-//         if (parseInt(data.model.step) + 1 === parseInt(app.command_action) || parseInt(data.model.step) - 1 === parseInt(app.command_action)) {
+//         if (parseInt(data.model.step) + 1 === parseInt(app.command_action)
+// || parseInt(data.model.step) - 1 === parseInt(app.command_action)) {
 //             app.Commands.add(data.model);
 //         }
 //     }
