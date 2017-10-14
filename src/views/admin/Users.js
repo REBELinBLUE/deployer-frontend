@@ -1,10 +1,10 @@
 import $ from 'jquery';
 
-import UserCollection from '../collections/Users';
-import CollectionViewFactory from '../factories/CollectionViewFactory';
-import ModelViewFactory from '../factories/ModelViewFactory';
-import { dateTimeFormatter } from '../utils/formatters';
-import bindDialogs from '../handlers/dialogs';
+import UserCollection from '../../collections/Users';
+import CollectionViewFactory from '../../factories/CollectionViewFactory';
+import ModelViewFactory from '../../factories/ModelViewFactory';
+import { dateTimeFormatter } from '../../utils/formatters';
+import bindDialogs from '../../handlers/dialogs';
 
 const element = 'user';
 const translationKey = 'users';

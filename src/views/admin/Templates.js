@@ -1,9 +1,9 @@
 import $ from 'jquery';
 
-import TemplateCollection from '../collections/Templates';
-import CollectionViewFactory from '../factories/CollectionViewFactory';
-import ModelViewFactory from '../factories/ModelViewFactory';
-import bindDialogs from '../handlers/dialogs';
+import TemplateCollection from '../../collections/Templates';
+import CollectionViewFactory from '../../factories/CollectionViewFactory';
+import ModelViewFactory from '../../factories/ModelViewFactory';
+import bindDialogs from '../../handlers/dialogs';
 
 const element = 'template';
 const translationKey = 'templates';

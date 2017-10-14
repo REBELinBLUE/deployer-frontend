@@ -19,4 +19,6 @@ export default {
   profileImage: '/profile/avatar',
   profileGravatar: '/profile/gravatar',
   profileUpload: '/profile/upload',
+  webhook: projectId => `/webhook/${projectId}/refresh`,
+  branches: projectId => `/projects/${projectId}/refresh`,
 };

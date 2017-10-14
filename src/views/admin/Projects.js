@@ -1,10 +1,11 @@
 import $ from 'jquery';
+import 'select2';
 
-import ProjectCollection from '../collections/Projects';
-import CollectionViewFactory from '../factories/CollectionViewFactory';
-import ModelViewFactory from '../factories/ModelViewFactory';
-import { dateTimeFormatter } from '../utils/formatters';
-import bindDialogs from '../handlers/dialogs';
+import ProjectCollection from '../../collections/Projects';
+import CollectionViewFactory from '../../factories/CollectionViewFactory';
+import ModelViewFactory from '../../factories/ModelViewFactory';
+import { dateTimeFormatter } from '../../utils/formatters';
+import bindDialogs from '../../handlers/dialogs';
 
 const element = 'project';
 const translationKey = 'projects';
@@ -13,6 +14,15 @@ const ModelView = ModelViewFactory(
   element,
   ['name', 'repository', 'branch', 'group_id', 'builds_to_keep', 'url', 'build_url'],
 );
+
+const selectOptions = {
+  width: '100%',
+  minimumResultsForSearch: Infinity,
+};
+
+// FIXME: Don't want this on every page
+$(`#${element}_group_id`).select2(selectOptions);
+$(`#${element}_template_id`).select2(selectOptions);
 
 class ProjectView extends ModelView {
   viewData() {

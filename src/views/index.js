@@ -1,7 +1,7 @@
-import GroupsView from './Groups';
-import UsersView from './Users';
-import TemplatesView from './Templates';
-import ProjectsView from './Projects';
+import GroupsView from './admin/Groups';
+import UsersView from './admin/Users';
+import TemplatesView from './admin/Templates';
+import ProjectsView from './admin/Projects';
 import ServersView from './Servers';
 import VariablesView from './Variables';
 import SharedFilesView from './SharedFiles';
@@ -11,8 +11,10 @@ import HeartbeatsView from './Heartbeats';
 import CheckUrlsView from './CheckUrls';
 import CommandsView from './Commands';
 import ProfileView from './Profile';
+import ProjectView from './Project';
 
 ProfileView();
+ProjectView();
 
 export default {
   Groups: GroupsView,
