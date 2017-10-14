@@ -39,7 +39,7 @@ mix
     `${paths.html5shiv}/dist/html5shiv.js`,
     `${paths.respond}/dest/respond.src.js`,
   ], `${build}/js/ie.js`)
-  .sourceMaps()
+  .sourceMaps(false)
   .styles([
     'src/css/app.css',
     'src/css/console.css',

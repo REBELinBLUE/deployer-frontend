@@ -13,6 +13,7 @@ export default {
   notifications: '/notifications',
   heartbeats: '/heartbeats',
   urls: '/check-urls',
+  commands: '/commands',
   profileEmail: '/profile/email',
   profileImage: '/profile/avatar',
   profileGravatar: '/profile/gravatar',

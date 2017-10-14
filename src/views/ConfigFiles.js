@@ -46,12 +46,14 @@ function destroyEditor() {
   editor.gotoLine(1);
   editor.destroy();
   openFile = null;
+  $(`#${element}_content`).text('');
+  $('#preview-content').text('');
 }
 
 $(`div#${element}.modal`)
   .on('show.bs.modal', () => {
     openFile = $(`#${element}_path`).val();
-    createEditor('configfile_content', false);
+    createEditor(`${element}_content`, false);
   })
   .on('hidden.bs.modal', destroyEditor);
 

@@ -9,6 +9,7 @@ import ConfigFilesView from './ConfigFiles';
 import NotificationsView from './Notifications';
 import HeartbeatsView from './Heartbeats';
 import CheckUrlsView from './CheckUrls';
+import CommandsView from './Commands';
 import ProfileView from './Profile';
 
 ProfileView();
@@ -25,4 +26,5 @@ export default {
   Notifications: NotificationsView,
   Heartbeats: HeartbeatsView,
   CheckUrls: CheckUrlsView,
+  Commands: CommandsView,
 };

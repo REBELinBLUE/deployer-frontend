@@ -9,6 +9,7 @@ import ConfigFile from './ConfigFile';
 import Notification from './Notification';
 import Heartbeat from './Heartbeat';
 import CheckUrl from './CheckUrl';
+import Command from './Command';
 
 export default {
   Group,
@@ -22,4 +23,5 @@ export default {
   Notification,
   Heartbeat,
   CheckUrl,
+  Command,
 };

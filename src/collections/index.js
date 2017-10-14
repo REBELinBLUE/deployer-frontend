@@ -9,6 +9,7 @@ import ConfigFilesCollection from './ConfigFiles';
 import NotificationsCollection from './Notifications';
 import HeartbeatsCollection from './Heartbeats';
 import CheckUrlsCollection from './CheckUrls';
+import CommandsColleciton from './Commands';
 
 export default {
   Groups: GroupsCollection,
@@ -22,4 +23,5 @@ export default {
   Notifications: NotificationsCollection,
   Heartbeats: HeartbeatsCollection,
   CheckUrls: CheckUrlsCollection,
+  Commands: CommandsColleciton,
 };
