@@ -3,6 +3,7 @@ import $ from 'jquery';
 
 import listener from '../listener';
 import { MODEL_CHANGED, MODEL_TRASHED, MODEL_CREATED } from '../listener/events';
+import { isCurrentTarget, isCurrentProject } from '../utils/target';
 
 export default (element, Collection, ModelView) =>
   class CollectionView extends Backbone.View {
@@ -52,20 +53,12 @@ export default (element, Collection, ModelView) =>
 
       // FIXME: Is there a better way to get the project_id
       listener.on(`${element}:${MODEL_CREATED}`, (data) => {
-        if (data.model.target_id) {
-          const targetType = $('input[name="target_type"]').val();
-          const targetId = $('input[name="target_id"]').val();
+        if (data.model.target_id && isCurrentTarget(data.model)) {
+          this.collection.add(data.model);
+        }
 
-          if (
-            targetType === data.model.target_type &&
-            parseInt(data.model.target_id, 10) === parseInt(targetId, 10)
-          ) {
-            this.collection.add(data.model);
-          }
-        } else if (data.model.project_id) {
-          if (parseInt(data.model.project_id, 10) === parseInt(window.app.project_id, 10)) {
-            this.collection.add(data.model);
-          }
+        if (data.model.project_id && isCurrentProject(data.model)) {
+          this.collection.add(data.model);
         }
       });
 

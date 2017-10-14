@@ -4,10 +4,15 @@ import models from './models';
 import collections from './collections';
 import listener from './listener';
 
+let projectId = null;
+
 window.app = {
   views,
   models,
   collections,
   listener,
-  project_id: null,
+  getProjectId: () => projectId,
+  setProjectId: (newId) => {
+    projectId = parseInt(newId, 10);
+  },
 };

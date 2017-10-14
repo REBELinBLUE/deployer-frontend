@@ -9,12 +9,9 @@ export default class Group extends Backbone.Model {
     this.urlRoot = routes.commands;
   }
 
-  // FIXME: Not sure this'll work
-  // defaults() {
-  //   return {
-  //     order: app.models.Commands.nextOrder(),
-  //   };
-  // }
+  isBefore() {
+    return !this.isAfter();
+  }
 
   isAfter() {
     return (parseInt(this.get('step'), 10) % 3 === 0);
