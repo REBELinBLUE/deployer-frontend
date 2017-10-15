@@ -11,3 +11,7 @@ export function logFormatter(log) {
 export function dateTimeFormatter(datetime) {
   return moment(datetime).format('Do MMMM YYYY h:mm:ss A');
 }
+
+export function timeFormatter(datetime) {
+  return moment(datetime).format('h:mm:ss A');
+}

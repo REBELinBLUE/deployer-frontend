@@ -10,6 +10,7 @@ import Notification from './Notification';
 import Heartbeat from './Heartbeat';
 import CheckUrl from './CheckUrl';
 import Command from './Command';
+import Deployment from './Deployment';
 
 export default {
   Group,
@@ -24,4 +25,5 @@ export default {
   Heartbeat,
   CheckUrl,
   Command,
+  Deployment,
 };

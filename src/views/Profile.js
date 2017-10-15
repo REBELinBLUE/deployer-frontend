@@ -103,11 +103,8 @@ function uploadSuccess(response) {
   }
 }
 
+// FIXME: Convert to class
 export default () => {
-  if ($('#upload').length === 0) {
-    return;
-  }
-
   const selectOptions = {
     minimumResultsForSearch: Infinity,
   };

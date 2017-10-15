@@ -21,4 +21,6 @@ export default {
   profileUpload: '/profile/upload',
   webhook: projectId => `/webhook/${projectId}/refresh`,
   branches: projectId => `/projects/${projectId}/refresh`,
+  log: logId => `/log/${logId}`,
+  rollback: deploymentId => `/deployment/${deploymentId}/rollback`,
 };

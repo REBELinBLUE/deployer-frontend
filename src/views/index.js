@@ -12,15 +12,15 @@ import CheckUrlsView from './CheckUrls';
 import CommandsView from './Commands';
 import ProfileView from './Profile';
 import ProjectView from './Project';
-
-ProfileView();
-ProjectView();
+import DeploymentView from './Deployments';
 
 export default {
   Groups: GroupsView,
   Users: UsersView,
   Templates: TemplatesView,
   Projects: ProjectsView,
+  Project: ProjectView,
+  Profile: ProfileView,
   Servers: ServersView,
   Variables: VariablesView,
   SharedFiles: SharedFilesView,
@@ -29,4 +29,5 @@ export default {
   Heartbeats: HeartbeatsView,
   CheckUrls: CheckUrlsView,
   Commands: CommandsView,
+  Deployment: DeploymentView,
 };

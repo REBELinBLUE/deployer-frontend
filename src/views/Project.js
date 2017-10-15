@@ -106,6 +106,7 @@ function triggerDeployment(event) {
   $('button.close', dialog).hide();
 }
 
+// FIXME: Convert to class
 export default () => {
   $('#new_webhook').on('click', resetWebhook);
   $('.deployment-source:radio').on('change', deploymentSource);
@@ -119,16 +120,13 @@ export default () => {
     $('.callout-danger', dialog).hide();
   });
 
-  // FIXME: Is there a better way to do this?
-  if ($('div.tab-content #deployments').length > 0) {
-    listener.on(`project:${MODEL_CHANGED}`, (data) => {
-      if (parseInt(data.model.id, 10) === window.app.getProjectId()) {
-        resetOptions('select.deployment-source#deployment_branch', data.model.branches);
-        resetOptions('select.deployment-source#deployment_tag', data.model.tags);
+  listener.on(`project:${MODEL_CHANGED}`, (data) => {
+    if (parseInt(data.model.id, 10) === window.app.getProjectId()) {
+      resetOptions('select.deployment-source#deployment_branch', data.model.branches);
+      resetOptions('select.deployment-source#deployment_tag', data.model.tags);
 
-        const dialog = $('.modal#reason');
-        resetDialog(dialog);
-      }
-    });
-  }
+      const dialog = $('.modal#reason');
+      resetDialog(dialog);
+    }
+  });
 };
