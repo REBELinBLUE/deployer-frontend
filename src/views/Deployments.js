@@ -85,7 +85,7 @@ function redeploy(event) {
   const button = $(event.relatedTarget);
   const deployment = button.data('deployment-id');
 
-  const tmp = button.data('optional-commands') + ''; // FIXME
+  const tmp = `${button.data('optional-commands')} `.trim(); // FIXME: why is this needed?
   let commands = tmp.split(',');
 
   if (tmp.length > 0) {

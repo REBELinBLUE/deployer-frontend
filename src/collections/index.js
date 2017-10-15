@@ -25,5 +25,5 @@ export default {
   Heartbeats: HeartbeatsCollection,
   CheckUrls: CheckUrlsCollection,
   Commands: CommandsColleciton,
-  Deployment: DeploymentsCollection // FIXME: Should rename this, slightly misleading
+  Deployment: DeploymentsCollection, // FIXME: Should rename this, slightly misleading
 };

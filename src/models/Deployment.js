@@ -1,9 +1,9 @@
 import Backbone from 'backbone';
 
 export const COMPLETED = 0;
-export const PENDING   = 1;
-export const RUNNING   = 2;
-export const FAILED    = 3;
+export const PENDING = 1;
+export const RUNNING = 2;
+export const FAILED = 3;
 export const CANCELLED = 4;
 
 export default class Deployment extends Backbone.Model {
