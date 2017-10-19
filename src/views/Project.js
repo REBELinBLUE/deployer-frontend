@@ -5,7 +5,7 @@ import listener from '../listener';
 import { MODEL_CHANGED } from '../listener/events';
 import routes from '../routes';
 import localize from '../utils/localization';
-import Deployment, { COMPLETED, ERRORS, RUNNING, FAILED, CANCELLED } from '../models/Deployment';
+import Deployment from '../models/Deployment';
 
 const selectOptions = {
   width: '80%',
