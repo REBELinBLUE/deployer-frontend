@@ -3,10 +3,9 @@ import _ from 'underscore';
 import toastr from 'toastr';
 
 import listener from '../listener';
-import { MODEL_CHANGED, MODEL_TRASHED } from '../listener/events';
 import { timeFormatter } from '../utils/formatters';
 import localize from '../utils/localization';
-import { RUNNING, PENDING, COMPLETED, FAILED, ERRORS } from '../models/Deployment';
+import Deployment, { RUNNING, PENDING } from '../models/Deployment';
 import { getProjectId } from '../utils/projectId';
 
 function updateNotificationsMenus() {
@@ -61,11 +60,7 @@ function getMessage(title, translation) {
 export default () => {
   $(document).ready(updateNotificationsMenus);
 
-  listener.on(`deployment:${MODEL_CHANGED}`, (data) => {
-    updateNavBar(data);
-  });
-
-  listener.on(`project:${MODEL_TRASHED}`, (data) => {
+  listener.onTrash('project', (data) => {
     $(`#sidebar_project_${data.model.id}`).parent('li').remove();
 
     // FIXME: Maybe send an alert
@@ -74,27 +69,29 @@ export default () => {
     }
   });
 
-  listener.on(`group:${MODEL_TRASHED}`, (data) => {
+  listener.onUpdate('group', (data) => {
     $(`#sidebar_group_${data.model.id}`).html(data.model.name);
   });
 
-  listener.on(`project:${MODEL_CHANGED}`, (data) => {
+  listener.onUpdate('project', (data) => {
     $(`#sidebar_project_${data.model.id}`).html(data.model.name);
   });
 
-  listener.on(`deployment:${MODEL_CHANGED}`, (data) => {
-    if ($('#timeline').length === 0) { // Don't show on dashboard
-      // FIXME: Also don't show if viewing the deployment, or the project the deployment is for
+  listener.onUpdate('deployment', (data) => {
+    updateNavBar(data);
+
+    if ($('#timeline').length === 0) {
+      const deployment = new Deployment(data.model);
 
       const title = localize.get('dashboard.deployment_number', {
         id: data.model.id,
       });
 
-      if (data.model.status === COMPLETED) {
+      if (deployment.isCompleted()) {
         toastr.success(getMessage(title, 'deployments.completed'), data.model.project_name);
-      } else if (data.model.status === FAILED) {
+      } else if (deployment.isFailed()) {
         toastr.error(getMessage(title, 'deployments.failed'), data.model.project_name);
-      } else if (data.model.status === ERRORS) {
+      } else if (deployment.isCompleteWithErrors()) {
         toastr.warning(getMessage(title, 'deployments.completed_with_errors'), data.model.project_name);
       } // FIXME: Add cancelled
     }

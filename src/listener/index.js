@@ -1,6 +1,8 @@
 import $ from 'jquery';
 import io from 'socket.io-client';
 
+import * as events from './events';
+
 const socket = $('meta[name="socket-url"]').attr('content');
 const jwt = $('meta[name="jwt"]').attr('content');
 
@@ -19,6 +21,7 @@ listener.on('connect_error', () => {
   hasConnectionError = true;
 });
 
+// FIXME: Can these be chained?
 listener.on('connect', () => {
   $('#socket_offline').hide();
   hasConnectionError = false;
@@ -29,4 +32,21 @@ listener.on('reconnect', () => {
   hasConnectionError = false;
 });
 
-export default listener;
+export default {
+  // For backward compatibility
+  on: (channel, callback) => {
+    listener.on(channel, callback);
+  },
+
+  onUpdate: (model, callback) => {
+    listener.on(`${model}:${events.MODEL_CHANGED}`, callback);
+  },
+
+  onCreate: (model, callback) => {
+    listener.on(`${model}:${events.MODEL_CREATED}`, callback);
+  },
+
+  onTrash: (model, callback) => {
+    listener.on(`${model}:${events.MODEL_TRASHED}`, callback);
+  },
+};

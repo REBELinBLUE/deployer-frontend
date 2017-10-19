@@ -6,7 +6,7 @@ import localize from '../utils/localization';
 import { timeFormatter, logFormatter } from '../utils/formatters';
 import DeploymentCollection from '../collections/Deployments';
 import listener from '../listener';
-import { MODEL_CHANGED, SERVER_LOG_CHANGED } from '../listener/events';
+import { SERVER_LOG_CHANGED } from '../listener/events';
 import { isCurrentProject } from '../utils/target';
 import routes from '../routes';
 
@@ -235,7 +235,7 @@ export default class DeploymentView extends Backbone.View {
       }
     });
 
-    listener.on(`deployment:${MODEL_CHANGED}`, (data) => {
+    listener.onUpdate('deployment', (data) => {
       if (isCurrentProject(data.model)) {
         if (data.model.repo_failure) {
           $('#repository_error').show();

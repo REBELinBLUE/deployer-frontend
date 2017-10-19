@@ -7,7 +7,6 @@ import CommandsCollection from '../collections/Commands';
 import ModelViewFactory from '../factories/ModelViewFactory';
 import bindDialogs from '../handlers/dialogs';
 import listener from '../listener';
-import { MODEL_CHANGED, MODEL_TRASHED, MODEL_CREATED } from '../listener/events';
 import { isCurrentTarget } from '../utils/target';
 import reorderModels from '../handlers/reorderModels';
 import routes from '../routes';
@@ -112,7 +111,7 @@ export default class CommandsCollectionView extends Backbone.View {
     this.listenTo(this.collection, 'all', this.render);
 
     // FIXME: Duplicated
-    listener.on(`${element}:${MODEL_CHANGED}`, (data) => {
+    listener.onUpdate(element, (data) => {
       const model = this.collection.get(parseInt(data.model.id, 10));
 
       if (model) {
@@ -120,7 +119,7 @@ export default class CommandsCollectionView extends Backbone.View {
       }
     });
 
-    listener.on(`${element}:${MODEL_TRASHED}`, (data) => {
+    listener.onTrash(element, (data) => {
       const model = this.collection.get(parseInt(data.model.id, 10));
 
       if (model) {
@@ -128,7 +127,7 @@ export default class CommandsCollectionView extends Backbone.View {
       }
     });
 
-    listener.on(`${element}:${MODEL_CREATED}`, (data) => {
+    listener.onCreate(element, (data) => {
       if (isCurrentTarget(data.model)) {
         const step = parseInt(data.model.step, 10);
 

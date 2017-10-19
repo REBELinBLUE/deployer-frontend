@@ -2,7 +2,6 @@ import $ from 'jquery';
 import 'select2';
 
 import listener from '../listener';
-import { MODEL_CHANGED } from '../listener/events';
 import routes from '../routes';
 import localize from '../utils/localization';
 import Deployment from '../models/Deployment';
@@ -190,7 +189,7 @@ export default () => {
     $('.callout-danger', dialog).hide();
   });
 
-  listener.on(`project:${MODEL_CHANGED}`, (data) => {
+  listener.onUpdate('project', (data) => {
     if (parseInt(data.model.id, 10) === window.app.getProjectId()) {
       resetOptions('select.deployment-source#deployment_branch', data.model.branches);
       resetOptions('select.deployment-source#deployment_tag', data.model.tags);
@@ -200,7 +199,7 @@ export default () => {
     }
   });
 
-  listener.on(`deployment:${MODEL_CHANGED}`, (data) => {
+  listener.onUpdate('deployment', (data) => {
     updateDeployment(data);
   });
 };

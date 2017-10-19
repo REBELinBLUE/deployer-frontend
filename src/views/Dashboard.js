@@ -1,7 +1,6 @@
 import $ from 'jquery';
 
 import listener from '../listener';
-import { MODEL_CHANGED } from '../listener/events';
 import routes from '../routes';
 import localize from '../utils/localization';
 import Project from '../models/Project';
@@ -17,10 +16,10 @@ function updateTimeline() {
 }
 
 export default () => {
-  listener.on(`deployment:${MODEL_CHANGED}`, updateTimeline);
+  listener.onUpdate('deployment', updateTimeline);
 
   // FIXME: Change to use an actual model
-  listener.on(`project:${MODEL_CHANGED}`, (data) => {
+  listener.onUpdate('project', (data) => {
     const project = new Project(data.model);
 
     const container = $(`#project_${data.model.id}`);
