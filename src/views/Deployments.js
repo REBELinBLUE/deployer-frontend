@@ -145,7 +145,7 @@ class LogView extends Backbone.View {
   viewData() {
     const data = this.model.toJSON();
 
-    let css = 'primary';
+    let css = 'info';
     let icon = 'clock-o';
     let status = localize.get(`${translationKey}.pending`);
 

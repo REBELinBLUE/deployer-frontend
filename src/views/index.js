@@ -13,14 +13,14 @@ import CommandsView from './Commands';
 import ProfileView from './Profile';
 import ProjectView from './Project';
 import DeploymentView from './Deployments';
+import DashboardView from './Dashboard';
+import NavigationView from './Navigation';
 
 export default {
   Groups: GroupsView,
   Users: UsersView,
   Templates: TemplatesView,
   Projects: ProjectsView,
-  Project: ProjectView,
-  Profile: ProfileView,
   Servers: ServersView,
   Variables: VariablesView,
   SharedFiles: SharedFilesView,
@@ -30,4 +30,10 @@ export default {
   CheckUrls: CheckUrlsView,
   Commands: CommandsView,
   Deployment: DeploymentView,
+
+  // Non-Backbone views
+  Project: ProjectView,
+  Profile: ProfileView,
+  Dashboard: DashboardView,
+  Navigation: NavigationView,
 };

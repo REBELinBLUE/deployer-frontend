@@ -19,6 +19,7 @@ export default {
   profileImage: '/profile/avatar',
   profileGravatar: '/profile/gravatar',
   profileUpload: '/profile/upload',
+  timeline: '/timeline',
   webhook: projectId => `/webhook/${projectId}/refresh`,
   branches: projectId => `/projects/${projectId}/refresh`,
   log: logId => `/log/${logId}`,

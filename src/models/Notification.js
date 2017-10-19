@@ -8,8 +8,8 @@ export const MAIL = 'mail';
 export const TWILIO = 'twilio';
 
 export default class Notification extends Backbone.Model {
-  constructor(options) {
-    super(options);
+  constructor(attributes, options) {
+    super(attributes, options);
 
     this.urlRoot = routes.notifications;
   }
