@@ -21,7 +21,6 @@ listener.on('connect_error', () => {
   hasConnectionError = true;
 });
 
-// FIXME: Can these be chained?
 listener.on('connect', () => {
   $('#socket_offline').hide();
   hasConnectionError = false;

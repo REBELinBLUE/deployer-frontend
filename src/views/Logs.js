@@ -4,7 +4,7 @@ import Backbone from 'backbone';
 
 import localize from '../utils/localization';
 import { timeFormatter, logFormatter } from '../utils/formatters';
-import DeploymentCollection from '../collections/Deployments';
+import LogCollection from '../collections/Logs';
 import listener from '../listener';
 import { SERVER_LOG_CHANGED } from '../listener/events';
 import { isCurrentProject } from '../utils/target';
@@ -139,7 +139,6 @@ class LogView extends Backbone.View {
 
   listeners() {
     this.listenTo(this.model, 'change', this.render);
-    this.listenTo(this.model, 'destroy', this.remove); // FIXME: IS THIS NEEDED?
   }
 
   viewData() {
@@ -187,14 +186,14 @@ class LogView extends Backbone.View {
   }
 }
 
-export default class DeploymentView extends Backbone.View {
+export default class LogsView extends Backbone.View {
   constructor(options) {
     super({
       ...options,
       el: '#app',
     });
 
-    this.collection = DeploymentCollection;
+    this.collection = LogCollection;
 
     this.$containers = [];
 
