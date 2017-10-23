@@ -19,7 +19,7 @@ if (typeof window.__backboneAgent === 'undefined') {
 window.io = io;
 window.__backboneAgent.handleBackbone(Backbone);
 
-// fixme: test this actually works
+// FIXME: test this actually works
 toastr.options = {
   ...toastr.options,
   closeButton: true,

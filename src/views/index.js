@@ -12,7 +12,7 @@ import CheckUrlsView from './CheckUrls';
 import CommandsView from './Commands';
 import ProfileView from './Profile';
 import ProjectView from './Project';
-import DeploymentView from './Deployments';
+import LogsView from './Logs';
 import DashboardView from './Dashboard';
 import NavigationView from './Navigation';
 
@@ -29,7 +29,7 @@ export default {
   Heartbeats: HeartbeatsView,
   CheckUrls: CheckUrlsView,
   Commands: CommandsView,
-  Deployment: DeploymentView,
+  Logs: LogsView,
 
   // Non-Backbone views
   Project: ProjectView,
