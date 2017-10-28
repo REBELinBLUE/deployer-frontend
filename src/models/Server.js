@@ -9,8 +9,8 @@ export const FAILED = 2;
 export const TESTING = 3;
 
 export default class Server extends Backbone.Model {
-  constructor(options) {
-    super(options);
+  constructor(attributes, options) {
+    super(attributes, options);
 
     this.urlRoot = routes.servers;
   }

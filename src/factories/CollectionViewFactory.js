@@ -2,7 +2,6 @@ import Backbone from 'backbone';
 import $ from 'jquery';
 
 import listener from '../listener';
-import { MODEL_CHANGED, MODEL_TRASHED, MODEL_CREATED } from '../listener/events';
 import { isCurrentTarget, isCurrentProject } from '../utils/target';
 
 export default (element, Collection, ModelView) =>
@@ -35,37 +34,47 @@ export default (element, Collection, ModelView) =>
       this.listenTo(this.collection, 'remove', this.addAll);
       this.listenTo(this.collection, 'all', this.render);
 
-      listener.on(`${element}:${MODEL_CHANGED}`, (data) => {
-        const model = this.collection.get(parseInt(data.model.id, 10));
+      listener.onUpdate(element, this.modelChanged());
+      listener.onTrash(element, this.modelTrashed());
+      listener.onCreate(element, this.modelCreated());
+    }
+
+    modelChanged() {
+      const self = this;
+
+      return (data) => {
+        const model = self.collection.get(parseInt(data.model.id, 10));
 
         if (model) {
           model.set(data.model);
         }
-      });
+      };
+    }
 
-      listener.on(`${element}:${MODEL_TRASHED}`, (data) => {
-        const model = this.collection.get(parseInt(data.model.id, 10));
+    modelTrashed() {
+      const self = this;
+
+      return (data) => {
+        const model = self.collection.get(parseInt(data.model.id, 10));
 
         if (model) {
-          this.collection.remove(model);
+          model.set(data.model);
         }
-      });
+      };
+    }
 
-      // FIXME: Is there a better way to get the project_id
-      listener.on(`${element}:${MODEL_CREATED}`, (data) => {
+    modelCreated() {
+      const self = this;
+
+      return (data) => {
         if (data.model.target_id && isCurrentTarget(data.model)) {
-          this.collection.add(data.model);
+          self.collection.add(data.model);
         }
 
         if (data.model.project_id && isCurrentProject(data.model)) {
-          this.collection.add(data.model);
+          self.collection.add(data.model);
         }
-      });
-
-      // FIXME: Figure out why if we do this collections is null in the method
-      // listener.on(`${element}:${MODEL_CHANGED}`, this.modelChanged);
-      // listener.on(`${element}:${MODEL_TRASHED}`, this.modelTrashed);
-      // listener.on(`${element}:${MODEL_CREATED}`, this.modelCreated);
+      };
     }
 
     addOne(model) {

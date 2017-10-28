@@ -95,7 +95,7 @@ body.dragging * {
     cursor: pointer;
 }
 
-#pending_menu, #deploying_menu {
+#pending_menu, #running_menu {
     display: none;
 }
 
@@ -128,8 +128,8 @@ div#reason div.radio label {
     min-width: 50%;
 }
 
-#deploying_menu li a p,
-#deploying_menu li a h4,
+#running_menu li a p,
+#running_menu li a h4,
 #pending_menu li a p,
 #pending_menu li a h4 {
     margin-left: 0;

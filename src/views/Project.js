@@ -2,8 +2,9 @@ import $ from 'jquery';
 import 'select2';
 
 import listener from '../listener';
-import { MODEL_CHANGED } from '../listener/events';
 import routes from '../routes';
+import localize from '../utils/localization';
+import Deployment from '../models/Deployment';
 
 const selectOptions = {
   width: '80%',
@@ -106,6 +107,74 @@ function triggerDeployment(event) {
   $('button.close', dialog).hide();
 }
 
+// FIXME: Change to use an actual model
+function updateDeployment(data) {
+  const container = $(`#deployment_${data.model.id}`);
+
+  if (container.length > 0) {
+    const deployment = new Deployment(data.model);
+
+    $('td:nth-child(4)', container).text(data.model.committer);
+
+    if (data.model.commit_url) {
+      $('td:nth-child(5)', container)
+        .html(`<a href="${data.model.commit_url}" target="_blank">${data.model.short_commit}</a>`);
+    } else {
+      $('td:nth-child(5)', container).text(data.model.short_commit);
+    }
+
+    let icon = 'clock-o';
+    let css = 'info';
+    let label = localize.get('deployments.pending');
+    let done = false;
+    let success = false;
+
+    if (deployment.isCompleted()) {
+      icon = 'check';
+      css = 'success';
+      label = localize.get('deployments.completed');
+      done = true;
+      success = true;
+    } else if (deployment.isRunning()) {
+      icon = 'spinner fa-pulse';
+      css = 'warning';
+      label = localize.get('deployments.running');
+    } else if (deployment.isFailed()) {
+      icon = 'warning';
+      css = 'danger';
+      label = localize.get('deployments.failed');
+      done = true;
+    } else if (deployment.isCompleteWithErrors()) {
+      icon = 'warning';
+      css = 'success';
+      label = localize.get('deployments.completed_with_errors');
+      done = true;
+      success = true;
+    } else if (deployment.isCancelled()) {
+      icon = 'warning';
+      css = 'danger';
+      label = localize.get('deployments.cancelled');
+      done = true;
+    }
+
+    const status = $('td:nth-child(7) span.label', container);
+
+    if (done) {
+      $('button#deploy_project:disabled').removeAttr('disabled');
+      $('td:nth-child(8) button.btn-cancel', container).remove();
+
+      if (success) {
+        $('button.btn-rollback').removeClass('hide');
+      }
+    }
+
+    // FIXME: This stuff is duplicated?
+    status.attr('class', `label label-${css}`);
+    $('i', status).attr('class', `fa fa-${icon}`);
+    $('span', status).text(label);
+  }
+}
+
 // FIXME: Convert to class
 export default () => {
   $('#new_webhook').on('click', resetWebhook);
@@ -120,7 +189,7 @@ export default () => {
     $('.callout-danger', dialog).hide();
   });
 
-  listener.on(`project:${MODEL_CHANGED}`, (data) => {
+  listener.onUpdate('project', (data) => {
     if (parseInt(data.model.id, 10) === window.app.getProjectId()) {
       resetOptions('select.deployment-source#deployment_branch', data.model.branches);
       resetOptions('select.deployment-source#deployment_tag', data.model.tags);
@@ -128,5 +197,9 @@ export default () => {
       const dialog = $('.modal#reason');
       resetDialog(dialog);
     }
+  });
+
+  listener.onUpdate('deployment', (data) => {
+    updateDeployment(data);
   });
 };

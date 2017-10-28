@@ -1,11 +1,13 @@
-import dialog from './dialog.spec';
-import formatters from './formatters.spec';
-import localization from './localization.spec';
-import currentProject from './projectId.spec';
+import dialogTests from './dialog.spec';
+import formattersTests from './formatters.spec';
+import localizationTests from './localization.spec';
+import currentProjectTests from './projectId.spec';
+import targetTests from './target.spec';
 
 describe('Utils', () => {
-  currentProject();
-  dialog();
-  formatters();
-  localization();
+  dialogTests();
+  formattersTests();
+  localizationTests();
+  currentProjectTests();
+  targetTests();
 });

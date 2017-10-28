@@ -1,16 +1,19 @@
 import $ from 'jquery';
 import io from 'socket.io-client';
 
+import handlers from './handlers';
+
 const socket = $('meta[name="socket-url"]').attr('content');
 const jwt = $('meta[name="jwt"]').attr('content');
-
-let hasConnectionError = false;
 
 const listener = io.connect(socket, {
   query: `jwt=${jwt}`,
   transports: ['websocket', 'polling'],
 });
 
+let hasConnectionError = false;
+
+// FIXME: Make these easier to test
 listener.on('connect_error', () => {
   if (!hasConnectionError) {
     $('#socket_offline').show();
@@ -29,4 +32,4 @@ listener.on('reconnect', () => {
   hasConnectionError = false;
 });
 
-export default listener;
+export default handlers(listener);

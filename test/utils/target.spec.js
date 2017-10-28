@@ -4,7 +4,7 @@ import dirtyChai from 'dirty-chai';
 use(dirtyChai);
 
 export default () => {
-  xdescribe('Dialog', () => {
+  describe('Target', () => {
     xit('Not yet tested');
   });
 };

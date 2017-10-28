@@ -7,8 +7,8 @@ export const UNTESTED = 1;
 export const MISSING = 2;
 
 export default class Heartbeat extends Backbone.Model {
-  constructor(options) {
-    super(options);
+  constructor(attributes, options) {
+    super(attributes, options);
 
     this.urlRoot = routes.heartbeats;
   }

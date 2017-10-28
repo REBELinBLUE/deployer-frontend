@@ -4,9 +4,9 @@ import Backbone from 'backbone';
 
 import localize from '../utils/localization';
 import { timeFormatter, logFormatter } from '../utils/formatters';
-import DeploymentCollection from '../collections/Deployments';
+import LogCollection from '../collections/Logs';
 import listener from '../listener';
-import { MODEL_CHANGED, SERVER_LOG_CHANGED } from '../listener/events';
+import { SERVER_LOG_CHANGED } from '../listener/events';
 import { isCurrentProject } from '../utils/target';
 import routes from '../routes';
 
@@ -85,7 +85,7 @@ function redeploy(event) {
   const button = $(event.relatedTarget);
   const deployment = button.data('deployment-id');
 
-  const tmp = button.data('optional-commands') + ''; // FIXME
+  const tmp = `${button.data('optional-commands')} `.trim(); // FIXME: why is this needed?
   let commands = tmp.split(',');
 
   if (tmp.length > 0) {
@@ -139,13 +139,12 @@ class LogView extends Backbone.View {
 
   listeners() {
     this.listenTo(this.model, 'change', this.render);
-    this.listenTo(this.model, 'destroy', this.remove); // FIXME: IS THIS NEEDED?
   }
 
   viewData() {
     const data = this.model.toJSON();
 
-    let css = 'primary';
+    let css = 'info';
     let icon = 'clock-o';
     let status = localize.get(`${translationKey}.pending`);
 
@@ -187,14 +186,14 @@ class LogView extends Backbone.View {
   }
 }
 
-export default class DeploymentView extends Backbone.View {
+export default class LogsView extends Backbone.View {
   constructor(options) {
     super({
       ...options,
       el: '#app',
     });
 
-    this.collection = DeploymentCollection;
+    this.collection = LogCollection;
 
     this.$containers = [];
 
@@ -235,7 +234,7 @@ export default class DeploymentView extends Backbone.View {
       }
     });
 
-    listener.on(`deployment:${MODEL_CHANGED}`, (data) => {
+    listener.onUpdate('deployment', (data) => {
       if (isCurrentProject(data.model)) {
         if (data.model.repo_failure) {
           $('#repository_error').show();
