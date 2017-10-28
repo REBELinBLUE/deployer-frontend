@@ -48,7 +48,10 @@ export function showErrors(target, errors) {
     if (typeof errors[name] !== 'undefined') {
       const parent = field.parents('div.form-group');
       parent.addClass('has-error');
-      parent.append($('<span>').attr('class', 'label label-danger').text(errors[name]));
+
+      $.each(errors[name], (idx) => {
+        parent.append($('<span>').attr('class', 'label label-danger').text(errors[name][idx]));
+      });
     }
   });
 }

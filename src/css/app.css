@@ -251,3 +251,8 @@ div#project div.callout-danger {
 table.table tr td {
     vertical-align: middle;
 }
+
+div.form-group.has-error span.label-danger:after {
+    content:"\000A";
+    white-space: pre;
+}
