@@ -2,16 +2,17 @@
 .PHONY: build test coverage
 .SILENT:
 
+RED    := $(shell tput -Txterm setaf 1)
 YELLOW := $(shell tput -Txterm setaf 3)
 RESET  := $(shell tput -Txterm sgr0)
 
 ## Build the bundle for development
-dev:
+dev: verify
 	@npm run dev
 	@$(MAKE) install
 
 ## Build the bundle for production
-build:
+build: verify
 	@npm run production
 	@$(MAKE) install
 
@@ -38,8 +39,18 @@ help:
 		$(MAKEFILE_LIST)
 
 install:
-	@rm -rf ~/Workspace/deployer/application/public/mix-manifest.json
-	@rm -rf ~/Workspace/deployer/application/public/js/
-	@rm -rf ~/Workspace/deployer/application/public/css/
-	@rm -rf ~/Workspace/deployer/application/public/fonts/
-	@cp -r build/* ~/Workspace/deployer/application/public/
+	@rm -rf $(DEPLOYER_DIR)/public/mix-manifest.json
+	@rm -rf $(DEPLOYER_DIR)/public/js/
+	@rm -rf $(DEPLOYER_DIR)/public/css/
+	@rm -rf $(DEPLOYER_DIR)/public/fonts/
+	@cp -r build/* $(DEPLOYER_DIR)/public/
+
+ifndef DEPLOYER_DIR
+verify:
+	@echo "${RED}DEPLOYER_DIR is not set, make sure you define the variable first${RESET}"
+	@echo ""
+	@exit -1
+else
+verify:
+
+endif
