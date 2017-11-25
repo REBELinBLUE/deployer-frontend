@@ -10,6 +10,7 @@ import NotificationsView from './Notifications';
 import HeartbeatsView from './Heartbeats';
 import CheckUrlsView from './CheckUrls';
 import CommandsView from './Commands';
+import AuditView from './Audit';
 import ProfileView from './Profile';
 import ProjectView from './Project';
 import LogsView from './Logs';
@@ -36,4 +37,5 @@ export default {
   Profile: ProfileView,
   Dashboard: DashboardView,
   Navigation: NavigationView,
+  Audit: AuditView,
 };

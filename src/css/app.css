@@ -256,3 +256,7 @@ div.form-group.has-error span.label-danger:after {
     content:"\000A";
     white-space: pre;
 }
+
+form#filter_log label {
+  margin-right: 10px;
+}
