@@ -38,7 +38,7 @@ export default (element, fields, events) =>
       $(`#${prefix}_id`).val(this.model.get('id'));
 
       properties.forEach((field) => {
-        $(`#${prefix}_${field}`).val(this.model.get(field));
+        $(`#${prefix}_${field}`).val(this.model.get(field)).trigger('change');
       });
     }
 
