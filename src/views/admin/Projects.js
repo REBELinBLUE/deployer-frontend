@@ -6,6 +6,7 @@ import CollectionViewFactory from '../../factories/CollectionViewFactory';
 import ModelViewFactory from '../../factories/ModelViewFactory';
 import { dateTimeFormatter } from '../../utils/formatters';
 import bindDialogs from '../../handlers/dialogs';
+import ace from "brace/index";
 
 const element = 'project';
 const translationKey = 'projects';
@@ -23,6 +24,18 @@ const selectOptions = {
 // FIXME: Don't want this on every page
 $(`#${element}_group_id`).select2(selectOptions);
 $(`#${element}_template_id`).select2(selectOptions);
+
+$(`div#${element}.modal`)
+  .on('show.bs.modal', (event) => {
+    const dialog = $(event.currentTarget);
+
+    $('#template-list', dialog).hide();
+
+    const button = $(event.relatedTarget);
+    if (!button.hasClass('btn-edit')) {
+      $('#template-list', dialog).show();
+    }
+  });
 
 class ProjectView extends ModelView {
   viewData() {
