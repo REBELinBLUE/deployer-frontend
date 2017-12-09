@@ -6,7 +6,6 @@ import CollectionViewFactory from '../../factories/CollectionViewFactory';
 import ModelViewFactory from '../../factories/ModelViewFactory';
 import { dateTimeFormatter } from '../../utils/formatters';
 import bindDialogs from '../../handlers/dialogs';
-import ace from "brace/index";
 
 const element = 'project';
 const translationKey = 'projects';
