@@ -20,6 +20,12 @@ class UserView extends ModelView {
       created: dateTimeFormatter(data.created_at),
     };
   }
+
+  editModel() {
+    super.editModel();
+
+    $(`#${element}_password`).val('');
+  }
 }
 
 const getInput = () => ({
