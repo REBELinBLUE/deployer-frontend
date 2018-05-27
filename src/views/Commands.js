@@ -84,7 +84,6 @@ const getInput = () => {
 
 bindDialogs(element, translationKey, getInput, CommandsCollection);
 
-
 reorderModels(element, routes.commandsReorder);
 
 export default class CommandsCollectionView extends Backbone.View {

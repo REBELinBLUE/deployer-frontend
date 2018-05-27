@@ -1,6 +1,6 @@
 import localize from '../utils/localization';
 
-export default translationKey =>
+export default (translationKey, element) =>
   (event) => {
     let title = localize.get(`${translationKey}.create`);
     const button = $(event.relatedTarget);
@@ -21,6 +21,7 @@ export default translationKey =>
       const form = dialog.find('form')[0];
       form.reset();
 
+      $(`#${element}_id`).val('');
       $('.new-only', dialog).show();
     }
 
