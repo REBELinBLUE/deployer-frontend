@@ -1,6 +1,8 @@
 import CollectionFactory from '../factories/CollectionFactory';
 import Variable from '../models/Variable';
 
-const VariableCollection = CollectionFactory(Variable);
+const Collection = CollectionFactory(Variable);
+
+class VariableCollection extends Collection {}
 
 export default new VariableCollection();

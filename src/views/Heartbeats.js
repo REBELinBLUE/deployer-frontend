@@ -59,4 +59,5 @@ const getInput = () => ({
 
 bindDialogs(element, translationKey, getInput, HeartbeatCollection);
 
-export default CollectionViewFactory(element, HeartbeatCollection, HeartbeatView);
+const CollectionView = CollectionViewFactory(element, HeartbeatCollection, HeartbeatView);
+export default class HeartbeatsCollectionView extends CollectionView { }

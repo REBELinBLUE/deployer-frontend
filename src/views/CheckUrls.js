@@ -76,5 +76,6 @@ const getInput = () => ({
 
 bindDialogs(element, translationKey, getInput, CheckUrlCollection);
 
-export default CollectionViewFactory(element, CheckUrlCollection, CheckUrlView);
+const CollectionView = CollectionViewFactory(element, CheckUrlCollection, CheckUrlView);
+export default class CheckUrlsCollectionView extends CollectionView { }
 

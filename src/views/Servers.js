@@ -113,4 +113,5 @@ const getInput = () => ({
 
 bindDialogs(element, translationKey, getInput, ServerCollection);
 
-export default CollectionViewFactory(element, ServerCollection, ServerView);
+const CollectionView = CollectionViewFactory(element, ServerCollection, ServerView);
+export default class ServersCollectionView extends CollectionView { }

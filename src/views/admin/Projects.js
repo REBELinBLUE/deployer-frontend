@@ -71,4 +71,5 @@ const getInput = () => ({
 
 bindDialogs(element, translationKey, getInput, ProjectCollection);
 
-export default CollectionViewFactory(element, ProjectCollection, ProjectView);
+const CollectionView = CollectionViewFactory(element, ProjectCollection, ProjectView);
+export default class ProjectsCollectionView extends CollectionView { }

@@ -10,7 +10,9 @@ import bindDialogs from '../../handlers/dialogs';
 const element = 'group';
 const translationKey = 'groups';
 
-const GroupView = ModelViewFactory(element, ['name']);
+const ModelView = ModelViewFactory(element, ['name']);
+
+class GroupView extends ModelView { }
 
 reorderModels(element, routes.groupsReorder);
 
@@ -20,4 +22,5 @@ const getInput = () => ({
 
 bindDialogs(element, translationKey, getInput, GroupCollection);
 
-export default CollectionViewFactory(element, GroupCollection, GroupView);
+const CollectionView = CollectionViewFactory(element, GroupCollection, GroupView);
+export default class GroupsCollectionView extends CollectionView { }

@@ -6,7 +6,7 @@ export const ONLINE = 0;
 export const UNTESTED = 1;
 export const OFFLINE = 2;
 
-export default class Heartbeat extends Backbone.Model {
+export default class CheckUrl extends Backbone.Model {
   constructor(attributes, options) {
     super(attributes, options);
 

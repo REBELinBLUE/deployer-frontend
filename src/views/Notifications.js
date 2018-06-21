@@ -143,4 +143,5 @@ const getInput = () => {
 
 bindDialogs(element, translationKey, getInput, NotificationCollection);
 
-export default CollectionViewFactory(element, NotificationCollection, NotificationView);
+const CollectionView = CollectionViewFactory(element, NotificationCollection, NotificationView);
+export default class NotificationsCollectionView extends CollectionView { }

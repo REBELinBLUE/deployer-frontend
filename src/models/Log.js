@@ -6,7 +6,6 @@ export const RUNNING = 2;
 export const FAILED = 3;
 export const CANCELLED = 4;
 
-
 export default class Log extends Backbone.Model {
   isCompleted() {
     return parseInt(this.get('status'), 10) === COMPLETED;

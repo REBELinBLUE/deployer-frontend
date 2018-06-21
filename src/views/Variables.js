@@ -8,7 +8,9 @@ import bindDialogs from '../handlers/dialogs';
 const element = 'variable';
 const translationKey = 'variables';
 
-const VariableView = ModelViewFactory(element, ['name', 'value']);
+const ModelView = ModelViewFactory(element, ['name', 'value']);
+
+class VariableView extends ModelView { }
 
 const getInput = () => ({
   name: $(`#${element}_name`).val(),
@@ -19,4 +21,5 @@ const getInput = () => ({
 
 bindDialogs(element, translationKey, getInput, VariableCollection);
 
-export default CollectionViewFactory(element, VariableCollection, VariableView);
+const CollectionView = CollectionViewFactory(element, VariableCollection, VariableView);
+export default class VariablesCollectionView extends CollectionView { }

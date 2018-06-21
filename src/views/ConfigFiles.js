@@ -84,4 +84,5 @@ const getInput = () => ({
 
 bindDialogs(element, translationKey, getInput, ConfigFileCollection);
 
-export default CollectionViewFactory(element, ConfigFileCollection, ConfigFileView);
+const CollectionView = CollectionViewFactory(element, ConfigFileCollection, ConfigFileView);
+export default class ConfigFilesCollectionView extends CollectionView { }

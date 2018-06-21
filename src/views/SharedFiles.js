@@ -8,7 +8,9 @@ import bindDialogs from '../handlers/dialogs';
 const element = 'sharedfile';
 const translationKey = 'sharedFiles';
 
-const SharedFileView = ModelViewFactory(element, ['name', 'file']);
+const ModelView = ModelViewFactory(element, ['name', 'file']);
+
+class SharedFileView extends ModelView { }
 
 const getInput = () => ({
   name: $(`#${element}_name`).val(),
@@ -19,4 +21,5 @@ const getInput = () => ({
 
 bindDialogs(element, translationKey, getInput, SharedFileCollection);
 
-export default CollectionViewFactory(element, SharedFileCollection, SharedFileView);
+const CollectionView = CollectionViewFactory(element, SharedFileCollection, SharedFileView);
+export default class SharedFilesCollectionView extends CollectionView { }

@@ -37,5 +37,6 @@ const getInput = () => ({
 
 bindDialogs(element, translationKey, getInput, UserCollection);
 
-export default CollectionViewFactory(element, UserCollection, UserView);
+const CollectionView = CollectionViewFactory(element, UserCollection, UserView);
+export default class UsersCollectionView extends CollectionView { }
 
