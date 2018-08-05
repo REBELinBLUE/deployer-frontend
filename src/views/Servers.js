@@ -1,5 +1,4 @@
 import $ from 'jquery';
-import 'devbridge-autocomplete';
 
 import localize from '../utils/localization';
 import ServerCollection from '../collections/Servers';
@@ -9,6 +8,7 @@ import { logFormatter } from '../utils/formatters';
 import routes from '../routes';
 import reorderModels from '../handlers/reorderModels';
 import bindDialogs from '../handlers/dialogs';
+
 
 const element = 'server';
 const translationKey = 'servers';
@@ -23,18 +23,17 @@ const ModelView = ModelViewFactory(
   },
 );
 
-$(`#${element} #${element}_name`).autocomplete({
-  serviceUrl: routes.serversAutocomplete,
-  dataType: 'json',
-  noCache: true,
-  preserveInput: true,
-  transformResult: response => ({
-    suggestions: $.map(response.suggestions, dataItem => ({
-      value: `${dataItem.name} (${dataItem.user}@${dataItem.ip_address})`,
-      data: dataItem,
-    })),
-  }),
-  onSelect: (suggestion) => {
+$(`#${element} #${element}_name`).typeahead({
+  autoSelect: false,
+  source: (query, process) => $.ajax({
+    type: 'GET',
+    url: routes.serversAutocomplete,
+    data: { query },
+  }).done(response => process($.map(response.suggestions, dataItem => ({
+    name: `${dataItem.name} (${dataItem.user}@${dataItem.ip_address})`,
+    data: dataItem,
+  })))),
+  afterSelect: (suggestion) => {
     fields.forEach((field) => {
       $(`#${element}_${field}`).val(suggestion.data[field]);
     });
@@ -42,6 +41,8 @@ $(`#${element} #${element}_name`).autocomplete({
     $(`#${element}_deploy_code`).prop('checked', suggestion.data.deploy_code);
   },
 });
+
+
 
 class ServerView extends ModelView {
   viewData() {

@@ -6,6 +6,7 @@ import CollectionViewFactory from '../../factories/CollectionViewFactory';
 import ModelViewFactory from '../../factories/ModelViewFactory';
 import { dateTimeFormatter } from '../../utils/formatters';
 import bindDialogs from '../../handlers/dialogs';
+import UserCollection from '../../collections/Users';
 
 const element = 'project';
 const translationKey = 'projects';
@@ -15,10 +16,39 @@ const ModelView = ModelViewFactory(
   ['name', 'repository', 'branch', 'group_id', 'builds_to_keep', 'url', 'build_url'],
 );
 
+
 const selectOptions = {
   width: '100%',
   minimumResultsForSearch: Infinity,
 };
+
+
+/**
+ * Autocomplete feature for project's members
+ */
+$('.members_autocomplete').tagsinput({
+  allowDuplicates: false,
+  freeInput: false,
+  itemText: 'text',
+  itemValue: 'value',
+  typeahead: {
+    name: 'users',
+    source: (query) => {
+      return UserCollection.filter((user) => {
+        // TODO: Maybe move this to a method on the collection instead, but it would require the collection to be changed so it isn't simply generated
+
+        return user.get('name').toLowerCase().startsWith(query.toLowerCase());
+      }).map(user => ({
+        value: user.get('id'),
+        text: user.get('name'),
+      }));
+    },
+    afterSelect: function() {
+    	this.$element[0].value = '';
+    }
+  }
+});
+// Needs work to exclude already added users and maybe to change the filter so it is more than just startsWith
 
 // FIXME: Don't want this on every page
 $(`#${element}_group_id`).select2(selectOptions);
@@ -52,6 +82,19 @@ class ProjectView extends ModelView {
     $(`#${element}_allow_other_branch`).prop('checked', (this.model.get('allow_other_branch') === true));
     $(`#${element}_include_dev`).prop('checked', (this.model.get('include_dev') === true));
     $(`#${element}_private_key`).val('');
+
+    // Displaying project's managers
+    var users = this.model.get('users');
+    for (var i in users) {
+      if (users[i].pivot.role == 'manager') {
+        // This user is a manager
+        $(`#${element}_managers`).tagsinput('add', { "value": users[i].id , "text": users[i].name });
+      }
+      else if (users[i].pivot.role == 'user') {
+        // This user is a simple user
+        $(`#${element}_users`).tagsinput('add', { "value": users[i].id , "text": users[i].name })
+      }
+    }
   }
 }
 
@@ -67,6 +110,8 @@ const getInput = () => ({
   allow_other_branch: $(`#${element}_allow_other_branch`).is(':checked'),
   include_dev: $(`#${element}_include_dev`).is(':checked'),
   private_key: $(`#${element}_private_key`).val(),
+  managers: $(`#${element}_managers`).val(),
+  users: $(`#${element}_users`).val()
 });
 
 bindDialogs(element, translationKey, getInput, ProjectCollection);

@@ -25,6 +25,10 @@ class UserView extends ModelView {
     super.editModel();
 
     $(`#${element}_password`).val('');
+    $(`#${element}_is_admin`).prop('checked', (this.model.get('is_admin') === true));
+
+    // Cannot remove admin role to first user (otherwise looses all access)
+    $(`#${element}_is_admin`).prop('disabled', (this.model.get('id') === 1));
   }
 }
 
@@ -33,10 +37,10 @@ const getInput = () => ({
   email: $(`#${element}_email`).val(),
   password: $(`#${element}_password`).val(),
   password_confirmation: $(`#${element}_password_confirmation`).val(),
+  is_admin: $(`#${element}_is_admin`).is(':checked'),
 });
 
 bindDialogs(element, translationKey, getInput, UserCollection);
 
 const CollectionView = CollectionViewFactory(element, UserCollection, UserView);
 export default class UsersCollectionView extends CollectionView { }
-

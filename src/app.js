@@ -5,6 +5,7 @@ import collections from './collections';
 import listener from './listener';
 import { getProjectId, setProjectId } from './utils/projectId';
 
+
 window.app = {
   views,
   models,

@@ -260,3 +260,13 @@ div.form-group.has-error span.label-danger:after {
 form#filter_log label {
   margin-right: 10px;
 }
+
+.bootstrap-tagsinput {
+  width: 100% !important;
+  border-radius: 2px;
+  border: 1px solid #ccc;
+}
+
+#project_members .input-group {
+  width: 100%;
+}

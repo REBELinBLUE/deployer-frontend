@@ -9,4 +9,3 @@ export default class User extends Backbone.Model {
     this.urlRoot = routes.users;
   }
 }
-
