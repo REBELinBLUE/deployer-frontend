@@ -12,7 +12,7 @@ const translationKey = 'checkUrls';
 
 const ModelView = ModelViewFactory(
   element,
-  ['name', 'url'],
+  ['name', 'url', 'match'],
   {
     'click .btn-view': 'showLog',
   },
@@ -70,6 +70,7 @@ class CheckUrlView extends ModelView {
 const getInput = () => ({
   name: $(`#${element}_name`).val(),
   url: $(`#${element}_url`).val(),
+  match: $(`#${element}_match`).val(),
   period: parseInt($('input[name="period"]:checked').val(), 10),
   project_id: parseInt($('input[name="project_id"]').val(), 10),
 });
@@ -78,4 +79,3 @@ bindDialogs(element, translationKey, getInput, CheckUrlCollection);
 
 const CollectionView = CollectionViewFactory(element, CheckUrlCollection, CheckUrlView);
 export default class CheckUrlsCollectionView extends CollectionView { }
-
