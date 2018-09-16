@@ -43,7 +43,6 @@ $(`#${element} #${element}_name`).typeahead({
 });
 
 
-
 class ServerView extends ModelView {
   viewData() {
     const data = this.model.toJSON();
