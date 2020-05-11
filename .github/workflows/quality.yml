@@ -1,13 +1,9 @@
-tename: Quality Checks
+name: Quality Checks
 
 on: [push, pull_request]
 
 jobs:
   quality:
-    env:
-      DB_CONNECTION: sqlite
-      DB_DATABASE: database/database.sqlite
-
     runs-on: ubuntu-latest
 
     steps:
