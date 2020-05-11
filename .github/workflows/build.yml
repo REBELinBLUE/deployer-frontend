@@ -1,9 +1,9 @@
-name: Quality Checks
+name: Production Build
 
 on: [push, pull_request]
 
 jobs:
-  quality:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -25,8 +25,8 @@ jobs:
       - name: Install Dependencies
         run: npm ci
 
-      - name: Lint
-        run: npm run lint
+      - name: Production Build
+        run: npm run production
 
 
 
