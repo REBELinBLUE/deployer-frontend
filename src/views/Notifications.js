@@ -42,7 +42,7 @@ function setTitleWithIcon(type, action) {
 }
 
 class NotificationView extends ModelView {
-  viewData() {g
+  viewData() {
     const data = this.model.toJSON();
 
     const icon = getIcon(this.model.get('type'));
