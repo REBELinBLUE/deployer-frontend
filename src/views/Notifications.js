@@ -42,10 +42,10 @@ function setTitleWithIcon(type, action) {
 }
 
 class NotificationView extends ModelView {
-  viewData() {
+  viewData() {g
     const data = this.model.toJSON();
 
-    let icon = getIcon(this.model.get('type'));
+    const icon = getIcon(this.model.get('type'));
     let label = localize.get('channels.custom');
 
     if (this.model.isSlack()) {
