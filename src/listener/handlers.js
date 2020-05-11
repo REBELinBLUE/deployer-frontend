@@ -1,6 +1,6 @@
 import * as events from './events';
 
-export default listener => ({
+export default (listener) => ({
   on: (channel, callback) => {
     listener.on(channel, callback);
   },

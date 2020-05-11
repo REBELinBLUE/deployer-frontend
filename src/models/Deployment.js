@@ -32,4 +32,3 @@ export default class Deployment extends Backbone.Model {
     return parseInt(this.get('status'), 10) === ERRORS;
   }
 }
-

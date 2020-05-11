@@ -11,11 +11,11 @@ const paths = {
   ionicons: `${packages}/ionicons`,
   html5shiv: `${packages}/html5shiv`,
   respond: `${packages}/respond.js`,
-  cropper: `${packages}/cropper`,
+  cropper: `${packages}/cropperjs`,
   toastr: `${packages}/toastr`,
   select2: `${packages}/select2`,
   tagsinput: `${packages}/bootstrap-tagsinput`,
-  typeahead: `${packages}/bootstrap-3-typeahead`
+  typeahead: `${packages}/bootstrap-3-typeahead`,
 };
 
 // Add shell command plugin configured to create JavaScript language file
@@ -23,7 +23,7 @@ mix
   // .webpackConfig({
   //   plugins: [
   //     new ShellPlugin({
-  //       onBuildStart: ['php ../deployer/application/artisan js-localization:export --quiet'],
+  //       onBuildStart: ['php ../deployer/application/artisan --quiet'],
   //     }),
   //   ],
   // })
@@ -31,12 +31,12 @@ mix
   .js('src/app.js', `${build}/js/`)
   .autoload({
     jquery: ['$', 'window.jQuery', 'jQuery', 'window.$', 'jquery', 'window.jquery'],
-    './utils/localization.js': ['Lang']
+    './utils/localization.js': ['Lang'],
   })
   .extract([
-    'admin-lte', 'backbone', 'jquery', 'jquery-sortable',
-    'moment', 'underscore', 'brace', 'toastr', 'socket.io-client', 'bootstrap', 'bootstrap-tagsinput',
-    'bootstrap-3-typeahead'
+    'admin-lte', 'backbone', 'jquery', 'jquery-sortable', 'jquery-cropper',
+    'moment', 'underscore', 'brace', 'toastr', 'socket.io-client',
+    'bootstrap', 'bootstrap-tagsinput', 'bootstrap-3-typeahead',
   ])
   .scripts([
     `${paths.html5shiv}/dist/html5shiv.js`,
@@ -45,7 +45,7 @@ mix
   .sourceMaps(false)
   .styles([
     'src/css/app.css',
-    'src/css/console.css'
+    'src/css/console.css',
   ], `${build}/css/app.css`)
   .styles([
     `${paths.bootstrap}/dist/css/bootstrap.css`,
@@ -56,7 +56,7 @@ mix
     `${paths.admin_lte}/dist/css/skins/_all-skins.css`,
     `${paths.toastr}/build/toastr.css`,
     `${paths.cropper}/dist/cropper.css`,
-    `${paths.tagsinput}/dist/bootstrap-tagsinput.css`
+    `${paths.tagsinput}/dist/bootstrap-tagsinput.css`,
   ], `${build}/css/vendor.css`)
   .copy(`${paths.bootstrap}/fonts/**`, `${build}/fonts`)
   .copy(`${paths.fontawesome}/fonts/**`, `${build}/fonts`)

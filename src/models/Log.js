@@ -27,4 +27,3 @@ export default class Log extends Backbone.Model {
     return parseInt(this.get('status'), 10) === CANCELLED;
   }
 }
-

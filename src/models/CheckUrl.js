@@ -25,4 +25,3 @@ export default class CheckUrl extends Backbone.Model {
     return parseInt(this.get('status'), 10) === OFFLINE;
   }
 }
-

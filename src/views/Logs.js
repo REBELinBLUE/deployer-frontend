@@ -89,7 +89,7 @@ function redeploy(event) {
   let commands = tmp.split(',');
 
   if (tmp.length > 0) {
-    commands = $.map(commands, value => parseInt(value, 10));
+    commands = $.map(commands, (value) => parseInt(value, 10));
   } else {
     commands = [];
   }
@@ -248,8 +248,10 @@ export default class LogsView extends Backbone.View {
       model,
     });
 
-    const found = _.find(this.$containers, element =>
-      parseInt(element.step, 10) === parseInt(model.get('deploy_step_id'), 10));
+    const found = _.find(
+      this.$containers,
+      (element) => parseInt(element.step, 10) === parseInt(model.get('deploy_step_id'), 10),
+    );
 
     $(found.element).append(view.render().el);
   }

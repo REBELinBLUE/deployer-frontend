@@ -35,4 +35,3 @@ export default class Project extends Backbone.Model {
     return parseInt(this.get('status'), 10) === NOT_DEPLOYED;
   }
 }
-

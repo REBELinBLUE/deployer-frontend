@@ -25,4 +25,3 @@ export default class Notification extends Backbone.Model {
     return this.get('type') === TWILIO;
   }
 }
-

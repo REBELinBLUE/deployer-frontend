@@ -13,9 +13,9 @@ const ModelView = ModelViewFactory(element, ['name', 'type']);
 function getIcon(type) {
   if (type === SLACK) {
     return 'slack';
-  } else if (type === MAIL) {
+  } if (type === MAIL) {
     return 'envelope-o';
-  } else if (type === TWILIO) {
+  } if (type === TWILIO) {
     return 'mobile';
   }
 

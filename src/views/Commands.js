@@ -141,7 +141,7 @@ export default class CommandsCollectionView extends Backbone.View {
     $(`.no-${element}s`).show();
     $(`.${element}-list`).hide();
 
-    const before = this.collection.find(model => model.isBefore());
+    const before = this.collection.find((model) => model.isBefore());
 
     if (typeof before !== 'undefined') {
       $(`#${element}s-before .no-${element}s`).hide();
@@ -151,7 +151,7 @@ export default class CommandsCollectionView extends Backbone.View {
       $(`#${element}s-before .${element}-list`).hide();
     }
 
-    const after = this.collection.find(model => model.isAfter());
+    const after = this.collection.find((model) => model.isAfter());
 
     if (typeof after !== 'undefined') {
       $(`#${element}s-after .no-${element}s`).hide();

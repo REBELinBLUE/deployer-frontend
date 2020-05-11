@@ -9,4 +9,3 @@ export default class Template extends Backbone.Model {
     this.urlRoot = routes.templates;
   }
 }
-

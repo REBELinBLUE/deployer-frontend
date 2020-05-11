@@ -29,7 +29,7 @@ $(`#${element} #${element}_name`).typeahead({
     type: 'GET',
     url: routes.serversAutocomplete,
     data: { query },
-  }).done(response => process($.map(response.suggestions, dataItem => ({
+  }).done((response) => process($.map(response.suggestions, (dataItem) => ({
     name: `${dataItem.name} (${dataItem.user}@${dataItem.ip_address})`,
     data: dataItem,
   })))),

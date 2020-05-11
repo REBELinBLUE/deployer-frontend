@@ -33,14 +33,11 @@ $('.members_autocomplete').tagsinput({
   itemValue: 'value',
   typeahead: {
     name: 'users',
-    source: query => UserCollection.filter(user =>
-      // TODO: Maybe move this to a method on the collection instead, but it would
-      //       require the collection to be changed so it isn't simply generated
-
-      user.get('name').toLowerCase().startsWith(query.toLowerCase())).map(user => ({
-      value: user.get('id'),
-      text: user.get('name'),
-    })),
+    // TODO: Maybe move this to a method on the collection instead, but it would
+    //       require the collection to be changed so it isn't simply generated
+    source: (query) => UserCollection.filter((user) => user.get('name')
+      .toLowerCase()
+      .startsWith(query.toLowerCase())).map((user) => ({ value: user.get('id'), text: user.get('name') })),
     afterSelect() {
       this.$element[0].value = '';
     },

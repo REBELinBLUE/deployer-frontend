@@ -1,4 +1,4 @@
 {
-  "presets": ["env", "stage-1"],
+  "presets": ["@babel/env"],
   "plugins": []
 }

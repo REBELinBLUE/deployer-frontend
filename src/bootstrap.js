@@ -7,7 +7,7 @@ import 'admin-lte';
 import 'select2';
 
 import localize from './utils/localization';
-import './messages';
+// import './messages'; // FIXME: Why does this no longer work, changed messages.js to `export default`
 import Navigation from './views/Navigation';
 
 // Needed for Backbone debugger

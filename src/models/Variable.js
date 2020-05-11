@@ -9,4 +9,3 @@ export default class Variable extends Backbone.Model {
     this.urlRoot = routes.variables;
   }
 }
-

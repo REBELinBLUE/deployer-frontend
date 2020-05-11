@@ -9,4 +9,3 @@ export default class SharedFile extends Backbone.Model {
     this.urlRoot = routes.shared;
   }
 }
-

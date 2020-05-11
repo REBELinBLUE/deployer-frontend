@@ -1,4 +1,6 @@
-import { setBusy, clearBusy, showErrors, clearDialog } from '../utils/dialog';
+import {
+  setBusy, clearBusy, showErrors, clearDialog,
+} from '../utils/dialog';
 
 // FIXME: getInput seems a horrible way to do it
 export default (Collection, element, getInput) => {

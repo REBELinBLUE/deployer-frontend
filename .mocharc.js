@@ -1,5 +1,5 @@
 module.exports = {
-    require: 'babel-register',
+    require: '@babel/register',
     recursive: true,
     reporter: 'spec'
 }

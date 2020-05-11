@@ -1,6 +1,6 @@
 import $ from 'jquery';
 import 'select2';
-import 'cropper';
+import 'jquery-cropper';
 
 import routes from '../routes';
 import Uploader from '../handlers/uploader';

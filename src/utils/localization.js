@@ -1,4 +1,5 @@
-const messages = {};
+const messages = require('../messages');
+
 let locale;
 
 function applyReplacements(message, replacements) {
@@ -82,4 +83,3 @@ export default {
   setLocale,
   getLocale,
 };
-

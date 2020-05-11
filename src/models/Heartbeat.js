@@ -25,4 +25,3 @@ export default class Heartbeat extends Backbone.Model {
     return parseInt(this.get('status'), 10) === MISSING;
   }
 }
-

@@ -20,8 +20,8 @@ export default {
   profileGravatar: '/profile/gravatar',
   profileUpload: '/profile/upload',
   timeline: '/timeline',
-  webhook: projectId => `/webhook/${projectId}/refresh`,
-  branches: projectId => `/projects/${projectId}/refresh`,
-  log: logId => `/log/${logId}`,
-  rollback: deploymentId => `/deployment/${deploymentId}/rollback`,
+  webhook: (projectId) => `/webhook/${projectId}/refresh`,
+  branches: (projectId) => `/projects/${projectId}/refresh`,
+  log: (logId) => `/log/${logId}`,
+  rollback: (deploymentId) => `/deployment/${deploymentId}/rollback`,
 };

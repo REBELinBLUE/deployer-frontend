@@ -47,4 +47,3 @@ export default class Server extends Backbone.Model {
     });
   }
 }
-

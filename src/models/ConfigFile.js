@@ -9,4 +9,3 @@ export default class ConfigFile extends Backbone.Model {
     this.urlRoot = routes.config;
   }
 }
-
